@@ -52,13 +52,14 @@ function App() {
 
       <div>
         <h2>Connect</h2>
-        {connectors.slice(0, 1).map((connector) => (
+        {connectors.map((connector) => (
+          console.log(connector),
           <button
             key={connector.uid}
             onClick={() => connect({ connector })}
             type="button"
           >
-            Connect Coinbase Wallet
+            {connector.name}
           </button>
         ))}
         <div>{status}</div>

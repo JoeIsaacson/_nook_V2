@@ -4,6 +4,9 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
+  min-height: 100vh;
+  padding-bottom: 80px; /* Space for fixed footer */
+  overflow-y: hidden; /* Prevents scrolling if you want a fixed layout */
 }
 
 .splash-page {
@@ -11,35 +14,14 @@ body {
   height: 100%;
   text-align: left;
 
-  .splash-content {
-    min-height: 100vh;
-    padding-bottom: 80px; /* Space for fixed footer */
-    overflow-y: hidden; 
-  }
-
   .splash-header {
-    font-size: 100px;
     position: absolute;
-    bottom: 80px;
+    bottom: 100px;
   }
 
   footer {
     background-color: transparent;
   }
-}
-
-.splash-page::before {
-  content: 'N';
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 31vh;  /* Adjust size as needed */
-  color: #ffffff;
-  font-weight: bold;
-  z-index: 1;
-  pointer-events: none;
-  font-family: Arial, sans-serif;  /* Or your preferred font */
 }
 
 .btn {

@@ -1,0 +1,30 @@
+body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.splash-page {
+  background-color: #C8C8C8;
+  height: 100%;
+
+  footer {
+    background-color: transparent;
+  }
+}
+
+.btn {
+  border-radius: 40px;
+}
+
+.btn-transparent {
+  background-color: transparent;
+  border: 1px solid rgba(0,0,0,0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-transparent:hover {
+  background-color: rgba(0,0,0,0.05);
+}

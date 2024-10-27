@@ -12,7 +12,7 @@ export default function Welcome() {
         <div className="splash-content container">
             <div className="splash-header pt-5">
             <h1 className="display-1">Welcome to</h1>
-            <h1 className="display-1 bold"><b>Nook</b></h1>
+            <h1 className="display-1">Nook</h1>
             </div>
          </div>
 

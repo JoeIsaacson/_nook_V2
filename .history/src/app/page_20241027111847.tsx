@@ -58,7 +58,7 @@ function App() {
             onClick={() => connect({ connector })}
             type="button"
           >
-            {connector.name}
+            Connect Coinbase Wallet
           </button>
         ))}
         <div>{status}</div>

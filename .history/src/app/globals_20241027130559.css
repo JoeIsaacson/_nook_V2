@@ -1,12 +1,7 @@
 
 body {
   background-color: #ffffff;
-  color: #874343;
-}
-
-html {
-  background-color: #ffffff;
-  color: #874343;
+  color: #181818;
 }
 
 @media (prefers-color-scheme: light) {

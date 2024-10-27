@@ -4,11 +4,6 @@ body {
   color: #874343;
 }
 
-html {
-  background-color: #ffffff;
-  color: #874343;
-}
-
 @media (prefers-color-scheme: light) {
   :root {
     background-color: #f8f8f8;

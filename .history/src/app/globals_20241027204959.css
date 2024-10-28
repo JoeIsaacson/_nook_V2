@@ -43,9 +43,7 @@ body {
 }
 
 .settings-list-stacked {
-  font-size: 14px;
-  font-weight: 600;
-
+  font-size: 12px;
   li i {
     width: 24px;
   }

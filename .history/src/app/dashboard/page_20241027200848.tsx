@@ -3,12 +3,11 @@
 
 import { useAccount, useConnect, useDisconnect, useBalance } from 'wagmi'
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 
 function App() {
-  const router = useRouter()
   const account = useAccount()
   const { connectors, connect, status, error } = useConnect()
+  const { disconnect } = useDisconnect()
   const [showBalance, setShowBalance] = useState(false)
 
   console.log(useConnect);
@@ -35,10 +34,7 @@ const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) :
       <nav className="navbar navbar-expand-lg navbar-light bg-white">
         <div className="container">
           {/* left side */}
-          <button 
-            className="btn"
-            onClick={() => router.push('/dashboard/settings')}
-          >
+          <button className="btn">
             <i className="fas fa-cog me-2"></i> 
           </button>
           {/* right side */}

@@ -4,11 +4,11 @@
 import { useAccount, useConnect, useDisconnect, useBalance } from 'wagmi'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-
 function App() {
   const router = useRouter()
   const account = useAccount()
   const { connectors, connect, status, error } = useConnect()
+  const { disconnect } = useDisconnect()
   const [showBalance, setShowBalance] = useState(false)
 
   console.log(useConnect);

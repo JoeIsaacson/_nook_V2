@@ -34,7 +34,7 @@ function Settings() {
               day: 'numeric'
             })}</p>
             {/* Settings List */}
-            <ul className="settings-list-stacked list-group list-group-flush row">
+            <ul className="list-group list-group-flush row">
               <li className="list-group-item">
                 <i className="far fa-face-smile me-2"></i>
                 Personal info
@@ -56,8 +56,6 @@ function Settings() {
                 Close account
               </li>
             </ul>
-
-            {account.status}
 
             {account.status === 'connected' && (
               <div className="mb-4">

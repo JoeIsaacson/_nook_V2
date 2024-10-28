@@ -42,15 +42,6 @@ body {
   font-family: Arial, sans-serif;  /* Or your preferred font */
 }
 
-.settings-list-stacked {
-  font-size: 14px;
-  font-weight: 600;
-
-  li i {
-    width: 24px;
-  }
-}
-
 .circle-badge {
   text-align: center;
   background-color: #DBDEE2;

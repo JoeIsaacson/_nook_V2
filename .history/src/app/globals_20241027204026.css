@@ -7,7 +7,7 @@ body {
 }
 
 .splash-page {
-  background-color: #C8C8C8;
+  background-color: #DBDEE2
   height: 100%;
   text-align: left;
 
@@ -42,24 +42,12 @@ body {
   font-family: Arial, sans-serif;  /* Or your preferred font */
 }
 
-.settings-list-stacked {
-  font-size: 14px;
-  font-weight: 600;
-
-  li i {
-    width: 24px;
-  }
-}
-
 .circle-badge {
-  text-align: center;
-  background-color: #DBDEE2;
-}
-
-.circle-badge-large {
   padding: 14px;
   border-radius: 30px;
   width: 52px;
+  text-align: center;
+  background-color: #C8C8C8;
 }
 
 .btn {

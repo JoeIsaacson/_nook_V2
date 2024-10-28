@@ -53,16 +53,16 @@ const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) :
             <div className="row">
                 <div className="col-6">
                     <button className="btn btn-primary w-100">
-                        Withdraw
+                        Withdraw <i className="fa-solid fa-arrow-up"></i>
                     </button>
                 </div>
                 <div className="col-6">
                     <button className="btn btn-secondary w-100">
-                        Details
+                        Details <i className="fa-solid fa-arrow-down"></i>
                     </button>
                 </div>
             </div>
-            <h5 className="mb-4">$200.55 earned</h5>
+            <h5 className="mb-4">Balance</h5>
 
             {account.status === 'connected' && (
               <div className="mb-4">
@@ -81,8 +81,7 @@ const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) :
             <div className="row">
                 <div className="col-12 text-center">
                 <button className="btn btn-transparent btn-lg w-100 btn-left-justify">
-                    <span>Deposit</span> 
-                    <i className="fa-solid fa-arrow-right"></i>
+                    Deposit <i className="fa-solid fa-arrow-right"></i>
                 </button>
                 </div>
             </div>

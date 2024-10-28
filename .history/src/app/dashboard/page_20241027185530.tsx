@@ -80,9 +80,9 @@ const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) :
             <div className="container py-3">
             <div className="row">
                 <div className="col-12 text-center">
-                <button className="btn btn-transparent btn-lg w-100 btn-left-justify">
+                <button className="btn btn-transparent btn-lg w-100 btn-left-justify d-flex align-items-center">
                     <span>Deposit</span> 
-                    <i className="fa-solid fa-arrow-right"></i>
+                    <i className="fa-solid fa-arrow-right float-end mx-auto"></i>
                 </button>
                 </div>
             </div>

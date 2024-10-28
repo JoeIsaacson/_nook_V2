@@ -81,8 +81,7 @@ const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) :
             <div className="row">
                 <div className="col-12 text-center">
                 <button className="btn btn-transparent btn-lg w-100 btn-left-justify">
-                    <span>Deposit</span> 
-                    <i className="fa-solid fa-arrow-right"></i>
+                    Deposit <i className="fa-solid fa-arrow-right"></i>
                 </button>
                 </div>
             </div>

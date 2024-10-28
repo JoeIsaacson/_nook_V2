@@ -31,7 +31,7 @@ const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) :
   return (
     <>
       {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-light bg-white">
+      <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom">
         <div className="container">
           {/* left side */}
           <button className="btn">
@@ -50,19 +50,6 @@ const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) :
           <div className="col-12">
             <h1 className="mb-4 display-3">${usdBalance}</h1>
             <h5 className="mb-4">{formattedEth} ETH</h5>
-            <div className="row">
-                <div className="col-6">
-                    <button className="btn btn-primary w-100">
-                        Withdraw
-                    </button>
-                </div>
-                <div className="col-6">
-                    <button className="btn btn-secondary w-100">
-                        Details
-                    </button>
-                </div>
-            </div>
-            <h5 className="mb-4">$200.55 earned</h5>
 
             {account.status === 'connected' && (
               <div className="mb-4">
@@ -76,18 +63,7 @@ const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) :
       </div>
 
     {/* Footer */}
-    <footer className="fixed-bottom">
-            <div className="container py-3">
-            <div className="row">
-                <div className="col-12 text-center">
-                <button className="btn btn-transparent btn-lg w-100 btn-left-justify">
-                    <span>Deposit</span> 
-                    <i className="fa-solid fa-arrow-right"></i>
-                </button>
-                </div>
-            </div>
-            </div>
-    </footer>
+
     </>
   )
 }

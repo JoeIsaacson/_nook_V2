@@ -62,7 +62,7 @@ const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) :
                     </button>
                 </div>
             </div>
-            <h5 className="mb-4">$200.55 earned</h5>
+            <h5 className="mb-4">$200 earned</h5>
 
             {account.status === 'connected' && (
               <div className="mb-4">
@@ -81,8 +81,7 @@ const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) :
             <div className="row">
                 <div className="col-12 text-center">
                 <button className="btn btn-transparent btn-lg w-100 btn-left-justify">
-                    <span>Deposit</span> 
-                    <i className="fa-solid fa-arrow-right"></i>
+                    Deposit <i className="fa-solid fa-arrow-right"></i>
                 </button>
                 </div>
             </div>

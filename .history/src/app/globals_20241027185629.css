@@ -48,23 +48,17 @@ body {
 
 .btn-left-justify {
   text-align: left;
-  display: flex!important;
-  align-items: center !important;
 
   i {
-    margin-left: auto !important;
-    margin-right: 0 !important; 
+    margin-right: 0;
   }
 }
 
 .btn-right-justify {
   text-align: right;
-  display: flex!important;
-  align-items: center !important;
 
   i {
-    margin-left: 0 !important;
-    margin-right: auto !important;
+    margin-left: 0;
   }
 }
 

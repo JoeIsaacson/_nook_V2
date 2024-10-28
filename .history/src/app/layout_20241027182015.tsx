@@ -23,13 +23,6 @@ export default function RootLayout(props: { children: ReactNode }) {
   )
   return (
     <html lang="en" className="layout-root">
-      <head>
-        {/* Add Font Awesome CDN here */}
-        <link 
-          rel="stylesheet" 
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
-        />
-      </head>
       <body className={inter.className}>
         <Providers initialState={initialState}>{props.children}</Providers>
       </body>

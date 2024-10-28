@@ -63,6 +63,7 @@ const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) :
                 </div>
             </div>
             <h5 className="mb-4">$200.55 earned</h5>
+
           </div>
         </div>
       </div>

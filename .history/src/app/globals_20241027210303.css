@@ -40,7 +40,7 @@ body {
 .splash-page::before {
   content: 'N';
   position: fixed;
-  top: 42%;
+  top: 38%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 31vh;  /* Adjust size as needed */
@@ -105,17 +105,4 @@ body {
 
 .btn-transparent:hover {
   background-color: rgba(0,0,0,0.05);
-}
-
-@keyframes slideFromRight {
-  from {
-    transform: translateX(100vw);  /* Start from viewport width */
-  }
-  to {
-    transform: translateX(0);      /* End at natural position */
-  }
-}
-
-img[src="src/app/img/ellipse_1.svg"] {
-  animation: slideFromRight 1s ease-out forwards;
 }

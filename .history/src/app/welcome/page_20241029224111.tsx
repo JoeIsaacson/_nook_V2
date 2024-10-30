@@ -17,7 +17,7 @@ export default function Welcome() {
 
   useEffect(() => {
     console.log(status);
-    if (status === 'success') {
+    if (status === 'connected') {
       router.push('/dashboard')
     }
   }, [status, router]);

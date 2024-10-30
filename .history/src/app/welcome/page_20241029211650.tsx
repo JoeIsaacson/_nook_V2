@@ -2,34 +2,23 @@
 
 import { useRouter } from 'next/navigation'
 import { useConnect, useAccount, useDisconnect } from 'wagmi'
-import { useEffect } from 'react';
 
 export default function Welcome() {
   const router = useRouter();
   const { connectors, connect, status, error } = useConnect()
 
   const { disconnect } = useDisconnect();
-  const CoinbaseWallet = connectors[0].name;
 
-  //disconnect();
-
-  console.log(CoinbaseWallet);
-
-  useEffect(() => {
-    console.log(status);
-    if (status === 'success') {
-      router.push('/dashboard')
-    }
-  }, [status, router]);
+  useDisconnect();
+  
+  console.log(status);
 
   function handleContinue() {
+    console.log('Continue button clicked');
     if (status === 'idle') {
-      console.log(CoinbaseWallet);
-      connect({ connector: connectors[0] });
-      console.log(status);
-    } else if (status === 'success') {
-      console.log(status);
       router.push('/dashboard')
+    } else {
+      console.log('Not connected');
     };
   };
 
@@ -45,6 +34,9 @@ export default function Welcome() {
           </div>
         </div>
 
+        {/* Background Image */}
+        <div className="background-logo">N</div>
+
         {/* Fixed Footer */}
         <footer className="fixed-bottom">
           <div className="container py-3">
@@ -52,10 +44,7 @@ export default function Welcome() {
                 <div className="col-12 text-center">
                   {/* Continue Button */}
                   <div>
-
-                  <button onClick={handleContinue}>Continue</button>
-
-                  {/* {connectors.slice(0, 1).map((connector) => (
+                  {connectors.slice(0, 1).map((connector) => (
                     <button
                       className="btn btn-transparent btn-lg w-100 btn-left-justify"
                       key={connector.uid}
@@ -64,7 +53,7 @@ export default function Welcome() {
                     >
                       Continue
                     </button>
-                  ))} */}
+                  ))}
                   <div>{error?.message}</div>
                 </div>
 

@@ -1,37 +1,11 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useConnect, useAccount, useDisconnect } from 'wagmi'
-import { useEffect } from 'react';
+import { useConnect, useAccount } from 'wagmi'
 
 export default function Welcome() {
   const router = useRouter();
   const { connectors, connect, status, error } = useConnect()
-
-  const { disconnect } = useDisconnect();
-  const CoinbaseWallet = connectors[0].name;
-
-  //disconnect();
-
-  console.log(CoinbaseWallet);
-
-  useEffect(() => {
-    console.log(status);
-    if (status === 'success') {
-      router.push('/dashboard')
-    }
-  }, [status, router]);
-
-  function handleContinue() {
-    if (status === 'idle') {
-      console.log(CoinbaseWallet);
-      connect({ connector: connectors[0] });
-      console.log(status);
-    } else if (status === 'success') {
-      console.log(status);
-      router.push('/dashboard')
-    };
-  };
 
   return (
     <>
@@ -45,26 +19,27 @@ export default function Welcome() {
           </div>
         </div>
 
+        {/* Background Image */}
+        <div className="background-logo">N</div>
+
         {/* Fixed Footer */}
         <footer className="fixed-bottom">
           <div className="container py-3">
             <div className="row">
                 <div className="col-12 text-center">
-                  {/* Continue Button */}
+                  {/* button connectors */}
                   <div>
-
-                  <button onClick={handleContinue}>Continue</button>
-
-                  {/* {connectors.slice(0, 1).map((connector) => (
+                  {connectors.map((connector) => (
                     <button
                       className="btn btn-transparent btn-lg w-100 btn-left-justify"
                       key={connector.uid}
                       onClick={() => connect({ connector })}
                       type="button"
                     >
-                      Continue
+                      {connector.name}
                     </button>
-                  ))} */}
+                  ))}
+                  <div>{status}</div>
                   <div>{error?.message}</div>
                 </div>
 

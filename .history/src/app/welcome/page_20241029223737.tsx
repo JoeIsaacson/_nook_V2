@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation'
 import { useConnect, useAccount, useDisconnect } from 'wagmi'
-import { useEffect } from 'react';
 
 export default function Welcome() {
   const router = useRouter();
@@ -15,19 +14,12 @@ export default function Welcome() {
 
   console.log(CoinbaseWallet);
 
-  useEffect(() => {
-    console.log(status);
-    if (status === 'success') {
-      router.push('/dashboard')
-    }
-  }, [status, router]);
-
   function handleContinue() {
     if (status === 'idle') {
       console.log(CoinbaseWallet);
       connect({ connector: connectors[0] });
       console.log(status);
-    } else if (status === 'success') {
+    } else if (status === 'success' || status === 'idle') {
       console.log(status);
       router.push('/dashboard')
     };

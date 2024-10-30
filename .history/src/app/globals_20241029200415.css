@@ -60,18 +60,6 @@ body {
   }
 }
 
-.display-1,
-.display-2,
-.display-3,
-.display-4,
-.display-5 {
-  font-weight: 500;
-}
-
-.display-1 {
-  font-size: 64px;
-}
-
 .circle-badge {
   text-align: center;
   background-color: #DBDEE2;
@@ -85,7 +73,6 @@ body {
 
 .btn-primary {
   background-color: #83F396 !important;
-  border: none !important;
   color: #000000;
 }
 

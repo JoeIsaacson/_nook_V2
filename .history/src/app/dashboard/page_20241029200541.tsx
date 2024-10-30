@@ -52,8 +52,8 @@ const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) :
       <div className="container mt-5">
         <div className="row">
           <div className="col-12">
-            <h1 className="mb-4 display-1">${usdBalance}</h1>
-            <h6 className="mb-4">{formattedEth} ETH</h6>
+            <h1 className="mb-4 display-3">${usdBalance}</h1>
+            <h5 className="mb-4">{formattedEth} ETH</h5>
             <div className="row">
                 <div className="col-6">
                     <button className="btn btn-secondary w-100">
@@ -66,7 +66,7 @@ const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) :
                     </button>
                 </div>
             </div>
-            <h6 className="my-4">$200.55 earned</h6>
+            <h5 className="m-4">$200.55 earned</h5>
           </div>
         </div>
       </div>

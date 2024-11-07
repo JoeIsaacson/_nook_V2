@@ -6,11 +6,6 @@ body {
   bottom: 0;
 }
 
-.navbar {
-  padding-top: 24px;
-  padding-bottom: 24px;
-}
-
 .container {
   padding-left: 24px;
   padding-right: 24px;
@@ -93,22 +88,14 @@ body {
   width: 52px;
 }
 
-.btn {
-  border-radius: 40px;
-}
-
 .btn-primary {
   background-color: #83F396 !important;
   border: none !important;
   color: #000000;
 }
 
-.btn-secondary {
-  background-color: #000000;
-}
-
-.btn-outline-secondary {
-  border-color: #000000;
+.btn {
+  border-radius: 40px;
 }
 
 .btn-left-justify {

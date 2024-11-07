@@ -16,19 +16,16 @@ export default function Welcome() {
   const { isConnected } = useAccount();
   console.log(isConnected);
 
-  useEffect(() => {
-    if (isConnected) {
-      router.push('/dashboard');
-    }
-  }, [isConnected, router]);
-
   function handleContinue() {
     if (isConnected === false) {
-      connect({ connector: connectors[0] });
+      connect({ 
+        connector: connectors[0],
+        onSuccess: () => router.push('/dashboard')
+      });
     } else {
       router.push('/dashboard');
-    }
-  }
+    };
+  };
 
   return (
     <>

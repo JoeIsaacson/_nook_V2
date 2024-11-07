@@ -16,19 +16,23 @@ export default function Welcome() {
   const { isConnected } = useAccount();
   console.log(isConnected);
 
-  useEffect(() => {
-    if (isConnected) {
-      router.push('/dashboard');
-    }
-  }, [isConnected, router]);
+
+  // useEffect(() => {
+  //   console.log(status);
+  //   if (status === 'success') {
+  //     router.push('/dashboard')
+  //   }
+  // }, [status, router]);
 
   function handleContinue() {
     if (isConnected === false) {
+      console.log(isConnected);
+      console.log(CoinbaseWallet);
       connect({ connector: connectors[0] });
     } else {
-      router.push('/dashboard');
-    }
-  }
+      router.push('/dashboard')
+    };
+  };
 
   return (
     <>

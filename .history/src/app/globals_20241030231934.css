@@ -93,22 +93,14 @@ body {
   width: 52px;
 }
 
-.btn {
-  border-radius: 40px;
-}
-
 .btn-primary {
   background-color: #83F396 !important;
   border: none !important;
   color: #000000;
 }
 
-.btn-secondary {
-  background-color: #000000;
-}
-
-.btn-outline-secondary {
-  border-color: #000000;
+.btn {
+  border-radius: 40px;
 }
 
 .btn-left-justify {

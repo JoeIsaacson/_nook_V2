@@ -12,23 +12,21 @@ export default function Welcome() {
   const { disconnect } = useDisconnect();
   const CoinbaseWallet = connectors[0].name;
 
-  console.log(status);
-  const { isConnected } = useAccount();
-  console.log(isConnected);
+  console.log(CoinbaseWallet);
 
   useEffect(() => {
-    if (isConnected) {
+    console.log('Status changed to:', status);
+    if (status === 'success') {
       router.push('/dashboard');
     }
-  }, [isConnected, router]);
+  }, [status, router]);
 
   function handleContinue() {
-    if (isConnected === false) {
+    if (status === 'idle') {
+      console.log('Starting connection...');
       connect({ connector: connectors[0] });
-    } else {
-      router.push('/dashboard');
     }
-  }
+  };
 
   return (
     <>
@@ -54,7 +52,6 @@ export default function Welcome() {
                     className="btn btn-transparent btn-lg w-100 btn-left-justify"
                     onClick={handleContinue}>
                       Continue
-                      <i className="fa-solid fa-arrow-right"></i>
                   </button>
 
                   {/* {connectors.slice(0, 1).map((connector) => (

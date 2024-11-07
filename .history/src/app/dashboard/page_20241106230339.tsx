@@ -1,9 +1,4 @@
-'use client'
-
-import { useAccount, useConnect, useDisconnect, useBalance } from 'wagmi'
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-
+// Your existing page content goes here
 function App() {
   const router = useRouter();
   const { address } = useAccount();

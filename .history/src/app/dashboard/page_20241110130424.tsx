@@ -97,7 +97,7 @@ export default function Dashboard() {
               </div>
             </div>
             <h6 className="my-4">
-              ${formattedLendingRewards} earned
+              {lendingAssetsRewards.map(reward => reward.amount)} earned
             </h6>
           </div>
         </div>

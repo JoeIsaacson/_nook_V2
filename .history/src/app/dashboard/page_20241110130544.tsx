@@ -97,7 +97,7 @@ export default function Dashboard() {
               </div>
             </div>
             <h6 className="my-4">
-              ${formattedLendingRewards} earned
+              ${formattedLendingRewards.reduce(usdBalance)} earned
             </h6>
           </div>
         </div>

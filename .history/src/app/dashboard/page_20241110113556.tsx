@@ -1,7 +1,7 @@
 'use client'
 
 import { useAccount, useBalance } from 'wagmi'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function Dashboard() {
@@ -19,44 +19,32 @@ export default function Dashboard() {
   // Format ETH to 6 decimal places
   const formattedEth = balance ? Number(balance.formatted).toFixed(6) : '0.000000'
 
-  // Fetch lending positions
+  // 1. Define state at component level
   const [lendingAssetsRewards, setLendingAssetsRewards] = useState<any[]>([]);
 
-  const fetchLendingAssetsRewards = useCallback(() => {
-    if (address) {
-      fetch(
-        `https://pro-openapi.debank.com/v1/user/protocol?id=${address}&protocol_id=compound`,
-        {
-          headers: {
-            'accept': 'application/json',
-            'AccessKey': process.env.NEXT_PUBLIC_DEBANK_API_KEY || ''
-          }
+  // Fetch lending positions
+  const fetchLendingAssetsRewards = () => {
+    fetch(
+      `https://pro-openapi.debank.com/v1/user/protocol?id=0xbcb6c05ee1da1865ce07b2810cd5062fb5168cac&protocol_id=compound`,
+      {
+        headers: {
+          'accept': 'application/json',
+          'AccessKey': process.env.NEXT_PUBLIC_DEBANK_API_KEY || ''
         }
-      )
-      .then(res => res.json())
-      .then(data => {
-        // Only set state if we have new data
-        if (data?.portfolio_item_list?.[0]?.detail?.reward_token_list) {
-          setLendingAssetsRewards(data.portfolio_item_list[0].detail.reward_token_list);
-        }
-      })
-      .catch(err => console.error('Error:', err));
-    }
-  }, [address]); // Only recreate if address changes
+      }
+    )
+    .then(res => res.json())
+    .then(data => {
+      const lendingPositions = data.portfolio_item_list[0];
+      // 2. Use setState instead of const
+      setLendingAssetsRewards(lendingPositions.detail.reward_token_list);
+    })
+    .catch(err => console.error('Error:', err));
+  };
 
-  // Only run once when address changes
-  useEffect(() => {
-    fetchLendingAssetsRewards();
-  }, [address]); // Remove fetchLendingAssetsRewards from dependencies
+  fetchLendingAssetsRewards();
 
-  // get the COMP price token
-  //const compPrice = lendingAssetsRewards.find(reward => reward.token_address === '0xc00e94cb662c3520282e6f5717214004a7f26888');
-  
-  // format the lending returns in USD
-  const compPrice = 52.55;
-  const formattedLendingRewards = lendingAssetsRewards.map(reward => reward.amount * compPrice);
-  console.log(formattedLendingRewards);
-  // testing grounds
+  // 3. Now lendingAssetsRewards is available here
   console.log('Outside function:', lendingAssetsRewards);
 
   return (
@@ -96,9 +84,20 @@ export default function Dashboard() {
                 </button>
               </div>
             </div>
-            <h6 className="my-4">
-              ${formattedLendingRewards} earned
-            </h6>
+            <h6 className="my-4">$200.55 earned</h6>
+
+            <div className="row">
+              {/* left side */}
+              <div className="col-6">
+                <h2>Reward balance 1</h2>
+                <p></p>
+              </div>
+              {/* right side */}
+              <div className="col-6">
+                <h2>Reward balance 2</h2>
+              </div>
+            </div>
+              
           </div>
         </div>
       </div>
@@ -116,6 +115,13 @@ export default function Dashboard() {
           </div>
         </div>
       </footer>
+
+      {/* 4. And available in your JSX */}
+      <div>
+        {lendingAssetsRewards.map(reward => (
+          <div key={reward.id}>{reward.amount}</div>
+        ))}
+      </div>
     </>
   )
 };

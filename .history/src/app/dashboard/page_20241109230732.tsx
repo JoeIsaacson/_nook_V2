@@ -1,31 +1,18 @@
 'use client'
 
 import { useAccount, useBalance } from 'wagmi'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
-export default function Dashboard() {
+function App() {
   const router = useRouter();
-  const { address } = useAccount();  
+  const { address } = useAccount();
+  const [debankData, setDebankData] = useState(null);
 
-  const { data: balance } = useBalance({
-    address: address,
-  });
-
-  // Mock ETH price in USD 
-  const ethPrice = 3165 // Example price
-  // Calculate USD balance
-  const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) : '0.00'
-  // Format ETH to 6 decimal places
-  const formattedEth = balance ? Number(balance.formatted).toFixed(6) : '0.000000'
-
-  // Fetch lending positions
-  const [lendingAssetsRewards, setLendingAssetsRewards] = useState<any[]>([]);
-
-  const fetchLendingAssetsRewards = useCallback(() => {
+  useEffect(() => {
     if (address) {
       fetch(
-        `https://pro-openapi.debank.com/v1/user/protocol?id=${address}&protocol_id=compound`,
+        `https://pro-openapi.debank.com/v1/user/chain_balance?id=${address}&chain_id=base`,
         {
           headers: {
             'accept': 'application/json',
@@ -34,30 +21,27 @@ export default function Dashboard() {
         }
       )
       .then(res => res.json())
-      .then(data => {
-        // Only set state if we have new data
-        if (data?.portfolio_item_list?.[0]?.detail?.reward_token_list) {
-          setLendingAssetsRewards(data.portfolio_item_list[0].detail.reward_token_list);
-        }
-      })
-      .catch(err => console.error('Error:', err));
+      .then(data => setDebankData(data))
+      .catch(err => console.error('Error fetching DeBank data:', err));
     }
-  }, [address]); // Only recreate if address changes
+  }, [address]);
 
-  // Only run once when address changes
-  useEffect(() => {
-    fetchLendingAssetsRewards();
-  }, [address]); // Remove fetchLendingAssetsRewards from dependencies
+  console.log("does this work?", debankData);
 
-  // get the COMP price token
-  //const compPrice = lendingAssetsRewards.find(reward => reward.token_address === '0xc00e94cb662c3520282e6f5717214004a7f26888');
-  
-  // format the lending returns in USD
-  const compPrice = 52.55;
-  const formattedLendingRewards = lendingAssetsRewards.map(reward => reward.amount * compPrice);
-  console.log(formattedLendingRewards);
-  // testing grounds
-  console.log('Outside function:', lendingAssetsRewards);
+  const { data: balance } = useBalance({
+    address: address,
+  });
+
+  // Mock ETH price in USD (you'll want to replace this with real price data)
+  const ethPrice = 3165 // Example price
+  const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) : '0.00'
+
+  console.log(balance, usdBalance);
+
+  console.log(balance;
+
+  // Format ETH to 6 decimal places
+  const formattedEth = balance ? Number(balance.formatted).toFixed(6) : '0.000000'
 
   return (
     <>
@@ -96,9 +80,7 @@ export default function Dashboard() {
                 </button>
               </div>
             </div>
-            <h6 className="my-4">
-              ${formattedLendingRewards} earned
-            </h6>
+            <h6 className="my-4">$200.55 earned</h6>
           </div>
         </div>
       </div>
@@ -118,4 +100,6 @@ export default function Dashboard() {
       </footer>
     </>
   )
-};
+}
+
+export default App

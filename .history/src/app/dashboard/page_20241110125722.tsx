@@ -19,9 +19,10 @@ export default function Dashboard() {
   // Format ETH to 6 decimal places
   const formattedEth = balance ? Number(balance.formatted).toFixed(6) : '0.000000'
 
-  // Fetch lending positions
+  // 1. Define state at component level
   const [lendingAssetsRewards, setLendingAssetsRewards] = useState<any[]>([]);
 
+  // Fetch lending positions
   const fetchLendingAssetsRewards = useCallback(() => {
     if (address) {
       fetch(
@@ -49,14 +50,7 @@ export default function Dashboard() {
     fetchLendingAssetsRewards();
   }, [address]); // Remove fetchLendingAssetsRewards from dependencies
 
-  // get the COMP price token
-  //const compPrice = lendingAssetsRewards.find(reward => reward.token_address === '0xc00e94cb662c3520282e6f5717214004a7f26888');
-  
-  // format the lending returns in USD
-  const compPrice = 52.55;
-  const formattedLendingRewards = lendingAssetsRewards.map(reward => reward.amount * compPrice);
-  console.log(formattedLendingRewards);
-  // testing grounds
+  // 3. Now lendingAssetsRewards is available here
   console.log('Outside function:', lendingAssetsRewards);
 
   return (
@@ -96,9 +90,22 @@ export default function Dashboard() {
                 </button>
               </div>
             </div>
-            <h6 className="my-4">
-              ${formattedLendingRewards} earned
-            </h6>
+            <h6 className="my-4">$200.55 earned</h6>
+
+            <div className="row">
+              {/* left side */}
+              <div className="col-6">
+                <h2>Reward balance 1</h2>
+                <p>
+                  {lendingAssetsRewards.map(reward => reward.amount)}
+                </p>
+              </div>
+              {/* right side */}
+              <div className="col-6">
+                <h2>Reward balance 2</h2>
+              </div>
+            </div>
+              
           </div>
         </div>
       </div>

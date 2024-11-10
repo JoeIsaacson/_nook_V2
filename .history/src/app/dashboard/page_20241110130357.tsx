@@ -52,9 +52,10 @@ export default function Dashboard() {
   // get the COMP price token
   //const compPrice = lendingAssetsRewards.find(reward => reward.token_address === '0xc00e94cb662c3520282e6f5717214004a7f26888');
   
+  console.log(compPrice);
   // format the lending returns in USD
   const compPrice = 52.55;
-  const formattedLendingRewards = lendingAssetsRewards.map(reward => reward.amount * compPrice);
+  const formattedLendingRewards = lendingAssetsRewards.map(reward => reward.amount * ethPrice);
   console.log(formattedLendingRewards);
   // testing grounds
   console.log('Outside function:', lendingAssetsRewards);
@@ -97,7 +98,7 @@ export default function Dashboard() {
               </div>
             </div>
             <h6 className="my-4">
-              ${formattedLendingRewards} earned
+              {lendingAssetsRewards.map(reward => reward.amount)} earned
             </h6>
           </div>
         </div>

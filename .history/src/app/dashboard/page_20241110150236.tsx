@@ -54,12 +54,7 @@ export default function Dashboard() {
   
   // format the lending returns in USD
   const compPrice = 52.55;
-  const formattedLendingRewards = lendingAssetsRewards.map(reward => 
-    (reward.amount * compPrice).toLocaleString('en-US', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    })
-  );
+  const formattedLendingRewards = lendingAssetsRewards.map(reward => reward.amount * compPrice).tofixed(2);
   console.log(formattedLendingRewards);
   // testing grounds
   console.log('Outside function:', lendingAssetsRewards);

@@ -7,36 +7,16 @@ import { useRouter } from 'next/navigation'
 function App() {
   const router = useRouter();
   const { address } = useAccount();
-  const [debankData, setDebankData] = useState(null);
-
-  useEffect(() => {
-    if (address) {
-      fetch(
-        `https://pro-openapi.debank.com/v1/user/chain_balance?id=${address}&chain_id=eth`,
-        {
-          headers: {
-            'accept': 'application/json',
-            'AccessKey': process.env.NEXT_PUBLIC_DEBANK_API_KEY || ''
-          }
-        }
-      )
-      .then(res => res.json())
-      .then(data => setDebankData(data))
-      .catch(err => console.error('Error fetching DeBank data:', err));
-    }
-  }, [address]);
 
   const { data: balance } = useBalance({
     address: address,
   });
 
-  console.log("does this work?", debankData);
+  console.log(address);
 
   // Mock ETH price in USD (you'll want to replace this with real price data)
-  const ethPrice = 3165 // Example price
+  const ethPrice = 2600 // Example price
   const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) : '0.00'
-
-  // console.log(balance, usdBalance);
 
   // Format ETH to 6 decimal places
   const formattedEth = balance ? Number(balance.formatted).toFixed(6) : '0.000000'

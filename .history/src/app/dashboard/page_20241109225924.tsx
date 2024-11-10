@@ -30,7 +30,7 @@ function App() {
     address: address,
   });
 
-  console.log("does this work?", debankData);
+  console.log(debankData);
 
   // Mock ETH price in USD (you'll want to replace this with real price data)
   const ethPrice = 3165 // Example price

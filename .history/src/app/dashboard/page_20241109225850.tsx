@@ -30,13 +30,13 @@ function App() {
     address: address,
   });
 
-  console.log("does this work?", debankData);
+  console.log(debankData);
 
   // Mock ETH price in USD (you'll want to replace this with real price data)
   const ethPrice = 3165 // Example price
   const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) : '0.00'
 
-  // console.log(balance, usdBalance);
+  console.log(balance, usdBalance);
 
   // Format ETH to 6 decimal places
   const formattedEth = balance ? Number(balance.formatted).toFixed(6) : '0.000000'

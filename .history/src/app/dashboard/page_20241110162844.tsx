@@ -14,7 +14,7 @@ export default function Dashboard() {
   const [lendingAssetsRewards, setLendingAssetsRewards] = useState<any[]>([]);
   const [lendingPrinciple, setLendingPrinciple] = useState<any[]>([]);
 
-  // Fetch lending position
+  // Fetch lending positio
   const fetchLendingData = useCallback(() => {
     if (address) {
       fetch(
@@ -40,6 +40,9 @@ export default function Dashboard() {
   useEffect(() => {
     fetchLendingData();
   }, [address]);
+
+  // get the COMP price token
+  //const compPrice = lendingAssetsRewards.find(reward => reward.token_address === '0xc00e94cb662c3520282e6f5717214004a7f26888');
   
   // format the lending returns in USD
   const compPrice = 52.55;
@@ -51,14 +54,12 @@ export default function Dashboard() {
   );
 
   // format the lending principle in USD
-  const formattedLendingPrincipleUSD = (Number(lendingPrinciple) * ethPrice).toLocaleString('en-US', {
+  const formattedLendingPrinciple = (Number(lendingPrinciple) * ethPrice).toLocaleString('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });
-
-  const formattedLendingPrincipleETH = Number(lendingPrinciple).toFixed(6);
   // testing grounds
-  console.log('Outside function:', formattedLendingPrincipleUSD);
+  console.log('Outside function:', formattedLendingPrinciple);
 
   return (
     <>
@@ -83,8 +84,8 @@ export default function Dashboard() {
       <div className="container mt-5">
         <div className="row">
           <div className="col-12">
-            <h1 className="mb-4 display-1">${formattedLendingPrincipleUSD}</h1>
-            <h6 className="mb-4">{formattedLendingPrincipleETH} ETH</h6>
+            <h1 className="mb-4 display-1">${formattedLendingPrinciple}</h1>
+            <h6 className="mb-4">{Number(lendingPrinciple).toFixed(6)} ETH</h6>
             <div className="row">
               <div className="col-6">
                 <button className="btn btn-secondary w-100">

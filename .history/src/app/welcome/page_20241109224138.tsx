@@ -1,15 +1,17 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useConnect, useAccount } from 'wagmi'
+import { useConnect, useAccount, useDisconnect } from 'wagmi'
 import { useEffect } from 'react';
+import { stat } from 'fs';
 
 export default function Welcome() {
   const router = useRouter();
   const { connectors, connect, status, error } = useConnect();
 
+  console.log(status);
   const { isConnected } = useAccount();
-  console.log(status, isConnected);
+  console.log(isConnected);
 
   useEffect(() => {
     if (isConnected) {
@@ -52,6 +54,16 @@ export default function Welcome() {
                       <i className="fa-solid fa-arrow-right"></i>
                   </button>
 
+                  {/* {connectors.slice(0, 1).map((connector) => (
+                    <button
+                      className="btn btn-transparent btn-lg w-100 btn-left-justify"
+                      key={connector.uid}
+                      onClick={() => connect({ connector })}
+                      type="button"
+                    >
+                      Continue
+                    </button>
+                  ))} */}
                   <div>{error?.message}</div>
                 </div>
 

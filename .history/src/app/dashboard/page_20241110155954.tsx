@@ -90,7 +90,7 @@ export default function Dashboard() {
         <div className="row">
           <div className="col-12">
             <h1 className="mb-4 display-1">${formattedLendingPrinciple}</h1>
-            <h6 className="mb-4">{Number(lendingPrinciple).toFixed(6)} ETH</h6>
+            <h6 className="mb-4">{lendingPrinciple} ETH</h6>
             <div className="row">
               <div className="col-6">
                 <button className="btn btn-secondary w-100">

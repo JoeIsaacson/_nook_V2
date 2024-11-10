@@ -12,15 +12,17 @@ export default function Dashboard() {
     address: address,
   });
 
-  
   // Mock ETH price in USD 
   const ethPrice = 3165 // Example price
-  // Create state for lending positions
-  const [lendingAssetsRewards, setLendingAssetsRewards] = useState<any[]>([]);
-  const [lendingPrinciple, setLendingPrinciple] = useState<any[]>([]);
+  // Calculate USD balance
+  const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) : '0.00'
+  // Format ETH to 6 decimal places
+  const formattedEth = balance ? Number(balance.formatted).toFixed(6) : '0.000000'
 
-  // Fetch lending positio
-  const fetchLendingData = useCallback(() => {
+  // Fetch lending positions
+  const [lendingAssetsRewards, setLendingAssetsRewards] = useState<any[]>([]);
+
+  const fetchLendingAssetsRewards = useCallback(() => {
     if (address) {
       fetch(
         `https://pro-openapi.debank.com/v1/user/protocol?id=${address}&protocol_id=compound`,
@@ -33,9 +35,31 @@ export default function Dashboard() {
       )
       .then(res => res.json())
       .then(data => {
-        const portfolioItem = data.portfolio_item_list[0].detail;
-        setLendingAssetsRewards(portfolioItem.reward_token_list);
-        setLendingPrinciple(portfolioItem.supply_token_list[0].amount);
+        // Only set state if we have new data
+        setLendingAssetsRewards(data.portfolio_item_list[0].detail.reward_token_list);
+      })
+      .catch(err => console.error('Error:', err));
+    }
+  }, [address]); // Only recreate if address changes
+
+  // Fetch the lending principle
+  const [lendingPrinciple, setLendingPrinciple] = useState<any[]>([]);
+
+  const fetchLendingPrinciple = useCallback(() => {
+    if (address) {
+      fetch(
+        `https://pro-openapi.debank.com/v1/user/protocol?id=${address}&protocol_id=compound`,
+        {
+          headers: {
+            'accept': 'application/json',
+            'AccessKey': process.env.NEXT_PUBLIC_DEBANK_API_KEY || ''
+          }
+        }
+      )
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setLendingPrinciple(data.portfolio_item_list[0].detail);
       })
       .catch(err => console.error('Error:', err));
     }
@@ -43,8 +67,8 @@ export default function Dashboard() {
 
   // Only run once when address changes
   useEffect(() => {
-    fetchLendingData();
-  }, [address]);
+    fetchLendingAssetsRewards();
+  }, [address]); // Remove fetchLendingAssetsRewards from dependencies
 
   // get the COMP price token
   //const compPrice = lendingAssetsRewards.find(reward => reward.token_address === '0xc00e94cb662c3520282e6f5717214004a7f26888');
@@ -57,14 +81,9 @@ export default function Dashboard() {
       maximumFractionDigits: 2
     })
   );
-
-  // format the lending principle in USD
-  const formattedLendingPrinciple = (Number(lendingPrinciple) * ethPrice).toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
+  console.log(formattedLendingRewards);
   // testing grounds
-  console.log('Outside function:', formattedLendingPrinciple);
+  console.log('Outside function:', lendingAssetsRewards);
 
   return (
     <>
@@ -89,8 +108,8 @@ export default function Dashboard() {
       <div className="container mt-5">
         <div className="row">
           <div className="col-12">
-            <h1 className="mb-4 display-1">${formattedLendingPrinciple}</h1>
-            <h6 className="mb-4">{Number(lendingPrinciple).toFixed(6)} ETH</h6>
+            <h1 className="mb-4 display-1">${usdBalance}</h1>
+            <h6 className="mb-4">{formattedEth} ETH</h6>
             <div className="row">
               <div className="col-6">
                 <button className="btn btn-secondary w-100">

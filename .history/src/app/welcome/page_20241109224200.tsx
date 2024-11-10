@@ -8,8 +8,9 @@ export default function Welcome() {
   const router = useRouter();
   const { connectors, connect, status, error } = useConnect();
 
+  console.log(status);
   const { isConnected } = useAccount();
-  console.log(status, isConnected);
+  console.log(isConnected);
 
   useEffect(() => {
     if (isConnected) {

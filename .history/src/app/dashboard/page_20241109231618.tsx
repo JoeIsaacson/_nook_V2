@@ -1,29 +1,23 @@
 'use client'
 
 import { useAccount, useBalance } from 'wagmi'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
-export default function Dashboard() {
+function App() {
   const router = useRouter();
-  const { address } = useAccount();  
+  const { address } = useAccount();
+  const [debankData, setDebankData] = useState(null);
+  const [ethPrice, setEthPrice] = useState<number>(0);
 
   const { data: balance } = useBalance({
     address: address,
   });
 
-  
-  // Mock ETH price in USD 
-  const ethPrice = 3165 // Example price
-  // Create state for lending positions
-  const [lendingAssetsRewards, setLendingAssetsRewards] = useState<any[]>([]);
-  const [lendingPrinciple, setLendingPrinciple] = useState<any[]>([]);
-
-  // Fetch lending positio
-  const fetchLendingData = useCallback(() => {
+  useEffect(() => {
     if (address) {
       fetch(
-        `https://pro-openapi.debank.com/v1/user/protocol?id=${address}&protocol_id=compound`,
+        `https://pro-openapi.debank.com/v1/user/chain_balance?id=${address}&chain_id=base`,
         {
           headers: {
             'accept': 'application/json',
@@ -32,39 +26,31 @@ export default function Dashboard() {
         }
       )
       .then(res => res.json())
-      .then(data => {
-        const portfolioItem = data.portfolio_item_list[0].detail;
-        setLendingAssetsRewards(portfolioItem.reward_token_list);
-        setLendingPrinciple(portfolioItem.supply_token_list[0].amount);
-      })
-      .catch(err => console.error('Error:', err));
+      .then(data => setDebankData(data))
+      .catch(err => console.error('Error fetching DeBank data:', err));
     }
   }, [address]);
 
-  // Only run once when address changes
+  // Fetch ETH price
   useEffect(() => {
-    fetchLendingData();
-  }, [address]);
+    fetch('https://api.coingecko.com/v3/simple/price?ids=ethereum&vs_currencies=usd')
+      .then(res => res.json())
+      .then(data => setEthPrice(data.ethereum.usd))
+      .catch(err => console.error('Error fetching ETH price:', err));
+  }, []);
 
-  // get the COMP price token
-  //const compPrice = lendingAssetsRewards.find(reward => reward.token_address === '0xc00e94cb662c3520282e6f5717214004a7f26888');
-  
-  // format the lending returns in USD
-  const compPrice = 52.55;
-  const formattedLendingRewards = lendingAssetsRewards.map(reward => 
-    (reward.amount * compPrice).toLocaleString('en-US', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    })
-  );
+  // Calculate USD value
+  const usdBalance = balance && ethPrice 
+    ? (Number(balance.formatted) * ethPrice).toFixed(2) 
+    : '0.00';
 
-  // format the lending principle in USD
-  const formattedLendingPrinciple = (Number(lendingPrinciple) * ethPrice).toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
-  // testing grounds
-  console.log('Outside function:', formattedLendingPrinciple);
+  console.log('ETH Balance:', balance?.formatted);
+  console.log('USD Balance:', usdBalance);
+
+  console.log("does this work?", debankData);
+
+  // Format ETH to 6 decimal places
+  const formattedEth = balance ? Number(balance.formatted).toFixed(6) : '0.000000'
 
   return (
     <>
@@ -89,8 +75,8 @@ export default function Dashboard() {
       <div className="container mt-5">
         <div className="row">
           <div className="col-12">
-            <h1 className="mb-4 display-1">${formattedLendingPrinciple}</h1>
-            <h6 className="mb-4">{Number(lendingPrinciple).toFixed(6)} ETH</h6>
+            <h1 className="mb-4 display-1">${usdBalance}</h1>
+            <h6 className="mb-4">{formattedEth} ETH</h6>
             <div className="row">
               <div className="col-6">
                 <button className="btn btn-secondary w-100">
@@ -103,9 +89,7 @@ export default function Dashboard() {
                 </button>
               </div>
             </div>
-            <h6 className="my-4">
-              ${formattedLendingRewards} earned
-            </h6>
+            <h6 className="my-4">$200.55 earned</h6>
           </div>
         </div>
       </div>
@@ -125,4 +109,6 @@ export default function Dashboard() {
       </footer>
     </>
   )
-};
+}
+
+export default App

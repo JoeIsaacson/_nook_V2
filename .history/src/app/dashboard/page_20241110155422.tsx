@@ -59,10 +59,7 @@ export default function Dashboard() {
   );
 
   // format the lending principle in USD
-  const formattedLendingPrinciple = (Number(lendingPrinciple) * ethPrice).toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
+  const formattedLendingPrinciple = (Number(lendingPrinciple) * ethPrice).toFixed(2);
   // testing grounds
   console.log('Outside function:', formattedLendingPrinciple);
 

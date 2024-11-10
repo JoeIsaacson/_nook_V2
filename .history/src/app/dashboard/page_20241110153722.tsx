@@ -14,6 +14,11 @@ export default function Dashboard() {
 
   // Mock ETH price in USD 
   const ethPrice = 3165 // Example price
+  // Calculate USD balance
+  const usdBalance = balance ? (Number(balance.formatted) * ethPrice).toFixed(2) : '0.00'
+  // Format ETH to 6 decimal places
+  const formattedEth = balance ? Number(balance.formatted).toFixed(6) : '0.000000'
+
   // Create state for lending positions
   const [lendingAssetsRewards, setLendingAssetsRewards] = useState<any[]>([]);
   const [lendingPrinciple, setLendingPrinciple] = useState<any[]>([]);

@@ -12,8 +12,6 @@ export default function Dashboard() {
     address: address,
   });
 
-  // Mock ETH price in USD 
-  const ethPrice = 3165 // Example price
   // Create state for lending positions
   const [lendingAssetsRewards, setLendingAssetsRewards] = useState<any[]>([]);
   const [lendingPrinciple, setLendingPrinciple] = useState<any[]>([]);

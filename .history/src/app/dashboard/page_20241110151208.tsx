@@ -59,8 +59,8 @@ export default function Dashboard() {
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        setLendingPrinciple(data.portfolio_item_list[0].detail.supply_token_list[0].amount);
-        //console.log(lendingPrinciple[0].supply_token_list[0].amounts);
+        setLendingPrinciple(data.portfolio_item_list[0].detail);
+        console.log(lendingPrinciple[0].supply_token_list[0].amounts);
       })
       .catch(err => console.error('Error:', err));
     }
@@ -87,11 +87,9 @@ export default function Dashboard() {
       maximumFractionDigits: 2
     })
   );
-
-  // format the lending principle in USD
-  const formattedLendingPrinciple = (Number(lendingPrinciple) * ethPrice).toFixed(2);
   // testing grounds
-  console.log('Outside function:', formattedLendingPrinciple);
+  // console.log(formattedLendingRewards);
+  //console.log('Outside function:', lendingAssetsRewards);
 
   return (
     <>
@@ -116,8 +114,8 @@ export default function Dashboard() {
       <div className="container mt-5">
         <div className="row">
           <div className="col-12">
-            <h1 className="mb-4 display-1">${formattedLendingPrinciple}</h1>
-            <h6 className="mb-4">{lendingPrinciple} ETH</h6>
+            <h1 className="mb-4 display-1">${usdBalance}</h1>
+            <h6 className="mb-4">{formattedEth} ETH</h6>
             <div className="row">
               <div className="col-6">
                 <button className="btn btn-secondary w-100">

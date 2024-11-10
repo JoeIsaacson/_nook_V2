@@ -89,9 +89,15 @@ export default function Dashboard() {
   );
 
   // format the lending principle in USD
-  const formattedLendingPrinciple = (Number(lendingPrinciple) * ethPrice).toFixed(2);
+  const formattedLendingPrinciple = (lendingPrinciple * ethPrice).toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })
+  );
   // testing grounds
-  console.log('Outside function:', formattedLendingPrinciple);
+  // console.log(formattedLendingRewards);
+  // console.log('Outside function:', lendingAssetsRewards);
+  console.log('Outside function:', lendingPrinciple);
 
   return (
     <>
@@ -116,8 +122,8 @@ export default function Dashboard() {
       <div className="container mt-5">
         <div className="row">
           <div className="col-12">
-            <h1 className="mb-4 display-1">${formattedLendingPrinciple}</h1>
-            <h6 className="mb-4">{lendingPrinciple} ETH</h6>
+            <h1 className="mb-4 display-1">${usdBalance}</h1>
+            <h6 className="mb-4">{formattedEth} ETH</h6>
             <div className="row">
               <div className="col-6">
                 <button className="btn btn-secondary w-100">

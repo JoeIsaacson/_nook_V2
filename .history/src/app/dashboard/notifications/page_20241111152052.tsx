@@ -43,14 +43,6 @@ export default function Notifications() {
               <p className="mb-0">Your savings rate just went up</p>
               <p className="mb-0 fw-normal">4 hours ago</p>
             </li>
-            <li 
-              className="list-group-item px-4 py-3"
-              onClick={() => router.push('/dashboard/notifications/3')}
-              style={{ cursor: 'pointer' }}
-            >
-              <p className="mb-0">You can now refer a friend and earn $50</p>
-              <p className="mb-0 fw-normal">1 day ago</p>
-            </li>
         </ul>
         </div>
     </>

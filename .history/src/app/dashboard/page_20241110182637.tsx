@@ -120,15 +120,18 @@ export default function Dashboard() {
             </div>
 
             {/* Footer */}
-            <footer className="">
-              <div className="py-3 text-center">
-                <button className="btn btn-transparent btn-primary btn-lg w-100 btn-left-justify border-0">
-                  <span>Deposit</span>
-                  <i className="fa-solid fa-arrow-right"></i>
-                </button>
+            <footer className="fixed-bottom">
+              <div className="container py-3">
+                <div className="row">
+                  <div className="col-12 text-center">
+                    <button className="btn btn-transparent btn-primary btn-lg w-100 btn-left-justify border-0">
+                      <span>Deposit</span>
+                      <i className="fa-solid fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
             </footer>
-            
           </div>
         </div>
       </div>

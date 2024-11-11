@@ -3,10 +3,8 @@
 import { useAccount, useDisconnect} from 'wagmi'
 import { useRouter } from 'next/navigation'
 
-function Settings() {
-  const router = useRouter()
-  const { disconnect } = useDisconnect()
-  const account = useAccount()
+function Notifications() {
+  const router = useRouter();
 
   return (
       <>
@@ -22,8 +20,8 @@ function Settings() {
         </div>
       </nav>
 
-      {/* Main Content */}
-      <div className="container mt-2">
+       {/* Main Content */}
+       <div className="container mt-2">
         <div className="row">
           <div className="col-12">
             <div className="circle-badge circle-badge-large mb-4">JI</div>
@@ -62,4 +60,4 @@ function Settings() {
   )
 }
 
-export default Settings
+export default Notifications

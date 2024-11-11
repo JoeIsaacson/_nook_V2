@@ -85,17 +85,14 @@ export default function Dashboard() {
         <div className="right-panel col-12 col-lg-6">
           {/* Navbar */}
           <nav className="navbar navbar-expand-lg navbar-light bg-white">
-            <div className="container d-flex justify-content-end px-0">
+            <div className="container d-flex justify-content-end">
               <button
                 className="btn"
                 onClick={() => router.push('/dashboard/settings')}
               >
                 <i className="fas fa-cog"></i>
               </button>
-              <button 
-                className="btn"
-                onClick={() => router.push('/dashboard/notifications')}
-              >
+              <button className="btn">
                 <i className="fas fa-bell"></i>
               </button>
             </div>
@@ -130,7 +127,7 @@ export default function Dashboard() {
             {/* Footer */}
             <footer className="">
               <div className="py-3 text-center">
-                <button className="btn btn-transparent btn-primary btn-lg w-100 btn-left-justify mt-5">
+                <button className="btn btn-transparent btn-primary btn-lg w-100 btn-left-justify border-0">
                   <span>Deposit</span>
                   <i className="fa-solid fa-arrow-right"></i>
                 </button>

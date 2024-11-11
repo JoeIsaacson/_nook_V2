@@ -92,10 +92,7 @@ export default function Dashboard() {
               >
                 <i className="fas fa-cog"></i>
               </button>
-              <button 
-                className="btn"
-                onClick={() => router.push('/dashboard/notifications')}
-              >
+              <button className="btn">
                 <i className="fas fa-bell"></i>
               </button>
             </div>

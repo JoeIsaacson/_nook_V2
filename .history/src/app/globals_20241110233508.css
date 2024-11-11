@@ -160,7 +160,3 @@ body {
 img[src="src/app/img/ellipse_1.svg"] {
   animation: slideFromRight 1s ease-out forwards;
 }
-
-.desktop-title-and-version {
-  margin-top: 50%;
-}

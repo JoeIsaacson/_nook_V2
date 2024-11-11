@@ -73,17 +73,14 @@ export default function Dashboard() {
   return (
     <div className="container">
       <div className="row">
-        <div className="left-panel col-6 d-none d-lg-block d-flex align-items-center justify-content-center">
-          <div className="desktop-title-and-version align-items-center justify-content-center h-100">
-            <p className="display-4 fs-4 text-decoration-underline text-center">nook</p>
-            <p className="text-center small">V 0.00.0</p>
-          </div>
+        <div className="left-panel col-6 d-none d-lg-block">
+          Hi, it's me
         </div>
         
         <div className="right-panel col-12 col-lg-6">
           {/* Navbar */}
           <nav className="navbar navbar-expand-lg navbar-light bg-white">
-            <div className="container d-flex justify-content-end">
+            <div className="container">
               <button
                 className="btn"
                 onClick={() => router.push('/dashboard/settings')}
@@ -101,7 +98,7 @@ export default function Dashboard() {
             <div className="row">
               <div className="col-12">
                 <h1 className="mb-4 display-1">${formattedLendingPrincipleUSD}</h1>
-                <h6 className="mb-4 small"><span className="text-decoration-underline">{formattedAPY}% APY</span> · Next payout in {nextPayout}h</h6>
+                <h6 className="mb-4 small">{formattedAPY}% APY · Next payout in {nextPayout}h</h6>
                 
                 <div className="row">
                   <div className="col-6">

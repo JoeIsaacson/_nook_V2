@@ -74,9 +74,9 @@ export default function Dashboard() {
     <div className="container">
       <div className="row">
         <div className="left-panel col-6 d-none d-lg-block d-flex align-items-center justify-content-center">
-          <div className="desktop-title-and-version align-items-center justify-content-center h-100">
-            <p className="display-4 fs-4 text-decoration-underline text-center">nook</p>
-            <p className="text-center small">V 0.00.0</p>
+          <div className="desktop-title-and-version d-flex align-items-center justify-content-center h-100">
+            <p className="display-1 fs-4 text-decoration-underline text-center">NOOK</p>
+            <p className="text-center">V 0.00.0</p>
           </div>
         </div>
         
@@ -101,7 +101,7 @@ export default function Dashboard() {
             <div className="row">
               <div className="col-12">
                 <h1 className="mb-4 display-1">${formattedLendingPrincipleUSD}</h1>
-                <h6 className="mb-4 small"><span className="text-decoration-underline">{formattedAPY}% APY</span> · Next payout in {nextPayout}h</h6>
+                <h6 className="mb-4 small">{formattedAPY}% APY · Next payout in {nextPayout}h</h6>
                 
                 <div className="row">
                   <div className="col-6">

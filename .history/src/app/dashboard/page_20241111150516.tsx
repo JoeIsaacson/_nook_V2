@@ -125,11 +125,7 @@ export default function Dashboard() {
                   ${formattedLendingRewards} earned
                 </h6>
 
-                <img 
-                  src="/img/graph_balloon_raw_1.png" 
-                  alt="nook logo" 
-                  className="w-100"
-                />
+                <img src="public/img/graph_balloon_raw_1.png" alt="nook logo" className="w-100" />
               </div>
             </div>
 

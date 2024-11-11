@@ -37,7 +37,7 @@ function Notifications() {
             <p className="mb-0 fw-normal">6 hours ago</p>
             </li>
             <li className="list-group-item px-4 py-3">
-            <p className="mb-0">Referral credits are now live</p>
+            <p className="mb-0">Personal info</p>
             <p className="mb-0 fw-normal">2 days ago</p>
             </li>
         </ul>

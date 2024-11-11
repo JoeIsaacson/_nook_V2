@@ -29,16 +29,16 @@ function Notifications() {
         {/* notifications list */}
         <ul className="settings-list-stacked list-group list-group-flush">
             <li className="list-group-item px-4 py-3">
-            <p className="mb-0">You just received a referral bonus</p>
-            <p className="mb-0 fw-normal">4 hours ago</p>
+            <p className="mb-0">Personal info</p>
+            <p className="mb-0 fw-normal">12 hours ago</p>
             </li>
             <li className="list-group-item px-4 py-3">
-            <p className="mb-0">Your APY just went up</p>
-            <p className="mb-0 fw-normal">6 hours ago</p>
+            <p className="mb-0">Personal info</p>
+            <p className="mb-0 fw-normal">12 hours ago</p>
             </li>
             <li className="list-group-item px-4 py-3">
-            <p className="mb-0">Referral credits are now live</p>
-            <p className="mb-0 fw-normal">2 days ago</p>
+            <p className="mb-0">Personal info</p>
+            <p className="mb-0 fw-normal">12 hours ago</p>
             </li>
         </ul>
         </div>

@@ -95,6 +95,7 @@ body {
 
 .btn {
   border-radius: 40px;
+  padding: auto 24px;
 }
 
 .btn-primary {

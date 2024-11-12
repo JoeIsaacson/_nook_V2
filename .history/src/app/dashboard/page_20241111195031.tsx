@@ -20,38 +20,25 @@ export default function Dashboard() {
 
   // Data fetching
   const fetchLendingData = useCallback(() => {
-    if (!address) return;
-    
-    const apiKey = process.env.NEXT_PUBLIC_DEBANK_API_KEY;
-    console.log('Using API Key:', apiKey ? 'Present' : 'Missing'); // Debug log
-    
+    if (!address) return
+    console.log(address);
     fetch(
       `https://pro-openapi.debank.com/v1/user/protocol?id=${address}&protocol_id=compound`,
       {
         headers: {
           'accept': 'application/json',
-          'AccessKey': apiKey || ''
+          'AccessKey': process.env.NEXT_PUBLIC_DEBANK_API_KEY || ''
         }
       }
     )
-    .then(res => {
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-      return res.json();
-    })
+    .then(res => res.json())
     .then(data => {
-      console.log('API Response:', data); // Debug log
-      const portfolioItem = data.portfolio_item_list[0].detail;
-      setLendingAssetsRewards(portfolioItem.reward_token_list);
-      setLendingPrinciple(portfolioItem.supply_token_list[0].amount);
+      const portfolioItem = data.portfolio_item_list[0].detail
+      setLendingAssetsRewards(portfolioItem.reward_token_list)
+      setLendingPrinciple(portfolioItem.supply_token_list[0].amount)
     })
-    .catch(err => {
-      console.error('Fetch Error:', err);
-      console.error('Address:', address);
-      console.error('API Key Present:', !!apiKey);
-    });
-  }, [address]);
+    .catch(err => console.error('Error:', err))
+  }, [address])
 
   // Effects
   useEffect(() => {

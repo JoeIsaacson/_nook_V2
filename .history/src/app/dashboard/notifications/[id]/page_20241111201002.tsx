@@ -15,13 +15,12 @@ export default function NotificationDetail() {
           title: 'You just received a referral bonus',
           time: '4 hours ago',
           content: 'This will be reinvested back into your main balance earning 4.4% APY',
-          class: 'notification-success'
         }
       case '2':
         return {
-          title: 'Your savings rate just increasted to 4.4% APY',
+          title: 'Welcome to nook!',
           time: '4 hours ago',
-          content: 'This was applied immediately',
+          content: 'Were excited to have you join us. Start exploring our platform to discover all the features available to you.',
           class: 'notification-welcome'
         }
       case '3':
@@ -35,17 +34,25 @@ export default function NotificationDetail() {
         return {
           title: 'Notification not found',
           time: '',
-          content: 'This notification does not exist.',
-          class: 'notification-default'
+          content: 'This notification does not exist.'
         }
     }
   }
 
   const notification = getNotificationContent()
 
+  const getNotificationClass = (id: string) => {
+    const classMap: { [key: string]: string } = {
+      '1': 'notification-success',
+      '2': 'notification-welcome',
+      '3': 'notification-referral'
+    };
+    return classMap[id] || 'notification-default';
+  }
+
   return (
     <>
-      <div className={`notification-detail notification-detail-content ${notification.class} vh-100`}>
+      <div className="notification-detail background-image-80 vh-100">
         <nav className="navbar navbar-expand-lg navbar-light">
           <div className="container">
             <button 
@@ -57,7 +64,7 @@ export default function NotificationDetail() {
           </div>
         </nav>
 
-        <div className="container mt-4">
+        <div className={`container mt-4 ${getNotificationClass(String(params.id))}`}>
           {/* Circle Success */}
           <div className="circle-success mb-4 text-center">
             <i className="fas fa-check fa-4x"></i>

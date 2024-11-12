@@ -19,9 +19,9 @@ export default function NotificationDetail() {
         }
       case '2':
         return {
-          title: 'Your savings rate just increasted to 4.4% APY',
+          title: 'Welcome to nook!',
           time: '4 hours ago',
-          content: 'This was applied immediately',
+          content: 'Were excited to have you join us. Start exploring our platform to discover all the features available to you.',
           class: 'notification-welcome'
         }
       case '3':
@@ -45,7 +45,7 @@ export default function NotificationDetail() {
 
   return (
     <>
-      <div className={`notification-detail notification-detail-content ${notification.class} vh-100`}>
+      <div className="notification-detail background-image-80 vh-100">
         <nav className="navbar navbar-expand-lg navbar-light">
           <div className="container">
             <button 
@@ -57,7 +57,7 @@ export default function NotificationDetail() {
           </div>
         </nav>
 
-        <div className="container mt-4">
+        <div className={`container mt-4 ${notification.class}`}>
           {/* Circle Success */}
           <div className="circle-success mb-4 text-center">
             <i className="fas fa-check fa-4x"></i>

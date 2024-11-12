@@ -14,29 +14,25 @@ export default function NotificationDetail() {
         return {
           title: 'You just received a referral bonus',
           time: '4 hours ago',
-          content: 'This will be reinvested back into your main balance earning 4.4% APY',
-          class: 'notification-success'
+          content: 'This will be reinvested back into your main balance earning 4.4% APY'
         }
       case '2':
         return {
-          title: 'Your savings rate just increasted to 4.4% APY',
+          title: 'Welcome to nook!',
           time: '4 hours ago',
-          content: 'This was applied immediately',
-          class: 'notification-welcome'
+          content: 'Were excited to have you join us. Start exploring our platform to discover all the features available to you.'
         }
       case '3':
         return {
           title: 'Earn $50 for every friend you refer',
           time: '1 day ago',
-          content: 'We see you are a believer. Earn $50 for every friend you refer.',
-          class: 'notification-referral'
+          content: 'We see you are a believer. Earn $50 for every friend you refer.'
         }
       default:
         return {
           title: 'Notification not found',
           time: '',
-          content: 'This notification does not exist.',
-          class: 'notification-default'
+          content: 'This notification does not exist.'
         }
     }
   }
@@ -45,7 +41,7 @@ export default function NotificationDetail() {
 
   return (
     <>
-      <div className={`notification-detail notification-detail-content ${notification.class} vh-100`}>
+      <div className="notification-detail background-image-80 vh-100">
         <nav className="navbar navbar-expand-lg navbar-light">
           <div className="container">
             <button 

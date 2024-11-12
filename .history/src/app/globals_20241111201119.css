@@ -216,9 +216,6 @@ img[src="src/app/img/ellipse_1.svg"] {
 
 .notification-detail {
   background-color: #C8C8C8;
-}
-
-.notification-detail-content {
   height: 80vh;
   background-size: 120% auto;  /* Make image wider than container to allow movement */
   background-position: center;
@@ -238,14 +235,10 @@ img[src="src/app/img/ellipse_1.svg"] {
   }
 }
 
-.notification-success {
+.background-image-spare-objects {
   background-image: url('/img/graph_balloon_raw_1.png');
-}
-
-.notification-welcome {
-  background-image: url('/img/graphic_3.png');
-}
-
-.notification-referral {
-  background-image: url('/img/graphic_4.png');
+  background-size: 120% auto;  /* Make image wider than container to allow movement */
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: panBackground 10s linear infinite alternate;  /* Adjust time as needed */
 }

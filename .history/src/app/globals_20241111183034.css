@@ -49,13 +49,9 @@ body {
     font-size: 20vh;
     opacity: 0;
   }
-  25% {
-    font-size: 24vh;
-    opacity: 1;
-  }
   50% {
     font-size: 28vh;
-    opacity: 1;
+    opacity: .9;
   }
   100% {
     font-size: 31vh;
@@ -91,7 +87,7 @@ body {
 }
 
 .coin-1 {
-  animation: coin-1 4s ease-in-out forwards;
+  animation: coin-1 10s ease-in-out forwards;
   position: absolute;
   top: -170px;
 }

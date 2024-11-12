@@ -51,7 +51,7 @@ body {
   }
   25% {
     font-size: 24vh;
-    opacity: 1;
+    opacity: .9;
   }
   50% {
     font-size: 28vh;

@@ -30,10 +30,7 @@ export default function Welcome() {
       {/* Main Content */}
       <div className="splash-page">
         <div className="splash-content container">
-          <img 
-            src="/img/ellipse_1.svg" 
-            alt="ellipse" 
-            className="ellipse-1 coin-1" />
+          <img src="/img/ellipse_1.png" alt="ellipse" className="ellipse-1" />
           <div className="splash-header pt-5">
             <h1 className="display-1">Welcome to</h1>
             <h1 className="display-1 bold">Nook</h1>

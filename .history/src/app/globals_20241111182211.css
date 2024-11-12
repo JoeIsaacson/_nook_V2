@@ -45,26 +45,17 @@ body {
 }
 
 @keyframes grow {
-  0% {
+  from {
     font-size: 20vh;
     opacity: 0;
   }
-  25% {
-    font-size: 24vh;
-    opacity: 1;
-  }
-  50% {
-    font-size: 28vh;
-    opacity: 1;
-  }
-  100% {
+  to {
     font-size: 31vh;
     opacity: 1;
   }
 }
 
 .splash-page::before {
-  opacity: 0;
   content: 'N';
   position: fixed;
   top: 42%;
@@ -87,21 +78,6 @@ body {
   to {
     transform: translateY(0);
     opacity: 1;
-  }
-}
-
-.coin-1 {
-  animation: coin-1 4s ease-in-out forwards;
-  position: absolute;
-  top: -170px;
-}
-
-@keyframes coin-1 {
-  0% {
-    top: -170px;
-  }
-  100% {
-    top: 400px;
   }
 }
 

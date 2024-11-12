@@ -127,7 +127,7 @@ export default function Dashboard() {
             </div>
 
             {/* Footer */}
-            <footer>
+            <footer className="">
               <div className="py-3 text-center">
                 <button className="btn btn-transparent btn-primary w-100 btn-left-justify mt-5">
                   <span>Deposit</span>

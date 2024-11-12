@@ -63,12 +63,9 @@ export default function NotificationDetail() {
           {/* Footer */}
           <footer className="">
             <div className="py-3 text-center">
-              <button 
-                className="btn btn-transparent w-100 mt-5"
-                onClick={() => router.push('/dashboard')}
-                >
-                <span>Done</span>
-              </button>
+              <button className="btn btn-transparent w-100  mt-5">
+              <span>Done</span>
+            </button>
             </div>
           </footer>
         </div>

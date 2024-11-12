@@ -143,16 +143,6 @@ body {
   background-color: rgba(0,0,0,0.05);
 }
 
-.circle-success {
-  padding: 32px;
-  height: 124px;
-  width: 124px;
-  text-align: center;
-  vertical-align: text-bottom;
-  background-color: #83F396;
-  border-radius: 100%;
-}
-
 @keyframes slideFromRight {
   from {
     transform: translateX(100vw);  /* Start from viewport width */

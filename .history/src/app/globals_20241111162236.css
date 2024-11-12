@@ -144,9 +144,9 @@ body {
 }
 
 .circle-success {
-  padding: 32px;
-  height: 124px;
-  width: 124px;
+  padding: 12px;
+  height: 44px;
+  width: 44px;
   text-align: center;
   vertical-align: text-bottom;
   background-color: #83F396;

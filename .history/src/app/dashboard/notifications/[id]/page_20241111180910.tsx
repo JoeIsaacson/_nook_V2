@@ -65,7 +65,7 @@ export default function NotificationDetail() {
             <div className="py-3 text-center">
               <button 
                 className="btn btn-transparent w-100 mt-5"
-                onClick={() => router.push('/dashboard')}
+                onClick={() => router.push('/dashboard/notifications')}
                 >
                 <span>Done</span>
               </button>

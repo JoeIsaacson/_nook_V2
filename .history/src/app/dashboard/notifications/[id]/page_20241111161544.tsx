@@ -52,23 +52,15 @@ export default function NotificationDetail() {
         </nav>
 
         <div className="container mt-4">
-          {/* Circle Success */}
-          <div className="circle-success mb-4 text-center">
-            <i className="fas fa-check fa-4x"></i>
-          </div>
-          {/* Core content */}
           <h1 className="display-2">{notification.title}</h1>
           {/* <p className="text-muted small">{notification.time}</p> */}
           <p className="mt-4">{notification.content}</p>
           {/* Footer */}
           <footer className="">
             <div className="py-3 text-center">
-              <button 
-                className="btn btn-transparent w-100 mt-5"
-                onClick={() => router.push('/dashboard')}
-                >
-                <span>Done</span>
-              </button>
+              <button className="btn btn-transparent w-100  mt-5">
+              <span>Done</span>
+            </button>
             </div>
           </footer>
         </div>

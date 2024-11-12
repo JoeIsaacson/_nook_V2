@@ -36,6 +36,7 @@ export default function Welcome() {
             className="ellipse-1 coin-1" />
           <div className="splash-header pt-5">
             <h1 className="display-1">Welcome to Nook</h1>
+            <h1 className="display-1 bold">Nook</h1>
           </div>
         </div>
 

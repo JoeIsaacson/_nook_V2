@@ -139,8 +139,8 @@ export default function Dashboard() {
               </div>
 
               {/* Footer */}
-              <footer className="d-block">
-                <div className="py-2 text-center">
+              <footer className="mt-2 d-block">
+                <div className="py-3 text-center">
                   <button
                     className="btn btn-transparent btn-primary w-100 btn-left-justify mt-5"
                     onClick={() => router.push('/dashboard/deposit-flow')}

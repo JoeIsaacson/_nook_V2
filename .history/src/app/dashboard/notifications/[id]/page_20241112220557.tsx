@@ -67,17 +67,18 @@ export default function NotificationDetail() {
           {/* <p className="text-muted small">{notification.time}</p> */}
           <p className="mt-4">{notification.content}</p>
         </div>
-        {/* Footer */}
-        <footer className="fixed-bottom">
-          <div className="container py-3 text-center">
-            <button 
-              className="btn btn-transparent w-100 mt-5"
-              onClick={() => router.push('/dashboard')}
-              >
-              <span>Done</span>
-            </button>
-          </div>
-        </footer>
+          {/* Footer */}
+          <footer className="fixed-bottom">
+            <div className="container py-3 text-center">
+              <button 
+                className="btn btn-transparent w-100 mt-5"
+                onClick={() => router.push('/dashboard')}
+                >
+                <span>Done</span>
+              </button>
+            </div>
+          </footer>
+        </div>
       </div>
     </>
   )

@@ -112,10 +112,7 @@ export default function Dashboard() {
   });
 
   // Rewards value
-  const formattedLendingRewards = lendingAssetsRewards.toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
+  const formattedLendingRewards = lendingAssetsRewards;
   
   // APY value
   const formattedAPY = assetAPY.toFixed(2)

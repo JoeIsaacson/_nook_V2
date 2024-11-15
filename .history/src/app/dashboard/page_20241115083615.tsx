@@ -62,8 +62,8 @@ export default function Dashboard() {
         if (data.portfolio_item_list && data.portfolio_item_list.length > 0) {
           const portfolioItem = data.portfolio_item_list[0].detail;
           setLendingPrinciple(portfolioItem.supply_token_list[0].amount);
-          setLendingAssetsRewards(portfolioItem.reward_token_list[0].amount);
-          //console.log('what is lendingPrinciple', portfolioItem.reward_token_list[0].amount);
+          setLendingAssetsRewards(portfolioItem.reward_token_list);
+          console.log('what is lendingPrinciple', portfolioItem.reward_token_list[0].amount);
         } else {
           console.log('No data found');
         }
@@ -103,6 +103,7 @@ export default function Dashboard() {
     protcolList()
     fetchLendingData()
     fetchAssetAPY()
+    console.log('what is lendingAssetsRewards', lendingAssetsRewards);
   }, [address, fetchLendingData])
 
   // Principle value
@@ -112,12 +113,13 @@ export default function Dashboard() {
   });
 
   // Rewards value
-  const formattedLendingRewards = lendingAssetsRewards.toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
-  
-  // APY value
+  console.log('what is lendingAssetsRewards', lendingAssetsRewards[0].amount);
+
+  // const formattedLendingRewards = lendingAssetsRewards[0].amount.toLocaleString('en-US', {
+  //   minimumFractionDigits: 2,
+  //   maximumFractionDigits: 2
+  // });
+
   const formattedAPY = assetAPY.toFixed(2)
 
   return (
@@ -170,7 +172,7 @@ export default function Dashboard() {
                 </div>
 
                 <h6 className="my-4 small">
-                 ${formattedLendingRewards} earned
+                 {/* ${formattedLendingRewards} earned */}
                 </h6>
               </div>
 

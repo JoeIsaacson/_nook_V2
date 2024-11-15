@@ -62,8 +62,7 @@ export default function Dashboard() {
         if (data.portfolio_item_list && data.portfolio_item_list.length > 0) {
           const portfolioItem = data.portfolio_item_list[0].detail;
           setLendingPrinciple(portfolioItem.supply_token_list[0].amount);
-          setLendingAssetsRewards(portfolioItem.reward_token_list[0].amount);
-          //console.log('what is lendingPrinciple', portfolioItem.reward_token_list[0].amount);
+          setLendingAssetsRewards(portfolioItem.reward_token_list);
         } else {
           console.log('No data found');
         }
@@ -74,6 +73,8 @@ export default function Dashboard() {
         console.error('API Key Present:', !!apiKey);
       });
   }, [address]);
+
+  console.log(lendingAssetsRewards);
 
   const fetchAssetAPY = useCallback(() => {
     // Fetch asset APY
@@ -112,12 +113,13 @@ export default function Dashboard() {
   });
 
   // Rewards value
-  const formattedLendingRewards = lendingAssetsRewards.toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
-  
-  // APY value
+  const formattedLendingRewards = lendingAssetsRewards.map(reward =>
+    (reward.amount * assetPrice).toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })
+  );
+
   const formattedAPY = assetAPY.toFixed(2)
 
   return (
@@ -170,7 +172,7 @@ export default function Dashboard() {
                 </div>
 
                 <h6 className="my-4 small">
-                 ${formattedLendingRewards} earned
+                  ${formattedLendingRewards} earned
                 </h6>
               </div>
 

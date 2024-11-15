@@ -1,6 +1,6 @@
 'use client'
 
-import { useAccount } from 'wagmi'
+import { useAccount, useBalance } from 'wagmi'
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 

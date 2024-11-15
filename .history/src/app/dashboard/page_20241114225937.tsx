@@ -86,7 +86,7 @@ export default function Dashboard() {
       .catch(err => console.error('Error fetching APY:', err))
   }, []);
 
-  // RUN IT ALL BABY
+  // Effects
   useEffect(() => {
     protcolList()
     fetchLendingData()

@@ -75,23 +75,21 @@ export default function Dashboard() {
       });
   }, [address]);
 
-  const fetchAssetAPY = useCallback(() => {
-    // Fetch asset APY
-    fetch('https://yields.llama.fi/pools')
-      .then(res => res.json())
-      .then(data => {
-        setAssetAPY(data.data[45].apy)
-        console.log('Asset APY is', assetAPY);
-      })
-      .catch(err => console.error('Error fetching APY:', err))
-  }, []);
-
-  // RUN IT ALL BABY
+  // Effects
   useEffect(() => {
     protcolList()
     fetchLendingData()
-    fetchAssetAPY()
   }, [address, fetchLendingData])
+
+  useEffect(() => {
+    fetch('https://yields.llama.fi/pools')
+      .then(res => res.json())
+      .then(data => {
+        
+        setAssetAPY(data.data[45].apy)
+      })
+      .catch(err => console.error('Error fetching APY:', err))
+  }, []);
 
   // Principle value
   const formattedLendingPrincipleUSD = (Number(lendingPrinciple) * assetPrice).toLocaleString('en-US', {

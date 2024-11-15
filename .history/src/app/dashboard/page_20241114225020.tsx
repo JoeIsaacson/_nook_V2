@@ -13,9 +13,10 @@ export default function Dashboard() {
   const assetPrice = 1 // Asset currently set to USDC
   const nextPayout = 4
 
+  // State
   const [lendingAssetsRewards, setLendingAssetsRewards] = useState<any[]>([]);
   const [lendingPrinciple, setLendingPrinciple] = useState<any[]>([]);
-  const [assetAPY, setAssetAPY] = useState(0);
+  const [compoundAssetAPY, setCompoundAssetAPY] = useState(0);
 
   const protcolList = useCallback(() => {
 
@@ -75,23 +76,21 @@ export default function Dashboard() {
       });
   }, [address]);
 
-  const fetchAssetAPY = useCallback(() => {
-    // Fetch asset APY
-    fetch('https://yields.llama.fi/pools')
-      .then(res => res.json())
-      .then(data => {
-        setAssetAPY(data.data[45].apy)
-        console.log('Asset APY is', assetAPY);
-      })
-      .catch(err => console.error('Error fetching APY:', err))
-  }, []);
-
-  // RUN IT ALL BABY
+  // Effects
   useEffect(() => {
     protcolList()
     fetchLendingData()
-    fetchAssetAPY()
   }, [address, fetchLendingData])
+
+  useEffect(() => {
+    fetch('https://yields.llama.fi/pools')
+      .then(res => res.json())
+      .then(data => {
+        setCompoundAssetAPY(data.data[45].apy)
+        console.log('Lending position APY is', compoundAssetAPY);
+      })
+      .catch(err => console.error('Error fetching APY:', err))
+  }, []);
 
   // Principle value
   const formattedLendingPrincipleUSD = (Number(lendingPrinciple) * assetPrice).toLocaleString('en-US', {
@@ -107,7 +106,7 @@ export default function Dashboard() {
     })
   );
 
-  const formattedAPY = assetAPY.toFixed(2)
+  const formattedAPY = compoundAssetAPY.toFixed(2)
 
   return (
     <div className="container">

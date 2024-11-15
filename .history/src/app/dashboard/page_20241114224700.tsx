@@ -13,9 +13,10 @@ export default function Dashboard() {
   const assetPrice = 1 // Asset currently set to USDC
   const nextPayout = 4
 
+  // State
   const [lendingAssetsRewards, setLendingAssetsRewards] = useState<any[]>([]);
   const [lendingPrinciple, setLendingPrinciple] = useState<any[]>([]);
-  const [assetAPY, setAssetAPY] = useState(0);
+  const [compoundUSDCAPY, setCompoundUSDCAPY] = useState(0);
 
   const protcolList = useCallback(() => {
 
@@ -64,6 +65,7 @@ export default function Dashboard() {
           const portfolioItem = data.portfolio_item_list[0].detail;
           setLendingPrinciple(portfolioItem.supply_token_list[0].amount);
           setLendingAssetsRewards(portfolioItem.reward_token_list);
+          console.log('Lending principle is', lendingPrinciple);
         } else {
           console.log('No data found');
         }
@@ -75,26 +77,24 @@ export default function Dashboard() {
       });
   }, [address]);
 
-  const fetchAssetAPY = useCallback(() => {
-    // Fetch asset APY
+  // Effects
+  useEffect(() => {
+    protcolList()
+    fetchLendingData()
+  }, [address, fetchLendingData])
+
+  useEffect(() => {
     fetch('https://yields.llama.fi/pools')
       .then(res => res.json())
       .then(data => {
-        setAssetAPY(data.data[45].apy)
-        console.log('Asset APY is', assetAPY);
+        setCompoundUSDCAPY(data.data[45].apy)
+        console.log('Lending position APY is', compoundUSDCAPY);
       })
       .catch(err => console.error('Error fetching APY:', err))
   }, []);
 
-  // RUN IT ALL BABY
-  useEffect(() => {
-    protcolList()
-    fetchLendingData()
-    fetchAssetAPY()
-  }, [address, fetchLendingData])
-
   // Principle value
-  const formattedLendingPrincipleUSD = (Number(lendingPrinciple) * assetPrice).toLocaleString('en-US', {
+  const formattedLendingPrincipleUSD = (Number(lendingPrinciple) * ethPrice).toLocaleString('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });
@@ -107,7 +107,7 @@ export default function Dashboard() {
     })
   );
 
-  const formattedAPY = assetAPY.toFixed(2)
+  const formattedAPY = compoundUSDCAPY.toFixed(2)
 
   return (
     <div className="container">

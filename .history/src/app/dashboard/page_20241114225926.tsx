@@ -80,13 +80,13 @@ export default function Dashboard() {
     fetch('https://yields.llama.fi/pools')
       .then(res => res.json())
       .then(data => {
+        console.log('Asset APY is', data.data[45].apy)
         setAssetAPY(data.data[45].apy)
-        console.log('Asset APY is', assetAPY);
       })
       .catch(err => console.error('Error fetching APY:', err))
   }, []);
 
-  // RUN IT ALL BABY
+  // Effects
   useEffect(() => {
     protcolList()
     fetchLendingData()

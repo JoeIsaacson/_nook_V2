@@ -10,12 +10,13 @@ export default function Dashboard() {
 
   // Constants
   const ethPrice = 3165  // Mock ETH price in USD
-  const assetPrice = 1 // Asset currently set to USDC
+  const compPrice = 52.55
   const nextPayout = 4
 
+  // State
   const [lendingAssetsRewards, setLendingAssetsRewards] = useState<any[]>([]);
   const [lendingPrinciple, setLendingPrinciple] = useState<any[]>([]);
-  const [assetAPY, setAssetAPY] = useState(0);
+  const [compoundUSDCAPY, setCompoundUSDCAPY] = useState(0);
 
   const protcolList = useCallback(() => {
 
@@ -23,13 +24,13 @@ export default function Dashboard() {
 
     fetch(
       `https://pro-openapi.debank.com//v1/protocol/all_list`,
-      {
-        headers: {
-          'accept': 'application/json',
-          'AccessKey': apiKey || ''
+        {
+          headers: {
+            'accept': 'application/json',
+            'AccessKey': apiKey || ''
+          }
         }
-      }
-    ).then(res => res.json())
+      ).then(res => res.json())
       .then(data => {
         console.log('Protocol List:', data);
       })
@@ -42,9 +43,9 @@ export default function Dashboard() {
     const apiKey = process.env.NEXT_PUBLIC_DEBANK_API_KEY;
     console.log('Using API Key:', apiKey ? 'Present' : 'Missing');
 
-    // Main call with explicit chain parameter
+    // First, let's check what chains are available for the protocol
     fetch(
-      `https://pro-openapi.debank.com/v1/user/protocol?id=${address}&protocol_id=base_moonwell&chain_ids[]=base`,
+      `https://pro-openapi.debank.com/v1/protocol?id=morpho`,
       {
         headers: {
           'accept': 'application/json',
@@ -52,62 +53,75 @@ export default function Dashboard() {
         }
       }
     )
-      .then(res => {
+    .then(res => res.json())
+    .then(data => {
+      console.log('Protocol Info:', data); // This will show supported chains
+    });
+
+    // Then make our main call with explicit chain parameter
+    fetch(
+      `https://pro-openapi.debank.com/v1/user/protocol?id=${address}&protocol_id=compound&chain_ids[]=base`,
+      {
+        headers: {
+          'accept': 'application/json',
+          'AccessKey': apiKey || ''
+        }
+      }
+    )
+    .then(res => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         return res.json();
-      })
-      .then(data => {
+    })
+    .then(data => {
         console.log('API Response for Base:', data);
         if (data.portfolio_item_list && data.portfolio_item_list.length > 0) {
           const portfolioItem = data.portfolio_item_list[0].detail;
-          setLendingPrinciple(portfolioItem.supply_token_list[0].amount);
           setLendingAssetsRewards(portfolioItem.reward_token_list);
+          setLendingPrinciple(portfolioItem.supply_token_list[0].amount);
         } else {
-          console.log('No data found');
+          console.log('No data found for Base chain');
         }
-      })
-      .catch(err => {
+    })
+    .catch(err => {
         console.error('Fetch Error:', err);
         console.error('Address:', address);
         console.error('API Key Present:', !!apiKey);
-      });
+    });
   }, [address]);
 
-  const fetchAssetAPY = useCallback(() => {
-    // Fetch asset APY
+  // Effects
+    useEffect(() => {
+    fetchLendingData()
+    protcolList()
+  }, [address, fetchLendingData])
+
+  useEffect(() => {
     fetch('https://yields.llama.fi/pools')
       .then(res => res.json())
       .then(data => {
-        setAssetAPY(data.data[45].apy)
-        console.log('Asset APY is', assetAPY);
+        //console.log(data);
+        setCompoundUSDCAPY(data.data[45].apy)
+        console.log('Compound USDC APY is', compoundUSDCAPY);
       })
       .catch(err => console.error('Error fetching APY:', err))
   }, []);
 
-  // RUN IT ALL BABY
-  useEffect(() => {
-    protcolList()
-    fetchLendingData()
-    fetchAssetAPY()
-  }, [address, fetchLendingData])
-
-  // Principle value
-  const formattedLendingPrincipleUSD = (Number(lendingPrinciple) * assetPrice).toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
-
-  // Rewards value
+  // Formatted values
   const formattedLendingRewards = lendingAssetsRewards.map(reward =>
-    (reward.amount * assetPrice).toLocaleString('en-US', {
+    (reward.amount * compPrice).toLocaleString('en-US', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     })
-  );
+  )
 
-  const formattedAPY = assetAPY.toFixed(2)
+  const formattedLendingPrincipleUSD = (Number(lendingPrinciple) * ethPrice).toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })
+
+  const formattedAPY = compoundUSDCAPY.toFixed(2)
 
   return (
     <div className="container">

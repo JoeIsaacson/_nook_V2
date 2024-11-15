@@ -139,7 +139,7 @@ export default function Dashboard() {
               </div>
 
               {/* Footer */}
-              <footer className="d-none d-lg-block">
+              <footer className="d-block">
                 <div className="py-2 text-center">
                   <button
                     className="btn btn-transparent btn-primary w-100 btn-left-justify mt-5"
@@ -153,7 +153,7 @@ export default function Dashboard() {
             </div>
 
             {/* Footer */}
-            <footer className="fixed-bottom mt-5 d-lg-none">
+            <footer className="fixed-bottom mt-5">
               <div className="container py-3 text-center">
                 <button
                   className="btn btn-transparent btn-primary w-100 btn-left-justify mt-5"

@@ -80,15 +80,15 @@ export default function Dashboard() {
       .then(res => res.json())
       .then(data => {
         // Find Moonwell protocol on Base chain
-        const moonwellPool = data.data.find((pool: any) => 
-          pool.project === "moonwell" &&
-          pool.symbol === "USDC"
+        const moonwellPool = data.data.find(pool => 
+          pool.chain === "base" && 
+          pool.project === "moonwell"
         );
 
         console.log(moonwellPool);
         
         if (moonwellPool) {
-          setAssetAPY(moonwellPool.apyBase);
+          setAssetAPY(moonwellPool.apy);
         } else {
           console.warn('Moonwell pool not found');
           setAssetAPY(0);

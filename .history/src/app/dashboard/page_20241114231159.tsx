@@ -79,20 +79,9 @@ export default function Dashboard() {
     fetch('https://yields.llama.fi/pools')
       .then(res => res.json())
       .then(data => {
-        // Find Moonwell protocol on Base chain
-        const moonwellPool = data.data.find((pool: any) => 
-          pool.project === "moonwell" &&
-          pool.symbol === "USDC"
-        );
-
-        console.log(moonwellPool);
-        
-        if (moonwellPool) {
-          setAssetAPY(moonwellPool.apyBase);
-        } else {
-          console.warn('Moonwell pool not found');
-          setAssetAPY(0);
-        }
+        setAssetAPY(data.data[45].apy)
+        console.log('Asset APY is', assetAPY);
+        console.log(data);
       })
       .catch(err => console.error('Error fetching APY:', err))
   }, []);

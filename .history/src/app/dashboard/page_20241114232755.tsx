@@ -88,7 +88,7 @@ export default function Dashboard() {
         console.log(moonwellPool);
         
         if (moonwellPool) {
-          setAssetAPY(moonwellPool.apyBase);
+          setAssetAPY(moonwellPool.apy);
         } else {
           console.warn('Moonwell pool not found');
           setAssetAPY(0);

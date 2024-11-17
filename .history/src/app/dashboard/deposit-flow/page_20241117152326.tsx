@@ -1,5 +1,4 @@
 'use client'
-
 import { useRouter, useParams } from 'next/navigation'
 import { useBalance, useAccount } from 'wagmi'
 
@@ -7,11 +6,8 @@ export default function DepositInput() {
   const router = useRouter()
   const params = useParams()
   const { address } = useAccount()
-  // get user eth balance on mainnet
   const { data: balance } = useBalance({
     address: address,
-    token: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913', // USDC contract address on Base
-    chainId: 8453, // Base mainnet
   })
 
   console.log(params.id);

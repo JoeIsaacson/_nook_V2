@@ -66,6 +66,7 @@ export default function DepositInput() {
 
           </div>
 
+          {transactionStatus !== 'success' && (
             <Transaction
               chainId={BASE_MAINNET_CHAIN_ID}
               contracts={moonWellContracts}
@@ -79,6 +80,7 @@ export default function DepositInput() {
                 <TransactionStatusAction />
               </TransactionStatus>
             </Transaction>
+          )}
 
           <div className="row">
             <div className="col-6 d-flex align-items-center">
@@ -96,8 +98,6 @@ export default function DepositInput() {
 
         <footer className="">
           <div className="container py-3 text-center">
-          {transactionStatus.statusName !== 'success' && (
-
           <Transaction
             chainId={BASE_MAINNET_CHAIN_ID}
             contracts={USDCContracts}
@@ -113,7 +113,6 @@ export default function DepositInput() {
               <TransactionStatusAction />
             </TransactionStatus>
             </Transaction>
-            )}
           </div>
         </footer>
       </div>

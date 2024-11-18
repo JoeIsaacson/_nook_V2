@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useBalance, useAccount } from 'wagmi'
 
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 
 import {
   Transaction,
@@ -32,14 +32,12 @@ export default function DepositInput() {
     chainId: 8453, // Base mainnet
   });
 
-  const [transactionStatus, setTransactionStatus] = useState<LifecycleStatus>('idle');
-
   const handleOnStatus = useCallback((status: LifecycleStatus) => {
-    console.log('LifecycleStatus', status);
-    setTransactionStatus(status);
+    //console.log('LifecycleStatus', status);
+    console.log('address', address);
   }, []);
 
-  console.log('LifecycleStatus', transactionStatus);
+  console.log('LifecycleStatus', status);
 
   return (
     <>
@@ -66,19 +64,19 @@ export default function DepositInput() {
 
           </div>
 
-            <Transaction
-              chainId={BASE_MAINNET_CHAIN_ID}
-              contracts={moonWellContracts}
-              onStatus={handleOnStatus}
-            >
-              <TransactionButton 
-                className="btn btn-secondary"/>
-              <TransactionSponsor />
-              <TransactionStatus>
-                <TransactionStatusLabel />
-                <TransactionStatusAction />
-              </TransactionStatus>
-            </Transaction>
+          <Transaction
+            chainId={BASE_MAINNET_CHAIN_ID}
+            contracts={moonWellContracts}
+            onStatus={handleOnStatus}
+          >
+            <TransactionButton 
+              className="btn btn-secondary"/>
+            <TransactionSponsor />
+            <TransactionStatus>
+              <TransactionStatusLabel />
+              <TransactionStatusAction />
+            </TransactionStatus>
+          </Transaction>
 
           <div className="row">
             <div className="col-6 d-flex align-items-center">
@@ -96,8 +94,6 @@ export default function DepositInput() {
 
         <footer className="">
           <div className="container py-3 text-center">
-          {transactionStatus.statusName !== 'success' && (
-
           <Transaction
             chainId={BASE_MAINNET_CHAIN_ID}
             contracts={USDCContracts}
@@ -113,7 +109,6 @@ export default function DepositInput() {
               <TransactionStatusAction />
             </TransactionStatus>
             </Transaction>
-            )}
           </div>
         </footer>
       </div>

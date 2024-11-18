@@ -18,6 +18,7 @@ import {
 
 import type { LifecycleStatus } from '@coinbase/onchainkit/transaction';
 
+import { Wallet, ConnectWallet } from '@coinbase/onchainkit/wallet';
 import { contracts } from './contracts';
 
 export default function DepositInput() {
@@ -37,14 +38,12 @@ export default function DepositInput() {
     projectId,
     addresses: { [address]: ['base'] },
     assets: ['USDC'],
-    presetFiatAmount: 100,
+    presetFiatAmount: 20,
     fiatCurrency: 'USD'
   });
 
   const handleOnStatus = useCallback((status: LifecycleStatus) => {
     console.log('LifecycleStatus', status);
-    console.log('onrampBuyUrl', onrampBuyUrl);
-    console.log('address', address);
   }, []);
 
   return (

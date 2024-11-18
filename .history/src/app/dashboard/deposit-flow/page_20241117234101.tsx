@@ -37,14 +37,12 @@ export default function DepositInput() {
     projectId,
     addresses: { [address]: ['base'] },
     assets: ['USDC'],
-    presetFiatAmount: 100,
+    presetFiatAmount: 20,
     fiatCurrency: 'USD'
   });
 
   const handleOnStatus = useCallback((status: LifecycleStatus) => {
     console.log('LifecycleStatus', status);
-    console.log('onrampBuyUrl', onrampBuyUrl);
-    console.log('address', address);
   }, []);
 
   return (

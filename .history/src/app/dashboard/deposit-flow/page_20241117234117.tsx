@@ -37,7 +37,7 @@ export default function DepositInput() {
     projectId,
     addresses: { [address]: ['base'] },
     assets: ['USDC'],
-    presetFiatAmount: 100,
+    presetFiatAmount: 20,
     fiatCurrency: 'USD'
   });
 

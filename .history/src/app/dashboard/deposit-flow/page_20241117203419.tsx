@@ -25,7 +25,6 @@ import { contracts } from './contracts';
 export default function DepositInput() {
   const router = useRouter();
   const { address } = useAccount();
-  const BASE_SEPOLIA_CHAIN_ID = 8453;
   // get user eth balance on mainnet
   const { data: balance } = useBalance({
     address: address,
@@ -84,6 +83,14 @@ export default function DepositInput() {
               <TransactionStatusAction />
             </TransactionStatus>
           </Transaction>
+          ) : (
+          <Wallet>
+            <ConnectWallet>
+              <Avatar className='h-6 w-6' />
+              <Name />
+            </ConnectWallet>
+          </Wallet>
+
 
           <div className="row">
             <div className="col-6 d-flex align-items-center">

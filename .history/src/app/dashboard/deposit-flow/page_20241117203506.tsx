@@ -84,6 +84,14 @@ export default function DepositInput() {
               <TransactionStatusAction />
             </TransactionStatus>
           </Transaction>
+          ) : (
+          <Wallet>
+            <ConnectWallet>
+              <Avatar className='h-6 w-6' />
+              <Name />
+            </ConnectWallet>
+          </Wallet>
+
 
           <div className="row">
             <div className="col-6 d-flex align-items-center">

@@ -3,49 +3,16 @@
 import { useRouter, useParams } from 'next/navigation'
 import { useBalance, useAccount } from 'wagmi'
 
-import { useCallback } from 'react';
-import { Avatar, Name } from '@coinbase/onchainkit/identity';
-
-import { FundButton, getOnrampBuyUrl } from '@coinbase/onchainkit/fund';
-
-import {
-  Transaction,
-  TransactionButton,
-  TransactionSponsor,
-  TransactionStatus,
-  TransactionStatusAction,
-  TransactionStatusLabel,
-} from '@coinbase/onchainkit/transaction';
-
-import type { LifecycleStatus } from '@coinbase/onchainkit/transaction';
-
-import { Wallet, ConnectWallet } from '@coinbase/onchainkit/wallet';
-import { contracts } from './contracts';
-
 export default function DepositInput() {
-  const router = useRouter();
-  const { address } = useAccount();
-  const BASE_SEPOLIA_CHAIN_ID = 8453;
+  const router = useRouter()
+  const params = useParams()
+  const { address } = useAccount()
   // get user eth balance on mainnet
   const { data: balance } = useBalance({
     address: address,
     token: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913', // USDC contract address on Base
     chainId: 8453, // Base mainnet
-  });
-
-  const projectId = 'ad6eda58-8529-4a92-a0b4-dacb59bd9e03';
-
-  const onrampBuyUrl = getOnrampBuyUrl({
-    projectId,
-    addresses: { [address]: ['base'] },
-    assets: ['USDC'],
-    presetFiatAmount: 20,
-    fiatCurrency: 'USD'
-  });
-
-  const handleOnStatus = useCallback((status: LifecycleStatus) => {
-    console.log('LifecycleStatus', status);
-  }, []);
+  })
 
   return (
     <>
@@ -72,19 +39,6 @@ export default function DepositInput() {
 
           </div>
 
-          <Transaction
-            chainId={BASE_SEPOLIA_CHAIN_ID}
-            contracts={contracts}
-            onStatus={handleOnStatus}
-          >
-            <TransactionButton />
-            <TransactionSponsor />
-            <TransactionStatus>
-              <TransactionStatusLabel />
-              <TransactionStatusAction />
-            </TransactionStatus>
-          </Transaction>
-
           <div className="row">
             <div className="col-6 d-flex align-items-center">
               <h6 className="mb-0 small">
@@ -101,8 +55,6 @@ export default function DepositInput() {
 
         <footer className="container">
           <div className="py-3 text-center">
-            <FundButton fundingUrl={onrampBuyUrl} />
-
             <button
               className="btn btn-transparent w-100 mt-5"
               onClick={() => router.push('/dashboard')}

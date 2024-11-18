@@ -3,29 +3,13 @@
 import { useRouter, useParams } from 'next/navigation'
 import { useBalance, useAccount } from 'wagmi'
 
-import { useCallback } from 'react';
-import { Avatar, Name } from '@coinbase/onchainkit/identity';
 
 import { FundButton, getOnrampBuyUrl } from '@coinbase/onchainkit/fund';
 
-import {
-  Transaction,
-  TransactionButton,
-  TransactionSponsor,
-  TransactionStatus,
-  TransactionStatusAction,
-  TransactionStatusLabel,
-} from '@coinbase/onchainkit/transaction';
-
-import type { LifecycleStatus } from '@coinbase/onchainkit/transaction';
-
-import { Wallet, ConnectWallet } from '@coinbase/onchainkit/wallet';
-import { contracts } from './contracts';
 
 export default function DepositInput() {
   const router = useRouter();
   const { address } = useAccount();
-  const BASE_SEPOLIA_CHAIN_ID = 8453;
   // get user eth balance on mainnet
   const { data: balance } = useBalance({
     address: address,
@@ -33,7 +17,7 @@ export default function DepositInput() {
     chainId: 8453, // Base mainnet
   });
 
-  const projectId = 'ad6eda58-8529-4a92-a0b4-dacb59bd9e03';
+  const projectId = 'YOUR_CDP_PROJECT_ID';
 
   const onrampBuyUrl = getOnrampBuyUrl({
     projectId,
@@ -42,10 +26,6 @@ export default function DepositInput() {
     presetFiatAmount: 20,
     fiatCurrency: 'USD'
   });
-
-  const handleOnStatus = useCallback((status: LifecycleStatus) => {
-    console.log('LifecycleStatus', status);
-  }, []);
 
   return (
     <>
@@ -72,19 +52,6 @@ export default function DepositInput() {
 
           </div>
 
-          <Transaction
-            chainId={BASE_SEPOLIA_CHAIN_ID}
-            contracts={contracts}
-            onStatus={handleOnStatus}
-          >
-            <TransactionButton />
-            <TransactionSponsor />
-            <TransactionStatus>
-              <TransactionStatusLabel />
-              <TransactionStatusAction />
-            </TransactionStatus>
-          </Transaction>
-
           <div className="row">
             <div className="col-6 d-flex align-items-center">
               <h6 className="mb-0 small">
@@ -102,6 +69,12 @@ export default function DepositInput() {
         <footer className="container">
           <div className="py-3 text-center">
             <FundButton fundingUrl={onrampBuyUrl} />
+            <button
+              fundingUrl={onrampBuyUrl}
+              className="btn btn-transparent w-100 mt-5"
+            >
+              <span>Fund It</span>
+            </button>
 
             <button
               className="btn btn-transparent w-100 mt-5"

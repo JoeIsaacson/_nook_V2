@@ -8,24 +8,23 @@ import { Avatar, Name } from '@coinbase/onchainkit/identity';
 
 import { FundButton, getOnrampBuyUrl } from '@coinbase/onchainkit/fund';
 
-import {
-  Transaction,
+import { 
+  Transaction, 
   TransactionButton,
   TransactionSponsor,
   TransactionStatus,
   TransactionStatusAction,
-  TransactionStatusLabel,
-} from '@coinbase/onchainkit/transaction';
+  TransactionStatusLabel, 
+} from '@coinbase/onchainkit/transaction'; 
 
 import type { LifecycleStatus } from '@coinbase/onchainkit/transaction';
 
 import { Wallet, ConnectWallet } from '@coinbase/onchainkit/wallet';
-import { contracts } from './contracts';
+import { contracts } from './contracts'; 
 
 export default function DepositInput() {
   const router = useRouter();
   const { address } = useAccount();
-  const BASE_SEPOLIA_CHAIN_ID = 8453;
   // get user eth balance on mainnet
   const { data: balance } = useBalance({
     address: address,
@@ -71,19 +70,6 @@ export default function DepositInput() {
             </div>
 
           </div>
-
-          <Transaction
-            chainId={BASE_SEPOLIA_CHAIN_ID}
-            contracts={contracts}
-            onStatus={handleOnStatus}
-          >
-            <TransactionButton />
-            <TransactionSponsor />
-            <TransactionStatus>
-              <TransactionStatusLabel />
-              <TransactionStatusAction />
-            </TransactionStatus>
-          </Transaction>
 
           <div className="row">
             <div className="col-6 d-flex align-items-center">

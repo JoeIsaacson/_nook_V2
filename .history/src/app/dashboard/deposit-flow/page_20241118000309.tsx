@@ -5,6 +5,8 @@ import { useBalance, useAccount } from 'wagmi'
 
 import { useCallback } from 'react';
 
+import { FundButton, getOnrampBuyUrl } from '@coinbase/onchainkit/fund';
+
 import {
   Transaction,
   TransactionButton,
@@ -34,6 +36,7 @@ export default function DepositInput() {
 
   const handleOnStatus = useCallback((status: LifecycleStatus) => {
     console.log('LifecycleStatus', status);
+    console.log('onrampBuyUrl', onrampBuyUrl);
     console.log('address', address);
   }, []);
 

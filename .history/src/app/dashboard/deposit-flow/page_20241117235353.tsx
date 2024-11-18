@@ -5,6 +5,8 @@ import { useBalance, useAccount } from 'wagmi'
 
 import { useCallback } from 'react';
 
+import { FundButton, getOnrampBuyUrl } from '@coinbase/onchainkit/fund';
+
 import {
   Transaction,
   TransactionButton,
@@ -20,11 +22,8 @@ import { USDCContracts, moonWellContracts } from './contracts';
 
 export default function DepositInput() {
   const router = useRouter();
-  const projectId = 'ad6eda58-8529-4a92-a0b4-dacb59bd9e03';
-
   const { address } = useAccount();
-  const BASE_MAINNET_CHAIN_ID = 8453;
-  
+  const BASE_SEPOLIA_CHAIN_ID = 8453;
   // get user eth balance on mainnet
   const { data: balance } = useBalance({
     address: address,
@@ -32,8 +31,19 @@ export default function DepositInput() {
     chainId: 8453, // Base mainnet
   });
 
+  const projectId = 'ad6eda58-8529-4a92-a0b4-dacb59bd9e03';
+
+  const onrampBuyUrl = getOnrampBuyUrl({
+    projectId,
+    addresses: { [address]: ['base'] },
+    assets: ['USDC'],
+    presetFiatAmount: 100,
+    fiatCurrency: 'USD'
+  });
+
   const handleOnStatus = useCallback((status: LifecycleStatus) => {
     console.log('LifecycleStatus', status);
+    console.log('onrampBuyUrl', onrampBuyUrl);
     console.log('address', address);
   }, []);
 
@@ -63,28 +73,11 @@ export default function DepositInput() {
           </div>
 
           <Transaction
-            chainId={BASE_MAINNET_CHAIN_ID}
-            contracts={USDCContracts}
+            chainId={BASE_SEPOLIA_CHAIN_ID}
+            contracts={contracts}
             onStatus={handleOnStatus}
           >
-            <TransactionButton
-              className="btn btn-primary"
-            />
-            <TransactionSponsor />
-            <TransactionStatus>
-              <TransactionStatusLabel />
-              <TransactionStatusAction />
-            </TransactionStatus>
-          </Transaction>
-
-          <Transaction
-            chainId={BASE_MAINNET_CHAIN_ID}
-            contracts={moonWellContracts}
-            onStatus={handleOnStatus}
-   
-          >
-            <TransactionButton 
-              className="btn btn-secondary"/>
+            <TransactionButton />
             <TransactionSponsor />
             <TransactionStatus>
               <TransactionStatusLabel />
@@ -108,6 +101,8 @@ export default function DepositInput() {
 
         <footer className="container">
           <div className="py-3 text-center">
+            <FundButton fundingUrl={onrampBuyUrl} />
+
             <button
               className="btn btn-transparent w-100 mt-5"
               onClick={() => router.push('/dashboard')}

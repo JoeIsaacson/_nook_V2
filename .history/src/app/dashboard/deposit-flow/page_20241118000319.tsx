@@ -5,6 +5,8 @@ import { useBalance, useAccount } from 'wagmi'
 
 import { useCallback } from 'react';
 
+import { FundButton, getOnrampBuyUrl } from '@coinbase/onchainkit/fund';
+
 import {
   Transaction,
   TransactionButton,

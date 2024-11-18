@@ -29,7 +29,7 @@ export const USDCContracts = [
   },
 ];
 
-const moonWellDepositAddress = '0xA88594D404727625A9437C3f886C7643872296AE'; // Moonwell USDC Market on Base
+const moonWellDepositAddress = '0x1C47cE2659495CD0751f81A761d76e741cB4a746'; // Moonwell USDC Market on Base
 
 const moonWellDepositAbi = [
   {
@@ -55,6 +55,6 @@ export const moonWellContracts = [
     address: moonWellDepositAddress,
     abi: moonWellDepositAbi,
     functionName: 'deposit',
-    args: ['0xbcb6c05eE1dA1865CE07b2810CD5062fB5168Cac', BigInt('1000000')],
+    args: [BigInt('1000000'), '0xbcb6c05eE1dA1865CE07b2810CD5062fB5168Cac'],
   },
 ];

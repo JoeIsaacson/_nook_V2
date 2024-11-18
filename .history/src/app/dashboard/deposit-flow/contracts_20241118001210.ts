@@ -1,6 +1,5 @@
-// replicate this transaction on Base https://basescan.org/tx/0xe1e2956a90e3431da3035e3dc4f20c3f6e2a587a94f94460d241c88f49a9f76c
 const usdcContractAddress = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'; // USDC on Base
-const moonWellDepositAddress = '0xEdc817A28E8B93B03976FBd4a3dDBc9f7D176c22'; // Moonwell USDC Market on Base
+const moonWellDepositAddress = '0xA88594D404727625A9437C3f886C7643872296AE'; // Moonwell USDC Market on Base
 
 const usdcContractAbi = [
   {
@@ -34,23 +33,27 @@ export const USDCContracts = [
 const moonWellDepositAbi = [
   {
     type: 'function',
-    name: 'mint',
+    name: 'deposit',
     inputs: [
       {
-        name: 'mintAmount',
+        name: 'amount',
         type: 'uint256',
       },
+      {
+        name: 'recipient',
+        type: 'address',
+      },
     ],
-    outputs: [{ type: 'uint256' }],
+    outputs: [],
     stateMutability: 'nonpayable',
-  },
+  }
 ] as const;
 
 export const moonWellContracts = [
   {
     address: moonWellDepositAddress,
     abi: moonWellDepositAbi,
-    functionName: 'mint',
-    args: [BigInt('10000000')], // 10 USDC (6 decimals)
+    functionName: 'deposit',
+    args: [1, '0xbcb6c05eE1dA1865CE07b2810CD5062fB5168Cac'],
   },
 ];

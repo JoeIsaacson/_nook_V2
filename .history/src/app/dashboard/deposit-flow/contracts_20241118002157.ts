@@ -40,17 +40,21 @@ const moonWellDepositAbi = [
         name: 'mintAmount',
         type: 'uint256',
       },
+      {
+        name: 'recipient',
+        type: 'address',
+      },
     ],
-    outputs: [{ type: 'uint256' }],
+    outputs: [{ type: 'bool' }],  // returns a boolean
     stateMutability: 'nonpayable',
-  },
+  }
 ] as const;
 
 export const moonWellContracts = [
   {
     address: moonWellDepositAddress,
     abi: moonWellDepositAbi,
-    functionName: 'mint',
-    args: [BigInt('10000000')], // 10 USDC (6 decimals)
+    functionName: 'deposit',
+    args: [1, '0xbcb6c05eE1dA1865CE07b2810CD5062fB5168Cac'],
   },
 ];

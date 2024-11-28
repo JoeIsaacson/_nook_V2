@@ -19,18 +19,8 @@ const usdcContractAbi = [
     outputs: [{ type: 'bool' }],
     stateMutability: 'nonpayable',
   },
-  {
-    type: 'function',
-    name: 'allowance',
-    inputs: [
-      { name: 'owner', type: 'address' },
-      { name: 'spender', type: 'address' }
-    ],
-    outputs: [{ type: 'uint256' }],
-    stateMutability: 'view'
-  }
 ] as const;
-
+ 
 export const USDCContracts = [
   {
     address: usdcContractAddress,

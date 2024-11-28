@@ -35,6 +35,7 @@ export default function DepositInput() {
     address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913', // USDC contract address on Base
     abi: USDCContracts,
     functionName: 'allowance',
+    args: [address, BigInt('1000000')],
     onSuccess(data) {
       console.log('Success', data)
     },
@@ -123,6 +124,3 @@ export default function DepositInput() {
     </>
   )
 }; 
-
-
-// Windsail / iOS app in Xcode

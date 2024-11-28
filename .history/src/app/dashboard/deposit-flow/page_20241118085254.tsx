@@ -123,6 +123,3 @@ export default function DepositInput() {
     </>
   )
 }; 
-
-
-// Windsail / iOS app in Xcode

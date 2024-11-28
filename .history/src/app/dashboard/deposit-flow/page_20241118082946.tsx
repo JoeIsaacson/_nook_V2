@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useAccount, useContractRead } from 'wagmi'
+import { useAccount } from 'wagmi'
 
 import { useCallback, useState } from 'react';
 
@@ -21,6 +21,7 @@ import { USDCContracts, moonWellContracts } from './contracts';
 export default function DepositInput() {
   const router = useRouter();
   // const projectId = 'ad6eda58-8529-4a92-a0b4-dacb59bd9e03';
+
   const { address } = useAccount();
   const BASE_MAINNET_CHAIN_ID = 8453;
   
@@ -30,17 +31,6 @@ export default function DepositInput() {
     console.log('LifecycleStatus', status);
     setTransactionStatus(status);
   }, []);
-
-  const { data: allowance } = useContractRead({
-    address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913', // USDC contract address on Base
-    abi: USDCContracts,
-    functionName: 'allowance',
-    onSuccess(data) {
-      console.log('Success', data)
-    },
-  });
-
-  console.log('allowance', allowance);
 
   console.log('LifecycleStatus', transactionStatus);
 
@@ -123,6 +113,3 @@ export default function DepositInput() {
     </>
   )
 }; 
-
-
-// Windsail / iOS app in Xcode

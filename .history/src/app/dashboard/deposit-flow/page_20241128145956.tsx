@@ -31,12 +31,12 @@ export default function DepositInput() {
     chainId: 8453, // Base mainnet
   });
 
-  // const [transactionStatus, setTransactionStatus] = useState<LifecycleStatus>('idle');
+  const [transactionStatus, setTransactionStatus] = useState<LifecycleStatus>('idle');
 
-  // const handleOnStatus = useCallback((status: LifecycleStatus) => {
-  //   console.log('LifecycleStatus', status);
-  //   setTransactionStatus(status);
-  // }, []);
+  const handleOnStatus = useCallback((status: LifecycleStatus) => {
+    console.log('LifecycleStatus', status);
+    setTransactionStatus(status);
+  }, []);
 
   // console.log('LifecycleStatus', transactionStatus);
 

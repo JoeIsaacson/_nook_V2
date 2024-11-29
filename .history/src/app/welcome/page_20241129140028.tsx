@@ -63,10 +63,9 @@ export default function Welcome() {
                 <div className="flex justify-end">
                   <Wallet>
                     <ConnectWallet
-                      className="btn btn-transparent btn-lg w-100"
+                      className="btn btn-transparent btn-lg w-100 btn-left-justify"
                       text="Continue"
                     >
-                      <i className="fa-solid fa-arrow-right"></i>
                     </ConnectWallet>
                   </Wallet>
                 </div>

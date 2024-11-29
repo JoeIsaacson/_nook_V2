@@ -63,10 +63,11 @@ export default function Welcome() {
                 <div className="flex justify-end">
                   <Wallet>
                     <ConnectWallet
-                      className="btn btn-transparent btn-lg w-100"
-                      text="Continue"
-                    >
-                      <i className="fa-solid fa-arrow-right"></i>
+                      className="btn btn-transparent btn-lg w-100 btn-left-justify"
+                      buttonText="Connect to Nook" // Add custom button text
+                      modalTitle="Connect Your Wallet" // Customize modal title
+                      modalSize="wide" // Options: 'compact' | 'wide'                  
+                      >
                     </ConnectWallet>
                   </Wallet>
                 </div>

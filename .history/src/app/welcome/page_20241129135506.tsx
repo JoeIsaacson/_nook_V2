@@ -1,13 +1,22 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useConnect, useAccount } from 'wagmi'
+import { useConnect, useAccount, WagmiConfig, WagmiProvider, createConfig, http } from 'wagmi'
 import { useEffect, ReactNode } from 'react';
 
 import {
   ConnectWallet,
   Wallet,
+  WalletDropdown,
+  WalletDropdownDisconnect,
 } from '@coinbase/onchainkit/wallet';
+
+import {
+  Address,
+  Avatar,
+  Name,
+  Identity,
+} from '@coinbase/onchainkit/identity';
 
 export default function Welcome() {
   const router = useRouter();
@@ -63,10 +72,8 @@ export default function Welcome() {
                 <div className="flex justify-end">
                   <Wallet>
                     <ConnectWallet
-                      className="btn btn-transparent btn-lg w-100"
-                      text="Continue"
-                    >
-                      <i className="fa-solid fa-arrow-right"></i>
+                      className="btn btn-transparent btn-lg w-100 btn-left-justify"
+>
                     </ConnectWallet>
                   </Wallet>
                 </div>

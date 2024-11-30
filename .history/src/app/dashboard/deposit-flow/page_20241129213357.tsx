@@ -26,7 +26,7 @@ export default function DepositInput() {
     chainId: 8453, // Base mainnet
   });
 
-  const USDC_BALANCE = balance?.formatted;
+  const USDC_BALANCE = balance?.value;
 
   const [transaction1Status, setTransaction1Status] = useState<LifecycleStatus>({
     statusName: 'idle'
@@ -61,11 +61,7 @@ export default function DepositInput() {
             </button>
             <div className="text-center w-100">
               <p className="mb-0">Deposit</p>
-              <div>
-                {USDC_BALANCE && Number(USDC_BALANCE) > 0 && (
-                  <p className="mb-0">${USDC_BALANCE} available</p>
-                )}
-              </div>
+              <p className="mb-0">${USDC_BALANCE} available</p>
             </div>
           </div>
         </nav>
@@ -80,10 +76,13 @@ export default function DepositInput() {
             </div>
           </div>
 
-          <h6 className="mb-0 small text-center">
-             10% · <span className="text-decoration-underline">$2.55 expected / yr</span>
-          </h6>
-
+          <div className="row">
+            <div className="col-6 d-flex align-items-center">
+              <h6 className="mb-0 small">
+                <span className="text-decoration-underline">10%</span>
+              </h6>
+            </div>
+          </div>
         </div>
 
         <footer className="fixed-bottom">
@@ -91,7 +90,7 @@ export default function DepositInput() {
         {transaction1Status.statusName}
 
           <div className="container py-3 text-center">
-            {transaction1Status.statusName !== 'success' && (
+            {transaction1Status.statusName === 'success' && (
               <Transaction
                 chainId={BASE_MAINNET_CHAIN_ID}
                 calls={USDCContracts}
@@ -104,7 +103,7 @@ export default function DepositInput() {
               </Transaction>
             )}
 
-            {transaction1Status.statusName === 'success' && (
+            {transaction1Status.statusName !== 'success' && (
               <Transaction
                 chainId={BASE_MAINNET_CHAIN_ID}
                 calls={moonWellContracts}

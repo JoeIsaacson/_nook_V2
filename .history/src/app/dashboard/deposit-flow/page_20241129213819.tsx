@@ -27,13 +27,12 @@ export default function DepositInput() {
   });
 
   const USDC_BALANCE = balance?.formatted;
-
   const [transaction1Status, setTransaction1Status] = useState<LifecycleStatus>({
-    statusName: 'idle'
+    statusName: 'success'
   });
 
   const [transaction2Status, setTransaction2Status] = useState<LifecycleStatus>({
-    statusName: 'idle'
+    statusName: 'success'
   });
 
   const handleTransaction1Status = (status: LifecycleStatus) => {
@@ -80,10 +79,13 @@ export default function DepositInput() {
             </div>
           </div>
 
-          <h6 className="mb-0 small text-center">
-             10% · <span className="text-decoration-underline">$2.55 expected / yr</span>
-          </h6>
-
+          <div className="row">
+            <div className="col-6 d-flex align-items-center">
+              <h6 className="mb-0 small">
+                <span className="text-decoration-underline">10%</span>
+              </h6>
+            </div>
+          </div>
         </div>
 
         <footer className="fixed-bottom">
@@ -104,7 +106,7 @@ export default function DepositInput() {
               </Transaction>
             )}
 
-            {transaction1Status.statusName === 'success' && (
+            {transaction1Status.statusName !== 'success' && (
               <Transaction
                 chainId={BASE_MAINNET_CHAIN_ID}
                 calls={moonWellContracts}

@@ -24,9 +24,10 @@ export default function DepositInput() {
     address: address,
     token: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913', // USDC contract address on Base
     chainId: 8453, // Base mainnet
+    console.log(data);
   });
 
-  const USDC_BALANCE = balance?.formatted;
+  console.log(balance);
 
   const [transaction1Status, setTransaction1Status] = useState<LifecycleStatus>({
     statusName: 'idle'
@@ -59,14 +60,6 @@ export default function DepositInput() {
             >
               <i className="fas fa-arrow-left"></i>
             </button>
-            <div className="text-center w-100">
-              <p className="mb-0">Deposit</p>
-              <div>
-                {USDC_BALANCE && Number(USDC_BALANCE) > 0 && (
-                  <p className="mb-0">${USDC_BALANCE} available</p>
-                )}
-              </div>
-            </div>
           </div>
         </nav>
 
@@ -75,15 +68,18 @@ export default function DepositInput() {
           <div className="row">
             <div className="col-12">
               <h1 className="mb-4 display-1 fw-normal text-center">
-                $0.00
+                ${balance?.value}
               </h1>
             </div>
           </div>
 
-          <h6 className="mb-0 small text-center">
-             10% · <span className="text-decoration-underline">$2.55 expected / yr</span>
-          </h6>
-
+          <div className="row">
+            <div className="col-6 d-flex align-items-center">
+              <h6 className="mb-0 small">
+                <span className="text-decoration-underline">10%</span>
+              </h6>
+            </div>
+          </div>
         </div>
 
         <footer className="fixed-bottom">
@@ -91,7 +87,7 @@ export default function DepositInput() {
         {transaction1Status.statusName}
 
           <div className="container py-3 text-center">
-            {transaction1Status.statusName !== 'success' && (
+            {transaction1Status.statusName === 'success' && (
               <Transaction
                 chainId={BASE_MAINNET_CHAIN_ID}
                 calls={USDCContracts}
@@ -104,7 +100,7 @@ export default function DepositInput() {
               </Transaction>
             )}
 
-            {transaction1Status.statusName === 'success' && (
+            {transaction1Status.statusName !== 'success' && (
               <Transaction
                 chainId={BASE_MAINNET_CHAIN_ID}
                 calls={moonWellContracts}

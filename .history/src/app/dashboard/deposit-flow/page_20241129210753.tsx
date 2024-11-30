@@ -14,6 +14,11 @@ import { LifecycleStatus } from '@coinbase/onchainkit/transaction';
 
 import { USDCContracts, moonWellContracts } from './contracts';
 
+type TransactionStatus = {
+  statusName: string;
+  statusData: any;
+};
+
 export default function DepositInput() {
   const router = useRouter();
   const { address } = useAccount();
@@ -26,26 +31,23 @@ export default function DepositInput() {
     chainId: 8453, // Base mainnet
   });
 
-  const USDC_BALANCE = balance?.formatted;
-
-  const [transaction1Status, setTransaction1Status] = useState<LifecycleStatus>({
-    statusName: 'idle'
-  });
-
-  const [transaction2Status, setTransaction2Status] = useState<LifecycleStatus>({
-    statusName: 'idle'
+  const [transaction1Status, setTransaction1Status] = useState<LifecycleStatus>('idle');
+  const [transaction2Status, setTransaction2Status] = useState<TransactionStatus>({
+    statusName: 'init',
+    statusData: null
   });
 
   const handleTransaction1Status = (status: LifecycleStatus) => {
-    console.log(status.statusName);
     setTransaction1Status(status);
-    console.log(transaction1Status.statusName);
+    console.log({ transaction1Status });
   };
 
   const handleTransaction2Status = (status: LifecycleStatus) => {
-    console.log(status.statusName);
-    setTransaction2Status(status);
-    console.log(transaction2Status.statusName);
+    setTransaction2Status({
+      statusName: status.statusName,
+      statusData: status.statusData
+    });
+    console.log({ transaction2Status });
   };
 
   return (
@@ -59,14 +61,6 @@ export default function DepositInput() {
             >
               <i className="fas fa-arrow-left"></i>
             </button>
-            <div className="text-center w-100">
-              <p className="mb-0">Deposit</p>
-              <div>
-                {USDC_BALANCE && Number(USDC_BALANCE) > 0 && (
-                  <p className="mb-0">${USDC_BALANCE} available</p>
-                )}
-              </div>
-            </div>
           </div>
         </nav>
 
@@ -75,23 +69,23 @@ export default function DepositInput() {
           <div className="row">
             <div className="col-12">
               <h1 className="mb-4 display-1 fw-normal text-center">
-                $0.00
+                $100
               </h1>
             </div>
           </div>
 
-          <h6 className="mb-0 small text-center">
-             10% · <span className="text-decoration-underline">$2.55 expected / yr</span>
-          </h6>
-
+          <div className="row">
+            <div className="col-6 d-flex align-items-center">
+              <h6 className="mb-0 small">
+                <span className="text-decoration-underline">10%</span>
+              </h6>
+            </div>
+          </div>
         </div>
 
         <footer className="fixed-bottom">
-
-        {transaction1Status.statusName}
-
           <div className="container py-3 text-center">
-            {transaction1Status.statusName !== 'success' && (
+            {transaction1Status !== 'success' && (
               <Transaction
                 chainId={BASE_MAINNET_CHAIN_ID}
                 calls={USDCContracts}
@@ -104,17 +98,20 @@ export default function DepositInput() {
               </Transaction>
             )}
 
-            {transaction1Status.statusName === 'success' && (
+            {transaction1Status}
+
+            {transaction2Status.statusName !== 'success' && (
               <Transaction
                 chainId={BASE_MAINNET_CHAIN_ID}
                 calls={moonWellContracts}
-                onStatus={handleTransaction2Status}
-            >
-              <TransactionButton
-                className="btn btn-secondary w-100"
-                text="Action two" />
+                onStatus={(status) => setTransaction2Status(status)}
+              >
+                <TransactionButton
+                  className="btn btn-secondary w-100"
+                  text={`Action two (${transaction2Status.statusName})`}
+                />
               </Transaction>
-              )}
+            )}
           </div>
         </footer>
       </div>

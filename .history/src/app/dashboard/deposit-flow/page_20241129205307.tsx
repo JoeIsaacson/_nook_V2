@@ -19,6 +19,8 @@ export default function DepositInput() {
   const { address } = useAccount();
   const BASE_MAINNET_CHAIN_ID = 8453;
 
+  console.log({ LifecycleStatus });
+
   // get user eth balance on mainnet
   const { data: balance } = useBalance({
     address: address,
@@ -26,26 +28,17 @@ export default function DepositInput() {
     chainId: 8453, // Base mainnet
   });
 
-  const USDC_BALANCE = balance?.formatted;
-
-  const [transaction1Status, setTransaction1Status] = useState<LifecycleStatus>({
-    statusName: 'idle'
-  });
-
-  const [transaction2Status, setTransaction2Status] = useState<LifecycleStatus>({
-    statusName: 'idle'
-  });
+  const [transaction1Status, setTransaction1Status] = useState<LifecycleStatus>('idle');
+  const [transaction2Status, setTransaction2Status] = useState<LifecycleStatus>('idle');
 
   const handleTransaction1Status = (status: LifecycleStatus) => {
-    console.log(status.statusName);
+    console.log('Transaction 1 status:', status);
     setTransaction1Status(status);
-    console.log(transaction1Status.statusName);
   };
 
   const handleTransaction2Status = (status: LifecycleStatus) => {
-    console.log(status.statusName);
+    console.log('Transaction 2 status:', status);
     setTransaction2Status(status);
-    console.log(transaction2Status.statusName);
   };
 
   return (
@@ -59,14 +52,6 @@ export default function DepositInput() {
             >
               <i className="fas fa-arrow-left"></i>
             </button>
-            <div className="text-center w-100">
-              <p className="mb-0">Deposit</p>
-              <div>
-                {USDC_BALANCE && Number(USDC_BALANCE) > 0 && (
-                  <p className="mb-0">${USDC_BALANCE} available</p>
-                )}
-              </div>
-            </div>
           </div>
         </nav>
 
@@ -75,46 +60,44 @@ export default function DepositInput() {
           <div className="row">
             <div className="col-12">
               <h1 className="mb-4 display-1 fw-normal text-center">
-                $0.00
+                $100
               </h1>
             </div>
           </div>
 
-          <h6 className="mb-0 small text-center">
-             10% · <span className="text-decoration-underline">$2.55 expected / yr</span>
-          </h6>
-
+          <div className="row">
+            <div className="col-6 d-flex align-items-center">
+              <h6 className="mb-0 small">
+                <span className="text-decoration-underline">10%</span>
+              </h6>
+            </div>
+          </div>
         </div>
 
         <footer className="fixed-bottom">
-
-        {transaction1Status.statusName}
-
           <div className="container py-3 text-center">
-            {transaction1Status.statusName !== 'success' && (
-              <Transaction
-                chainId={BASE_MAINNET_CHAIN_ID}
-                calls={USDCContracts}
-                onStatus={handleTransaction1Status}
-              >
-                <TransactionButton
-                  className="btn btn-primary w-100"
-                  text="Action one"
-                />
-              </Transaction>
-            )}
+            {/* Action one */}
+            <Transaction
+              chainId={BASE_MAINNET_CHAIN_ID}
+              calls={USDCContracts}
+              onStatus={handleTransaction1Status}
+            >
+              <TransactionButton
+                className="btn btn-primary w-100"
+                text="Action one"
+              />
+            </Transaction>
 
-            {transaction1Status.statusName === 'success' && (
-              <Transaction
-                chainId={BASE_MAINNET_CHAIN_ID}
-                calls={moonWellContracts}
-                onStatus={handleTransaction2Status}
+            {/* Action two */}
+            <Transaction
+              chainId={BASE_MAINNET_CHAIN_ID}
+              calls={moonWellContracts}
+              onStatus={handleTransaction2Status}
             >
               <TransactionButton
                 className="btn btn-secondary w-100"
                 text="Action two" />
-              </Transaction>
-              )}
+            </Transaction>
           </div>
         </footer>
       </div>

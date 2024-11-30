@@ -81,7 +81,7 @@ export default function DepositInput() {
           </div>
 
           <h6 className="mb-0 small text-center">
-             10% · <span className="text-decoration-underline">$2.55 expected / yr</span>
+            <span className="text-decoration-underline">10% · $2.55 expected / yr</span>
           </h6>
 
         </div>

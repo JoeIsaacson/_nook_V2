@@ -166,12 +166,9 @@ export default function Dashboard() {
                     <button 
                       className="btn btn-transparent w-100 btn-outline-none border-0" 
                       onClick={() => {
-                        const dashboardData = {
-                          formattedLendingRewards: formattedLendingRewards,
-                          formattedAPY: formattedAPY
-                        };
-                        localStorage.setItem('dashboardData', JSON.stringify(dashboardData));
-                        router.push('/dashboard/details');
+                        localStorage.setItem('formattedLendingRewards', formattedLendingRewards);
+                        localStorage.setItem('formattedAPY', formattedAPY);
+                        router.push('/dashboard/details')
                       }}
                     >
                       Details

@@ -49,13 +49,19 @@ export default function Details() {
         <div className="container mt-2 px-0">
           {/* notifications list */}
           <ul className="settings-list-stacked list-group list-group-flush">
-            <li className="list-group-item px-4 py-3">
+            <li
+              className="list-group-item px-4 py-3"
+              style={{ cursor: 'pointer' }}
+            >
               <p className="mb-0 fw-normal text-decoration-underline">Friday</p>
-              <p className="mb-0 fw-normal">Expected reward</p>
+              <p className="mb-0">Expected reward</p>
             </li>
-            <li className="list-group-item px-4 py-3">
+            <li
+              className="list-group-item px-4 py-3"
+              style={{ cursor: 'pointer' }}
+            >
               <p className="mb-0 fw-normal text-decoration-underline">Dec 13</p>
-              <p className="mb-0 fw-normal">Expected reward</p>
+              <p className="mb-0">Expected reward</p>
             </li>
           </ul>
         </div>
@@ -81,13 +87,13 @@ export default function Details() {
             <li
               className="list-group-item px-4 py-3"
             >
-              <p className="mb-0 fw-normal text-decoration-underline">Moonwell</p>
+              <p className="mb-0">Moonwell</p>
               <p className="mb-0 fw-normal">$12.22</p>
             </li>
             <li
               className="list-group-item px-4 py-3"
             >
-              <p className="mb-0 fw-normal text-decoration-underline">USDC</p>
+              <p className="mb-0">USDC</p>
               <p className="mb-0 fw-normal">$5.55</p>
             </li>
           </ul>

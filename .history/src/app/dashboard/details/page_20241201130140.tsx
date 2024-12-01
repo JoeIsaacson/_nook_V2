@@ -35,13 +35,16 @@ export default function Details() {
             >
               <i className="fas fa-xmark"></i>
             </button>
+            <div className="position-absolute start-50 translate-middle-x">
+              <span className="navbar-text">Details</span>
+            </div>
           </div>
         </nav>
 
         <div className="container">
           <div className="mt-4">
             <h6 className="mb-4 small">You are earning {details?.formattedAPY}% APY</h6>
-            <h2>What happens next</h2>
+            <h2>What happens next?</h2>
           </div>
         </div>
 
@@ -49,13 +52,19 @@ export default function Details() {
         <div className="container mt-2 px-0">
           {/* notifications list */}
           <ul className="settings-list-stacked list-group list-group-flush">
-            <li className="list-group-item px-4 py-3">
-              <p className="mb-0 fw-normal text-decoration-underline">Friday</p>
-              <p className="mb-0 fw-normal">Expected reward</p>
+            <li
+              className="list-group-item px-4 py-3"
+              style={{ cursor: 'pointer' }}
+            >
+              <p className="mb-0">You made a deposit</p>
+              <p className="mb-0 fw-normal">2 hours ago</p>
             </li>
-            <li className="list-group-item px-4 py-3">
-              <p className="mb-0 fw-normal text-decoration-underline">Dec 13</p>
-              <p className="mb-0 fw-normal">Expected reward</p>
+            <li
+              className="list-group-item px-4 py-3"
+              style={{ cursor: 'pointer' }}
+            >
+              <p className="mb-0">You earned X amount of rewards</p>
+              <p className="mb-0 fw-normal">4 hours ago</p>
             </li>
           </ul>
         </div>
@@ -81,13 +90,13 @@ export default function Details() {
             <li
               className="list-group-item px-4 py-3"
             >
-              <p className="mb-0 fw-normal text-decoration-underline">Moonwell</p>
+              <p className="mb-0">Moonwell</p>
               <p className="mb-0 fw-normal">$12.22</p>
             </li>
             <li
               className="list-group-item px-4 py-3"
             >
-              <p className="mb-0 fw-normal text-decoration-underline">USDC</p>
+              <p className="mb-0">USDC</p>
               <p className="mb-0 fw-normal">$5.55</p>
             </li>
           </ul>

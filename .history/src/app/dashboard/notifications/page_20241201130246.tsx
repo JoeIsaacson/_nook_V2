@@ -21,7 +21,7 @@ export default function Notifications() {
 
         <div className="container mt-2">
             <h2>Notifications</h2>
-            <h6 className="mb-4 small">3 unread</h6>
+            <h6 className="mb-4 small">3 unread notifications</h6>
         </div>
 
        {/* Main Content */}

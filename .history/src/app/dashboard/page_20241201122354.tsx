@@ -12,8 +12,8 @@ export default function Dashboard() {
   const assetPrice = 1 // Asset currently set to USDC
   const nextPayout = 4
 
-  const [lendingPrinciple, setLendingPrinciple] = useState<any[]>([]);
   const [lendingAssetsRewards, setLendingAssetsRewards] = useState<any[]>([]);
+  const [lendingPrinciple, setLendingPrinciple] = useState<any[]>([]);
   const [assetAPY, setAssetAPY] = useState(0);
 
   const protcolList = useCallback(() => {
@@ -166,12 +166,9 @@ export default function Dashboard() {
                     <button 
                       className="btn btn-transparent w-100 btn-outline-none border-0" 
                       onClick={() => {
-                        const dashboardData = {
-                          formattedLendingRewards: formattedLendingRewards,
-                          formattedAPY: formattedAPY
-                        };
-                        localStorage.setItem('dashboardData', JSON.stringify(dashboardData));
-                        router.push('/dashboard/details');
+                        localStorage.setItem('formattedLendingRewards', formattedLendingRewards);
+                        localStorage.setItem('formattedAPY', formattedAPY);
+                        router.push('/dashboard/details')
                       }}
                     >
                       Details

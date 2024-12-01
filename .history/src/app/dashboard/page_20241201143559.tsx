@@ -63,7 +63,7 @@ export default function Dashboard() {
           const portfolioItem = data.portfolio_item_list[0].detail;
           setLendingPrinciple(portfolioItem.supply_token_list[0].amount);
           setLendingAssetsRewards(portfolioItem.reward_token_list[0].amount);
-          console.log('what is lendingPrinciple', portfolioItem.reward_token_list);
+          console.log('what is lendingPrinciple', portfolioItem.reward_token_list[0].amount);
         } else {
           console.log('No data found');
         }

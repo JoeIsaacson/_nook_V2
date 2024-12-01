@@ -15,6 +15,7 @@ export default function Dashboard() {
   const [lendingPrinciple, setLendingPrinciple] = useState<any[]>([]);
   const [lendingAssetsRewards, setLendingAssetsRewards] = useState<any[]>([]);
   const [assetAPY, setAssetAPY] = useState(0);
+
   const [totalRewardsObject, setTotalRewardsObject] = useState<any[]>([]);
 
   const protcolList = useCallback(() => {
@@ -86,12 +87,14 @@ export default function Dashboard() {
           const totalRewardsObject = cleanRewardAmounts(rewardTokenSummary);
           const totalRewards = totalRewardsObject.reduce((total, token) => total + token.valueInUSDC, 0);
 
+          console.log('totalRewards', totalRewardsObject);
+
           // Set the total rewards object
           setTotalRewardsObject(totalRewardsObject);
           // Set the principle and rewards
-          setLendingPrinciple([portfolioItem.supply_token_list[0].amount]);
+          setLendingPrinciple(portfolioItem.supply_token_list[0].amount);
           // Set the rewards
-          setLendingAssetsRewards([totalRewards]);
+          setLendingAssetsRewards(totalRewards);
         } else {
           console.log('No data found');
         }
@@ -155,7 +158,6 @@ export default function Dashboard() {
       formattedAPY: formattedAPY,
       totalRewardsObject: totalRewardsObject
     };
-    console.log('dashboardData', dashboardData);
     localStorage.setItem('dashboardData', JSON.stringify(dashboardData));
   };
 
@@ -205,7 +207,6 @@ export default function Dashboard() {
                     <button 
                       className="btn btn-transparent w-100 btn-outline-none border-0" 
                       onClick={() => {
-                        storeRewardsData();
                         router.push('/dashboard/details');
                       }}
                     >

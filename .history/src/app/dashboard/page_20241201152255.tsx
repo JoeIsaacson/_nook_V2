@@ -86,6 +86,8 @@ export default function Dashboard() {
           const totalRewardsObject = cleanRewardAmounts(rewardTokenSummary);
           const totalRewards = totalRewardsObject.reduce((total, token) => total + token.valueInUSDC, 0);
 
+          console.log('totalRewards', totalRewardsObject);
+
           // Set the total rewards object
           setTotalRewardsObject(totalRewardsObject);
           // Set the principle and rewards

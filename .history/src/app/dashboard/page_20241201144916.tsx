@@ -15,7 +15,6 @@ export default function Dashboard() {
   const [lendingPrinciple, setLendingPrinciple] = useState<any[]>([]);
   const [lendingAssetsRewards, setLendingAssetsRewards] = useState<any[]>([]);
   const [assetAPY, setAssetAPY] = useState(0);
-  const [totalRewardsObject, setTotalRewardsObject] = useState<any[]>([]);
 
   const protcolList = useCallback(() => {
 
@@ -64,34 +63,15 @@ export default function Dashboard() {
           const portfolioItem = data.portfolio_item_list[0].detail;
           const rewardTokenSummary = portfolioItem.reward_token_list;
 
-          const cleanRewardAmounts = (rewardList: any[]) => {
-            console.log('rewardList', rewardList);
-            return rewardList.map((token) => {
-              console.log('Token amount:', token.amount);
-              console.log('Token price:', token.price);
-              
-              const amount = Number(token.amount) || 0;
-              const price = Number(token.price) || 0;
-              
-              return {
-                tokenName: token.asset,
-                amount: amount,
-                valueInUSDC: amount * price,
-                rawAmount: token.amount, // Debug: see original value
-                rawPrice: token.price // Debug: see original value
-              };
-            });
-          };
+          const sumRewardAmounts = sumRewardAmounts({
+            console.log(rewardTokenSummary);
+          });
 
-          const totalRewardsObject = cleanRewardAmounts(rewardTokenSummary);
-          const totalRewards = totalRewardsObject.reduce((total, token) => total + token.valueInUSDC, 0);
-
-          // Set the total rewards object
-          setTotalRewardsObject(totalRewardsObject);
           // Set the principle and rewards
-          setLendingPrinciple([portfolioItem.supply_token_list[0].amount]);
+          setLendingPrinciple(portfolioItem.supply_token_list[0].amount);
           // Set the rewards
-          setLendingAssetsRewards([totalRewards]);
+          setLendingAssetsRewards(portfolioItem.reward_token_list[0].amount);
+          console.log('what is lendingPrinciple', portfolioItem.reward_token_list);
         } else {
           console.log('No data found');
         }
@@ -148,17 +128,6 @@ export default function Dashboard() {
   // APY value
   const formattedAPY = assetAPY.toFixed(2)
 
-  // When you want to store it (e.g., before navigation)
-  const storeRewardsData = () => {
-    const dashboardData = {
-      formattedLendingRewards: formattedLendingRewards,
-      formattedAPY: formattedAPY,
-      totalRewardsObject: totalRewardsObject
-    };
-    console.log('dashboardData', dashboardData);
-    localStorage.setItem('dashboardData', JSON.stringify(dashboardData));
-  };
-
   return (
     <div className="dashboard-page container">
       <div className="row">
@@ -205,7 +174,11 @@ export default function Dashboard() {
                     <button 
                       className="btn btn-transparent w-100 btn-outline-none border-0" 
                       onClick={() => {
-                        storeRewardsData();
+                        const dashboardData = {
+                          formattedLendingRewards: formattedLendingRewards,
+                          formattedAPY: formattedAPY
+                        };
+                        localStorage.setItem('dashboardData', JSON.stringify(dashboardData));
                         router.push('/dashboard/details');
                       }}
                     >

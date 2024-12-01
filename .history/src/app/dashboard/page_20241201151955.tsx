@@ -86,6 +86,8 @@ export default function Dashboard() {
           const totalRewardsObject = cleanRewardAmounts(rewardTokenSummary);
           const totalRewards = totalRewardsObject.reduce((total, token) => total + token.valueInUSDC, 0);
 
+          console.log('totalRewards', totalRewardsObject);
+
           // Set the total rewards object
           setTotalRewardsObject(totalRewardsObject);
           // Set the principle and rewards
@@ -155,7 +157,6 @@ export default function Dashboard() {
       formattedAPY: formattedAPY,
       totalRewardsObject: totalRewardsObject
     };
-    console.log('dashboardData', dashboardData);
     localStorage.setItem('dashboardData', JSON.stringify(dashboardData));
   };
 
@@ -205,8 +206,8 @@ export default function Dashboard() {
                     <button 
                       className="btn btn-transparent w-100 btn-outline-none border-0" 
                       onClick={() => {
-                        storeRewardsData();
                         router.push('/dashboard/details');
+                        storeRewardsData();
                       }}
                     >
                       Details

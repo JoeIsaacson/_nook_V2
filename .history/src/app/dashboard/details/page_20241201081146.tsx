@@ -36,8 +36,8 @@ export default function Details() {
 
         <div className="container">
           <div className="mt-4">
+            <h5>Transaction Details</h5>
             <h6 className="mb-4 small">You are earning {apy}% APY</h6>
-            <h2>What happens next?</h2>
           </div>
         </div>
 

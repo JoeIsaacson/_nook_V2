@@ -36,32 +36,10 @@ export default function Details() {
 
         <div className="container">
           <div className="mt-4">
-            <h6 className="mb-4 small">You are earning {apy}% APY</h6>
-            <h2>What happens next?</h2>
+            <h5>Transaction Details</h5>
+            <p>APY: {apy}%</p>
           </div>
         </div>
-
-       {/* Main Content */}
-       <div className="container mt-2 px-0">
-        {/* notifications list */}
-        <ul className="settings-list-stacked list-group list-group-flush">
-            <li 
-              className="list-group-item px-4 py-3"
-              style={{ cursor: 'pointer' }}
-            >
-              <p className="mb-0">You made a deposit</p>
-              <p className="mb-0 fw-normal">2 hours ago</p>
-            </li>
-            <li 
-              className="list-group-item px-4 py-3"
-              style={{ cursor: 'pointer' }}
-            >
-              <p className="mb-0">You earned X amount of rewards</p>
-              <p className="mb-0 fw-normal">4 hours ago</p>
-            </li>
-        </ul>
-       </div>
-
       </div>
     </>
   )

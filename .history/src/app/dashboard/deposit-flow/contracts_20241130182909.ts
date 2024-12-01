@@ -33,12 +33,12 @@ const usdcContractAbi = [
 
 export const USDCContracts = [
   {
-    address: usdcContractAddress,
+    to: usdcContractAddress,
     abi: usdcContractAbi,
     functionName: 'approve',
     args: [moonWellDepositAddress, BigInt('1000000')], // 1 USDC (6 decimals)
   },
-] as any;
+];
 
 const moonWellDepositAbi = [
   {
@@ -57,9 +57,9 @@ const moonWellDepositAbi = [
 
 export const moonWellContracts = [
   {
-    address: moonWellDepositAddress,
+    to: moonWellDepositAddress,
     abi: moonWellDepositAbi,
     functionName: 'mint',
     args: [100000], // 10 USDC (6 decimals)
   },
-] as any;
+];

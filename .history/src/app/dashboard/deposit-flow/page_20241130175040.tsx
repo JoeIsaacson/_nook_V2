@@ -36,16 +36,35 @@ export default function DepositInput() {
     return Math.min(((amount / total) * 100), 100).toFixed(0);
   };
 
-  const handleOnStatus = useCallback((status: LifecycleStatus) => {
-    console.log('LifecycleStatus', status);
+  const [transaction1Status, setTransaction1Status] = useState<LifecycleStatus>({
+    statusName: 'success',
+    statusData: {
+      transactionReceipts: [] // Array of TransactionReceipt objects
+    }
+  });
+
+  const handleTransaction1Status = (status: LifecycleStatus) => {
+    console.log(status.statusName);
+    setTransaction1Status(status);
+  };
+
+  useEffect(() => {
+    // Expose the function to the global scope
+    window.handleTransaction1Status = handleTransaction1Status;
   }, []);
+
+  const handleTransaction2Status = (status: LifecycleStatus) => {
+    console.log(status.statusName);
+    //setTransaction2Status(status);
+    //console.log(transaction2Status.statusName);
+  };
 
   return (
     <>
       <div className="deposit-screen">
         <nav className="navbar navbar-expand-lg navbar-light bg-white">
           <div className="container">
-            <button
+            <button 
               className="btn"
               onClick={() => router.push('/dashboard')}
             >
@@ -54,9 +73,9 @@ export default function DepositInput() {
             <div className="position-absolute start-50 translate-middle-x text-center">
               <span className="navbar-text">Deposit</span>
               <span className={`navbar-text USDC-balance-text ${Number(inputAmount) > Number(USDC_BALANCE) ? 'text-danger' : ''}`}>
-                {USDC_BALANCE && Number(USDC_BALANCE) > 0 && (
-                  <p className="mb-0">${USDC_BALANCE} available</p>
-                )}
+              {USDC_BALANCE && Number(USDC_BALANCE) > 0 && (
+                <p className="mb-0">${USDC_BALANCE} available</p>
+              )}
               </span>
             </div>
 
@@ -91,28 +110,35 @@ export default function DepositInput() {
         </div>
 
         <footer className="fixed-bottom">
-          <div className="container py-3 text-center">
-            <Transaction
-              chainId={BASE_MAINNET_CHAIN_ID}
-              calls={USDCContracts}
-              onStatus={handleOnStatus}
-            >
-              <TransactionButton
-                className="btn btn-primary w-100"
-                text="Confirm access"
-              />
-            </Transaction>
 
-            <Transaction
-              chainId={BASE_MAINNET_CHAIN_ID}
-              calls={moonWellContracts}
-              onStatus={handleOnStatus}
-            >
-              <TransactionButton
-                className="btn btn-secondary w-100"
-                text="Confirm deposit" />
-            </Transaction>
-          </div>
+          {/* {transaction1Status.statusName} */}
+
+          {/* <div className="container py-3 text-center">
+            {transaction1Status.statusName !== 'success' && (
+              <Transaction
+                chainId={BASE_MAINNET_CHAIN_ID}
+                calls={USDCContracts}
+                onStatus={handleTransaction1Status}
+              >
+                <TransactionButton
+                  className="btn btn-primary w-100"
+                  text="Confirm access"
+                />
+              </Transaction>
+            )}
+
+            {transaction1Status.statusName === 'success' && (
+              <Transaction
+                chainId={BASE_MAINNET_CHAIN_ID}
+                calls={moonWellContracts}
+                onStatus={handleTransaction2Status}
+              >
+                <TransactionButton
+                  className="btn btn-secondary w-100"
+                  text="Confirm deposit" />
+              </Transaction>
+            )}
+          </div> */}
         </footer>
       </div>
     </>

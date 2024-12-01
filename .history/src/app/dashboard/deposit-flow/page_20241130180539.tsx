@@ -91,6 +91,8 @@ export default function DepositInput() {
         </div>
 
         <footer className="fixed-bottom">
+
+
           <div className="container py-3 text-center">
             <Transaction
               chainId={BASE_MAINNET_CHAIN_ID}
@@ -106,7 +108,7 @@ export default function DepositInput() {
             <Transaction
               chainId={BASE_MAINNET_CHAIN_ID}
               calls={moonWellContracts}
-              onStatus={handleOnStatus}
+              onStatus={handleTransaction2Status}
             >
               <TransactionButton
                 className="btn btn-secondary w-100"

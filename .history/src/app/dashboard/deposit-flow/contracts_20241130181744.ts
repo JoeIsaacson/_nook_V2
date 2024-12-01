@@ -38,7 +38,7 @@ export const USDCContracts = [
     functionName: 'approve',
     args: [moonWellDepositAddress, BigInt('1000000')], // 1 USDC (6 decimals)
   },
-] as any;
+];
 
 const moonWellDepositAbi = [
   {
@@ -62,4 +62,4 @@ export const moonWellContracts = [
     functionName: 'mint',
     args: [100000], // 10 USDC (6 decimals)
   },
-] as any;
+];

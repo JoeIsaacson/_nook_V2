@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState } from 'react';
 
 import { useAccount, useBalance } from 'wagmi'
 
@@ -28,24 +28,39 @@ export default function DepositInput() {
 
   const USDC_BALANCE = Number(balance?.formatted).toFixed(2);
   const [inputAmount, setInputAmount] = useState("0.00");
-  const expectedYearlyReturn = (Number(inputAmount) * 0.12).toFixed(2);
 
   const calculatePercentage = () => {
     const amount = Number(inputAmount);
     const total = Number(USDC_BALANCE);
-    return Math.min(((amount / total) * 100), 100).toFixed(0);
+    return ((amount / total) * 100).toFixed(0);
   };
 
-  const handleOnStatus = useCallback((status: LifecycleStatus) => {
-    console.log('LifecycleStatus', status);
-  }, []);
+  const [transaction1Status, setTransaction1Status] = useState<LifecycleStatus>({
+    statusName: 'idle'
+  });
+
+  const [transaction2Status, setTransaction2Status] = useState<LifecycleStatus>({
+    statusName: 'idle'
+  });
+
+  const handleTransaction1Status = (status: LifecycleStatus) => {
+    console.log(status.statusName);
+    setTransaction1Status(status);
+    console.log(transaction1Status.statusName);
+  };
+
+  const handleTransaction2Status = (status: LifecycleStatus) => {
+    console.log(status.statusName);
+    setTransaction2Status(status);
+    console.log(transaction2Status.statusName);
+  };
 
   return (
     <>
       <div className="deposit-screen">
         <nav className="navbar navbar-expand-lg navbar-light bg-white">
           <div className="container">
-            <button
+            <button 
               className="btn"
               onClick={() => router.push('/dashboard')}
             >
@@ -53,10 +68,10 @@ export default function DepositInput() {
             </button>
             <div className="position-absolute start-50 translate-middle-x text-center">
               <span className="navbar-text">Deposit</span>
-              <span className={`navbar-text USDC-balance-text ${Number(inputAmount) > Number(USDC_BALANCE) ? 'text-danger' : ''}`}>
-                {USDC_BALANCE && Number(USDC_BALANCE) > 0 && (
-                  <p className="mb-0">${USDC_BALANCE} available</p>
-                )}
+              <span className="navbar-text">
+              {USDC_BALANCE && Number(USDC_BALANCE) > 0 && (
+                <p className="mb-0">${USDC_BALANCE} available</p>
+              )}
               </span>
             </div>
 
@@ -72,7 +87,10 @@ export default function DepositInput() {
                 className="mb-4 display-1 fw-normal text-center border-0 w-100"
                 value={inputAmount}
                 onChange={(e) => {
-                  setInputAmount(e.target.value);
+                  const value = Number(e.target.value);
+                  if (value <= Number(USDC_BALANCE)) {
+                    setInputAmount(e.target.value);
+                  }
                 }}
                 placeholder="0.00"
                 step="0.01"
@@ -82,36 +100,41 @@ export default function DepositInput() {
             </div>
           </div>
 
-          {Number(inputAmount) > 0 && (
-            <h6 className="mb-0 small text-center">
-              {calculatePercentage()}% · <span className="">${expectedYearlyReturn} expected /yr</span>
-            </h6>
-          )}
+          <h6 className="mb-0 small text-center">
+            {calculatePercentage()}% · <span className="text-decoration-underline">$2.55 expected / yr</span>
+          </h6>
 
         </div>
 
         <footer className="fixed-bottom">
-          <div className="container py-3 text-center">
-            <Transaction
-              chainId={BASE_MAINNET_CHAIN_ID}
-              calls={USDCContracts}
-              onStatus={handleOnStatus}
-            >
-              <TransactionButton
-                className="btn btn-primary w-100"
-                text="Confirm access"
-              />
-            </Transaction>
 
-            <Transaction
-              chainId={BASE_MAINNET_CHAIN_ID}
-              calls={moonWellContracts}
-              onStatus={handleOnStatus}
-            >
-              <TransactionButton
-                className="btn btn-secondary w-100"
-                text="Confirm deposit" />
-            </Transaction>
+          {transaction1Status.statusName}
+
+          <div className="container py-3 text-center">
+            {transaction1Status.statusName !== 'success' && (
+              <Transaction
+                chainId={BASE_MAINNET_CHAIN_ID}
+                calls={USDCContracts}
+                onStatus={handleTransaction1Status}
+              >
+                <TransactionButton
+                  className="btn btn-primary w-100"
+                  text="Confirm access"
+                />
+              </Transaction>
+            )}
+
+            {transaction1Status.statusName === 'success' && (
+              <Transaction
+                chainId={BASE_MAINNET_CHAIN_ID}
+                calls={moonWellContracts}
+                onStatus={handleTransaction2Status}
+              >
+                <TransactionButton
+                  className="btn btn-secondary w-100"
+                  text="Confirm deposit" />
+              </Transaction>
+            )}
           </div>
         </footer>
       </div>

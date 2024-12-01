@@ -48,7 +48,7 @@ export default function Details() {
         {/* graphic*/}
 
         <div className="details-graphic blur-overlay">
-          <img src="/img/GRAPH.png" alt="graphic" />
+          <img src="/img/lemon.gif" alt="graphic" />
         </div>
 
         {/* payout schedule */}
@@ -130,8 +130,8 @@ export default function Details() {
 
         <div className="container mt-4 mb-4">
           <h6 className="mb-4 small">Deposits and payouts</h6>
-          <h2 className="">Transferring money out</h2>
-          <p className="small fw-normal">You can move your funds whenever you wish and are never locked · <a href="#">See my options</a></p>
+          <h2 className="mb-0">Transferring money in and out</h2>
+          <h6 className="mb-0 small">You can move your funds whenever you wish and are never locked · <a href="#">See my options</a></h6>
         </div>
 
       </div>

@@ -25,6 +25,7 @@ body {
   height: 6px;
 }
 
+
 .list-item-square {
   height: 12px;
   width: 12px;
@@ -320,13 +321,8 @@ input[type="number"]::before {
   left: 0;
 }
 
-.details-graphic {
-  height: 350px;
-  overflow: hidden;
-}
-
 .details-graphic img {
-  border-radius: 0px;
+  border-radius: 8px;
   width: 100%;
 }
 
@@ -341,7 +337,7 @@ input[type="number"]::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(40px);
   z-index: 1;
 }

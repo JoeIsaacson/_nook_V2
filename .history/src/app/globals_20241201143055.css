@@ -342,6 +342,6 @@ input[type="number"]::before {
   right: 0;
   bottom: 0;
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(40px);
   z-index: 1;
 }

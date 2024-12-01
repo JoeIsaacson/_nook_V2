@@ -25,23 +25,6 @@ body {
   height: 6px;
 }
 
-.list-item-square {
-  height: 12px;
-  width: 12px;
-  background-color: #000000;
-}
-
-.list-item-circle {
-  height: 12px;
-  width: 12px;
-  border-radius: 100%;
-  border: 2px solid #000000;
-}
-
-.list-item-circle.completed {
-  background-color:#000000;
-}
-
 .splash-page {
   background-color: #C8C8C8;
   height: 100%;
@@ -318,30 +301,4 @@ input[type="number"]::before {
   content: "$";
   position: absolute;
   left: 0;
-}
-
-.details-graphic {
-  height: 350px;
-  overflow: hidden;
-}
-
-.details-graphic img {
-  border-radius: 0px;
-  width: 100%;
-}
-
-.blur-overlay {
-  position: relative;
-}
-
-.blur-overlay::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
-  z-index: 1;
 }

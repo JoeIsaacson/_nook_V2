@@ -130,7 +130,7 @@ export default function Details() {
 
         <div className="container mt-4 mb-4">
           <h6 className="mb-4 small">Deposits and payouts</h6>
-          <h2 className="">Transferring money out</h2>
+          <h2 className="mb-0">Transferring money out</h2>
           <p className="small fw-normal">You can move your funds whenever you wish and are never locked · <a href="#">See my options</a></p>
         </div>
 

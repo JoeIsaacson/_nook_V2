@@ -47,8 +47,8 @@ export default function Details() {
 
         {/* graphic*/}
 
-        <div className="details-graphic blur-overlay">
-          <img src="/img/GRAPH.png" alt="graphic" />
+        <div className="details-graphic py-5 min-vh-50 container bg-primary">
+          <h2>Graphic</h2>
         </div>
 
         {/* payout schedule */}
@@ -56,9 +56,9 @@ export default function Details() {
           {/* notifications list */}
           <ul className="settings-list-stacked list-group list-group-flush">
             <li className="list-group-item px-4 py-3">
-              <div className="row">
-                <div className="col-auto d-flex align-items-center">
-                  <div className="list-item-circle completed"></div>
+              <div className="form-check row">
+                <div className="col-auto ">
+                  <div className="event-circle completed"></div>
                 </div>
                 <div className="col">
                   <p className="mb-0 fw-normal text-decoration-underline">Friday</p>
@@ -66,19 +66,10 @@ export default function Details() {
                 </div>
               </div>
             </li>
-
             <li className="list-group-item px-4 py-3">
-              <div className="row">
-                <div className="col-auto d-flex align-items-center">
-                  <div className="list-item-circle"></div>
-                </div>
-                <div className="col">
-                  <p className="mb-0 fw-normal text-decoration-underline">Dec 8</p>
-                  <p className="mb-0 fw-normal">Expected reward</p>
-                </div>
-              </div>
+              <p className="mb-0 fw-normal text-decoration-underline">Dec 13</p>
+              <p className="mb-0 fw-normal">Expected reward</p>
             </li>
-
           </ul>
         </div>
 
@@ -100,38 +91,25 @@ export default function Details() {
         <div className="container mt-2 px-0">
           {/* notifications list */}
           <ul className="settings-list-stacked list-group list-group-flush">
-
-            <li className="list-group-item px-4 py-3">
-              <div className="row">
-                <div className="col-auto d-flex align-items-center">
-                  <div className="list-item-square completed"></div>
-                </div>
-                <div className="col">
-                  <p className="mb-0 fw-normal text-decoration-underline">Moonwell</p>
-                  <p className="mb-0 fw-normal">$12.22</p>
-                  </div>
-              </div>
+            <li
+              className="list-group-item px-4 py-3"
+            >
+              <p className="mb-0 fw-normal text-decoration-underline">Moonwell</p>
+              <p className="mb-0 fw-normal">$12.22</p>
             </li>
-
-            <li className="list-group-item px-4 py-3">
-              <div className="row">
-                <div className="col-auto d-flex align-items-center">
-                  <div className="list-item-square completed"></div>
-                </div>
-                <div className="col">
-                  <p className="mb-0 fw-normal text-decoration-underline">USDC</p>
-                  <p className="mb-0 fw-normal">$5.55</p>
-                  </div>
-              </div>
+            <li
+              className="list-group-item px-4 py-3"
+            >
+              <p className="mb-0 fw-normal text-decoration-underline">USDC</p>
+              <p className="mb-0 fw-normal">$5.55</p>
             </li>
-
           </ul>
         </div>
 
         <div className="container mt-4 mb-4">
           <h6 className="mb-4 small">Deposits and payouts</h6>
-          <h2 className="">Transferring money out</h2>
-          <p className="small fw-normal">You can move your funds whenever you wish and are never locked · <a href="#">See my options</a></p>
+          <h2 className="mb-0">Transferring money in and out</h2>
+          <h6 className="mb-0 small">You can move your funds whenever you wish and are never locked · <a href="#">See my options</a></h6>
         </div>
 
       </div>

@@ -91,14 +91,14 @@ export default function DepositInput() {
         </div>
 
         <footer className="fixed-bottom">
-          <div className="container text-center">
+          <div className="container py-3 text-center">
             <Transaction
               chainId={BASE_MAINNET_CHAIN_ID}
               calls={USDCContracts}
               onStatus={handleOnStatus}
             >
               <TransactionButton
-                className="btn btn-lg btn-primary w-100 py-2"
+                className="btn btn-primary w-100 px-0 py-0"
                 text="Confirm access"
               />
             </Transaction>
@@ -109,7 +109,7 @@ export default function DepositInput() {
               onStatus={handleOnStatus}
             >
               <TransactionButton
-                className="btn btn-lg btn-secondary w-100 py-2"
+                className="btn btn-secondary w-100 px-0 py-0"
                 text="Confirm deposit" />
             </Transaction>
           </div>

@@ -98,7 +98,7 @@ export default function DepositInput() {
               onStatus={handleOnStatus}
             >
               <TransactionButton
-                className="btn btn-lg btn-primary w-100 py-2"
+                className="btn btn-primary w-100 py-2"
                 text="Confirm access"
               />
             </Transaction>
@@ -109,7 +109,7 @@ export default function DepositInput() {
               onStatus={handleOnStatus}
             >
               <TransactionButton
-                className="btn btn-lg btn-secondary w-100 py-2"
+                className="btn btn-secondary w-100 py-2"
                 text="Confirm deposit" />
             </Transaction>
           </div>

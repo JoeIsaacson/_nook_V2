@@ -39,19 +39,15 @@ function Settings() {
                 Refer a friend
               </li>
               <li className="list-group-item py-3" 
-                onClick={() => {
-                  disconnect();
-                  router.push('/welcome');
-                }}
+                onClick={() => disconnect()}
               >
                 <i className="fas fa-user-xmark me-2"></i>
-                Log out
+                Log out (of Wallet)
               </li>
             </ul>
-            
           </div>
           </div>
-        </div>        
+        </div>
       </>
   )
 }

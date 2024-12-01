@@ -45,7 +45,7 @@ function Settings() {
                 }}
               >
                 <i className="fas fa-user-xmark me-2"></i>
-                Log out
+                Log out (of Wallet)
               </li>
             </ul>
             

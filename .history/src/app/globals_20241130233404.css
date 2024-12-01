@@ -221,17 +221,17 @@ body {
 }
 
 /* For when element is removed */
-.deposit-flow-expected-return.fade-in {
-  animation: fadeIn 0.3s ease-in-out;
-  opacity: 1;
+.deposit-flow-expected-return.fade-out {
+  animation: fadeOut 0.3s ease-in-out;
+  opacity: 0;
 }
 
-@keyframes fadeIn {
+@keyframes fadeOut {
   0% {
-    opacity: 0;
+    opacity: 1;
   }
   100% {
-    opacity: 1;
+    opacity: 0;
   }
 }
 

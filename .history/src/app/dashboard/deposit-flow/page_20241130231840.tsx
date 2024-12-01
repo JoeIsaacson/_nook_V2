@@ -27,8 +27,8 @@ export default function DepositInput() {
   });
 
   const USDC_BALANCE = Number(balance?.formatted).toFixed(2);
-  const [inputAmount, setInputAmount] = useState("0");
-  const expectedYearlyReturn = (Math.min(Number(inputAmount), Number(USDC_BALANCE)) * 0.12).toFixed(2);
+  const [inputAmount, setInputAmount] = useState("0.00");
+  const expectedYearlyReturn = (Number(inputAmount) * 0.12).toFixed(2);
 
   const calculatePercentage = () => {
     const amount = Number(inputAmount);
@@ -66,7 +66,7 @@ export default function DepositInput() {
         <div className="container mt-4">
 
           <div className="row">
-            <div className="col-12 position-relative">
+            <div className="col-12">
               <input
                 type="number"
                 className="mb-4 display-1 fw-normal text-center border-0 w-100"
@@ -74,8 +74,7 @@ export default function DepositInput() {
                 onChange={(e) => {
                   setInputAmount(e.target.value);
                 }}
-                onFocus={(e) => e.target.select()}
-                placeholder="0"
+                placeholder="0.00"
                 step="0.01"
                 min="0"
                 max="10000"
@@ -84,7 +83,7 @@ export default function DepositInput() {
           </div>
 
           {Number(inputAmount) > 0 && (
-            <h6 className={`deposit-flow-expected-return mb-0 small text-center ${Number(inputAmount) > 0 ? 'fade-in' : ''}`}>
+            <h6 className="mb-0 small text-center">
               {calculatePercentage()}% · <span className="">${expectedYearlyReturn} expected /yr</span>
             </h6>
           )}

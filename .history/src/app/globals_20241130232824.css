@@ -206,35 +206,6 @@ body {
   border-radius: 100%;
 }
 
-.deposit-flow-expected-return {
-  animation: fadeInOut 0.3s ease-in-out;
-  opacity: 1;
-}
-
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-/* For when element is removed */
-.deposit-flow-expected-return.fade-in {
-  animation: fadeIn 0.3s ease-in-out;
-  opacity: 1;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 @keyframes slideFromRight {
   from {
     transform: translateX(100vw);  /* Start from viewport width */
@@ -293,7 +264,7 @@ input[type="number"] {
 }
 
 input[type="number"]::before {
-  content: "$";
+  content: var(--prefix);
   position: absolute;
   left: 0;
 }

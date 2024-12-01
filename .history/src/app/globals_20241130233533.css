@@ -226,7 +226,12 @@ body {
   opacity: 1;
 }
 
-@keyframes fadeIn {
+.deposit-flow-expected-return.fade-out {
+  animation: fadeOut 0.3s ease-in-out;
+  opacity: 0;
+}
+
+@keyframes fadeOut {
   0% {
     opacity: 0;
   }

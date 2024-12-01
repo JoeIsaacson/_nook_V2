@@ -28,7 +28,7 @@ export default function DepositInput() {
 
   const USDC_BALANCE = Number(balance?.formatted).toFixed(2);
   const [inputAmount, setInputAmount] = useState("0");
-  const expectedYearlyReturn = (Math.min(Number(inputAmount), Number(USDC_BALANCE)) * 0.12).toFixed(2);
+  const expectedYearlyReturn = (Number(inputAmount) * 0.12).toFixed(2);
 
   const calculatePercentage = () => {
     const amount = Number(inputAmount);
@@ -67,24 +67,26 @@ export default function DepositInput() {
 
           <div className="row">
             <div className="col-12 position-relative">
-              <input
-                type="number"
-                className="mb-4 display-1 fw-normal text-center border-0 w-100"
-                value={inputAmount}
-                onChange={(e) => {
-                  setInputAmount(e.target.value);
-                }}
-                onFocus={(e) => e.target.select()}
-                placeholder="0"
-                step="0.01"
-                min="0"
-                max="10000"
-              />
+              <div className="position-relative">
+                <span className="position-absolute start-0 top-50 translate-middle-y ms-3 display-1">$</span>
+                <input
+                  type="number"
+                  className="mb-4 display-1 fw-normal text-center border-0 w-100 ps-4"
+                  value={inputAmount}
+                  onChange={(e) => {
+                    setInputAmount(e.target.value);
+                  }}
+                  placeholder="0"
+                  step="0.01"
+                  min="0"
+                  max="10000"
+                />
+              </div>
             </div>
           </div>
 
           {Number(inputAmount) > 0 && (
-            <h6 className={`deposit-flow-expected-return mb-0 small text-center ${Number(inputAmount) > 0 ? 'fade-in' : ''}`}>
+            <h6 className="mb-0 small text-center">
               {calculatePercentage()}% · <span className="">${expectedYearlyReturn} expected /yr</span>
             </h6>
           )}

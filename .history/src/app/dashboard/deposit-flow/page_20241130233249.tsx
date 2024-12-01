@@ -84,7 +84,7 @@ export default function DepositInput() {
           </div>
 
           {Number(inputAmount) > 0 && (
-            <h6 className={`deposit-flow-expected-return mb-0 small text-center ${Number(inputAmount) > 0 ? 'fade-in' : ''}`}>
+            <h6 className="deposit-flow-expected-return mb-0 small text-center">
               {calculatePercentage()}% · <span className="">${expectedYearlyReturn} expected /yr</span>
             </h6>
           )}

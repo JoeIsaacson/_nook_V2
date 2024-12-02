@@ -76,8 +76,8 @@ export default function DepositInput() {
               <i className="fas fa-arrow-left"></i>
             </button>
             <div className="position-absolute start-50 translate-middle-x text-center">
-              <span className="navbar-text small fw-medium">Deposit</span>
-              <span className={`navbar-text USDC-balance-text small ${Number(inputAmount) > Number(USDC_BALANCE) ? 'text-danger' : ''}`}>
+              <span className="navbar-text">Deposit</span>
+              <span className={`navbar-text USDC-balance-text ${Number(inputAmount) > Number(USDC_BALANCE) ? 'text-danger' : ''}`}>
                 {USDC_BALANCE && Number(USDC_BALANCE) > 0 && (
                   <p className="mb-0">${USDC_BALANCE} available</p>
                 )}

@@ -61,12 +61,10 @@ export default function DepositInput() {
     // watch: true,
   })
 
-  const allowanceFormatted = allowance ? Number(allowance) / 1000000 : 0;
   const hasAllowance = allowance && Number(allowance) >= Number(inputAmount) * 1000000;
 
-
   console.log('hasAllowance', hasAllowance);
-  console.log('its', allowanceFormatted);
+  console.log('its', allowance);
 
   return (
     <>

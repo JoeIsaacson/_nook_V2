@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useCallback, useState, useEffect } from 'react';
 
-import { useAccount, useBalance, useContractRead } from 'wagmi'
+import { useAccount, useBalance } from 'wagmi'
 
 import {
   Transaction,
@@ -18,9 +18,8 @@ export default function DepositInput() {
   const router = useRouter();
   const { address } = useAccount();
   const BASE_MAINNET_CHAIN_ID = 8453;
-  const moonWellDepositAddress = '0xEdc817A28E8B93B03976FBd4a3dDBc9f7D176c22'; // Moonwell USDC Market on Base
 
-  // get user USDC balance on Base
+  // get user eth balance on mainnet
   const { data: balance } = useBalance({
     address: address,
     token: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913', // USDC contract address on Base
@@ -42,31 +41,6 @@ export default function DepositInput() {
   const handleOnStatus = useCallback((status: LifecycleStatus) => {
     console.log('LifecycleStatus', status);
   }, []);
-
-  const { data: allowance } = useContractRead({
-    address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913', // USDC contract address
-    abi: [{
-      name: 'allowance',
-      type: 'function',
-      stateMutability: 'view',
-      inputs: [
-        { name: 'owner', type: 'address' },
-        { name: 'spender', type: 'address' }
-      ],
-      outputs: [{ type: 'uint256' }]
-    }],
-    functionName: 'allowance',
-    args: [address as `0x${string}`, moonWellDepositAddress], // owner, spender
-    chainId: BASE_MAINNET_CHAIN_ID,
-    // watch: true,
-  })
-
-  const allowanceFormatted = allowance ? Number(allowance) / 1000000 : 0;
-  const hasAllowance = allowance && Number(allowance) >= Number(inputAmount) * 1000000;
-
-
-  console.log('hasAllowance', hasAllowance);
-  console.log('its', allowanceFormatted);
 
   return (
     <>
@@ -123,18 +97,16 @@ export default function DepositInput() {
           <div className="container text-center">
             {Number(inputAmount) > 0 && (
               <>
-                {!hasAllowance && (
-                  <Transaction
-                    chainId={BASE_MAINNET_CHAIN_ID}
-                    calls={USDCContracts(inputAmount) as any}
-                    onStatus={handleOnStatus}
-                  >
-                    <TransactionButton
-                      className="btn btn-lg btn-primary w-100 py-2"
-                      text="Confirm access"
-                    />
-                  </Transaction>
-                )}
+                <Transaction
+                  chainId={BASE_MAINNET_CHAIN_ID}
+                  calls={USDCContracts(inputAmount) as any}
+                  onStatus={handleOnStatus}
+                >
+                  <TransactionButton
+                    className="btn btn-lg btn-primary w-100 py-2"
+                    text="Confirm access"
+                  />
+                </Transaction>
 
                 <Transaction
                   chainId={BASE_MAINNET_CHAIN_ID}
@@ -153,5 +125,6 @@ export default function DepositInput() {
     </>
   )
 };
+
 
 // Windsail / iOS app in Xcode

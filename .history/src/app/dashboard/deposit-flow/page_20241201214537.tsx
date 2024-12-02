@@ -61,7 +61,7 @@ export default function DepositInput() {
     // watch: true,
   })
 
-  const allowanceFormatted = allowance ? Number(allowance) / 1000000 : 0;
+  const allowanceFormatted = allowance ? Number(formatUnits(allowance, 6)) : 0;
   const hasAllowance = allowance && Number(allowance) >= Number(inputAmount) * 1000000;
 
 

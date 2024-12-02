@@ -347,3 +347,8 @@ input[type="number"]::before {
   z-index: 1;
 }
 
+input {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}

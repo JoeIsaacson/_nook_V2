@@ -31,17 +31,14 @@ const usdcContractAbi = [
   }
 ] as const;
 
-export const USDCContracts = (inputAmount: string) => {
-  return [{
-    to: usdcContractAddress,
+export const USDCContracts = [
+  {
+    address: usdcContractAddress,
     abi: usdcContractAbi,
     functionName: 'approve',
-    args: [
-      moonWellDepositAddress, 
-      BigInt(inputAmount * 1000000) // Convert to USDC decimals (6)
-    ],
-  }] as any;
-};
+    args: [moonWellDepositAddress, BigInt('1000000')], // 1 USDC (6 decimals)
+  },
+] as any;
 
 const moonWellDepositAbi = [
   {
@@ -56,15 +53,13 @@ const moonWellDepositAbi = [
     outputs: [{ type: 'uint256' }],
     stateMutability: 'payable',
   },
-] as const;
+] as any;
 
-export const moonWellContracts = (inputAmount: string) => {
-  return [{
-    to: moonWellDepositAddress,
+export const moonWellContracts = [
+  {
+    address: moonWellDepositAddress,
     abi: moonWellDepositAbi,
     functionName: 'mint',
-    args: [
-      BigInt(Number(inputAmount) * 1000000) // Convert to USDC decimals (6)
-    ],
-  }] as any;
-};
+    args: [100000], // 10 USDC (6 decimals)
+  },
+];

@@ -2,7 +2,7 @@
 const usdcContractAddress = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'; // USDC on Base
 const moonWellDepositAddress = '0xEdc817A28E8B93B03976FBd4a3dDBc9f7D176c22'; // Moonwell USDC Market on Base
 
-const usdcContractAbi = [
+const USDCContracts = [
   {
     type: 'function',
     name: 'approve',
@@ -31,16 +31,16 @@ const usdcContractAbi = [
   }
 ] as const;
 
-export const USDCContracts = (inputAmount: string) => {
+export const generateUSDCContracts = (inputAmount: string) => {
   return [{
     to: usdcContractAddress,
     abi: usdcContractAbi,
     functionName: 'approve',
     args: [
       moonWellDepositAddress, 
-      BigInt(inputAmount * 1000000) // Convert to USDC decimals (6)
+      BigInt(Number(inputAmount) * 1000000) // Convert to USDC decimals (6)
     ],
-  }] as any;
+  }];
 };
 
 const moonWellDepositAbi = [
@@ -58,7 +58,7 @@ const moonWellDepositAbi = [
   },
 ] as const;
 
-export const moonWellContracts = (inputAmount: string) => {
+export const generateMoonwellContracts = (inputAmount: string) => {
   return [{
     to: moonWellDepositAddress,
     abi: moonWellDepositAbi,
@@ -66,5 +66,5 @@ export const moonWellContracts = (inputAmount: string) => {
     args: [
       BigInt(Number(inputAmount) * 1000000) // Convert to USDC decimals (6)
     ],
-  }] as any;
+  }];
 };

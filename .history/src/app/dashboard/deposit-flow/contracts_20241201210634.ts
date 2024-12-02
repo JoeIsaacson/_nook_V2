@@ -38,9 +38,9 @@ export const USDCContracts = (inputAmount: string) => {
     functionName: 'approve',
     args: [
       moonWellDepositAddress, 
-      BigInt(inputAmount * 1000000) // Convert to USDC decimals (6)
+      BigInt(Number(inputAmount) * 1000000) // Convert to USDC decimals (6)
     ],
-  }] as any;
+  }];
 };
 
 const moonWellDepositAbi = [

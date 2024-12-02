@@ -36,8 +36,6 @@ export default function DepositInput() {
     return Math.min(((amount / total) * 100), 100).toFixed(0);
   };
 
-  console.log('USDCContracts', USDCContracts(inputAmount));
-
   const handleOnStatus = useCallback((status: LifecycleStatus) => {
     console.log('LifecycleStatus', status);
   }, []);
@@ -97,7 +95,7 @@ export default function DepositInput() {
           <div className="container text-center">
             <Transaction
               chainId={BASE_MAINNET_CHAIN_ID}
-              calls={USDCContracts(inputAmount) as any}
+              calls={USDCContracts(Number(inputAmount))}
               onStatus={handleOnStatus}
             >
               <TransactionButton
@@ -108,7 +106,7 @@ export default function DepositInput() {
 
             <Transaction
               chainId={BASE_MAINNET_CHAIN_ID}
-              calls={moonWellContracts(inputAmount) as any}
+              calls={moonWellContracts}
               onStatus={handleOnStatus}
             >
               <TransactionButton

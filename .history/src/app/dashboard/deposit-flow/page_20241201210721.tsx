@@ -36,8 +36,6 @@ export default function DepositInput() {
     return Math.min(((amount / total) * 100), 100).toFixed(0);
   };
 
-  console.log('USDCContracts', USDCContracts(inputAmount));
-
   const handleOnStatus = useCallback((status: LifecycleStatus) => {
     console.log('LifecycleStatus', status);
   }, []);

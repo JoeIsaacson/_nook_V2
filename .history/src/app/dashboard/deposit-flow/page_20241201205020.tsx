@@ -36,8 +36,6 @@ export default function DepositInput() {
     return Math.min(((amount / total) * 100), 100).toFixed(0);
   };
 
-  console.log('USDCContracts', USDCContracts(inputAmount));
-
   const handleOnStatus = useCallback((status: LifecycleStatus) => {
     console.log('LifecycleStatus', status);
   }, []);
@@ -69,19 +67,51 @@ export default function DepositInput() {
 
           <div className="row">
             <div className="col-12 position-relative">
-              <input
-                type="number"
+              <div
+                contentEditable
+                suppressContentEditableWarning
                 className="mb-4 display-1 fw-normal text-center border-0 w-100"
-                value={inputAmount}
-                onChange={(e) => {
-                  setInputAmount(e.target.value);
+                role="textbox"
+                tabIndex={0}
+                onInput={(e) => {
+                  let value = e.currentTarget.textContent || '0';
+                  
+                  // Remove any non-numeric characters except decimal point
+                  value = value.replace(/[^\d.]/g, '');
+                  
+                  // Ensure only one decimal point
+                  const parts = value.split('.');
+                  if (parts.length > 2) {
+                    value = parts[0] + '.' + parts.slice(1).join('');
+                  }
+                  
+                  // Limit to 2 decimal places
+                  if (parts[1]?.length > 2) {
+                    value = parseFloat(value).toFixed(2);
+                  }
+                  
+                  // Enforce min/max values
+                  const numValue = parseFloat(value);
+                  if (numValue > 10000) value = '10000';
+                  if (numValue < 0) value = '0';
+                  
+                  // Update the display
+                  e.currentTarget.textContent = value;
+                  setInputAmount(value);
                 }}
-                onFocus={(e) => e.target.select()}
-                placeholder="0"
-                step="0.01"
-                min="0"
-                max="10000"
-              />
+                onFocus={(e) => window.getSelection()?.selectAllChildren(e.currentTarget)}
+                onKeyDown={(e) => {
+                  // Allow only numbers, decimal point, and control keys
+                  if (
+                    !/[\d.]/.test(e.key) && 
+                    !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)
+                  ) {
+                    e.preventDefault();
+                  }
+                }}
+              >
+                {inputAmount || '0'}
+              </div>
             </div>
           </div>
 
@@ -97,7 +127,7 @@ export default function DepositInput() {
           <div className="container text-center">
             <Transaction
               chainId={BASE_MAINNET_CHAIN_ID}
-              calls={USDCContracts(inputAmount) as any}
+              calls={USDCContracts}
               onStatus={handleOnStatus}
             >
               <TransactionButton
@@ -108,7 +138,7 @@ export default function DepositInput() {
 
             <Transaction
               chainId={BASE_MAINNET_CHAIN_ID}
-              calls={moonWellContracts(inputAmount) as any}
+              calls={moonWellContracts}
               onStatus={handleOnStatus}
             >
               <TransactionButton

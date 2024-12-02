@@ -37,6 +37,8 @@ export default function DepositInput() {
     return Math.min(((amount / total) * 100), 100).toFixed(0);
   };
 
+  console.log('USDCContracts', USDCContracts(inputAmount));
+
   const handleOnStatus = useCallback((status: LifecycleStatus) => {
     console.log('LifecycleStatus', status);
   }, []);
@@ -56,6 +58,7 @@ export default function DepositInput() {
     functionName: 'allowance',
     args: [address as `0x${string}`, moonWellDepositAddress], // owner, spender
     chainId: BASE_MAINNET_CHAIN_ID,
+    // watch: true,
   })
 
   const allowanceFormatted = allowance ? Number(allowance) / 1000000 : 0;
@@ -120,22 +123,18 @@ export default function DepositInput() {
           <div className="container text-center">
             {Number(inputAmount) > 0 && Number(USDC_BALANCE) > 0 && (
               <>
-                {/* Confirm access to USDC */}
-                {!hasAllowance && (
-                  <Transaction
-                    chainId={BASE_MAINNET_CHAIN_ID}
-                    calls={USDCContracts(inputAmount) as any}
-                    onStatus={handleOnStatus}
-                  >
-                    <TransactionButton
-                      className="btn btn-lg btn-primary w-100 py-2"
-                      text="Continue"
-                    />
-                  </Transaction>
-                )}
+                <Transaction
+                  chainId={BASE_MAINNET_CHAIN_ID}
+                  calls={USDCContracts(inputAmount) as any}
+                  onStatus={handleOnStatus}
+                >
+                  <TransactionButton
+                    className="btn btn-lg btn-primary w-100 py-2"
+                    text="Confirm access"
+                  />
+                </Transaction>
 
-                {/* Deposit to Moonwell */}
-                {hasAllowance && (
+                {!hasAllowance && allowanceFormatted < Number(inputAmount) && (
                   <Transaction
                     chainId={BASE_MAINNET_CHAIN_ID}
                     calls={moonWellContracts(inputAmount) as any}
@@ -143,8 +142,7 @@ export default function DepositInput() {
                   >
                     <TransactionButton
                       className="btn btn-lg btn-secondary w-100 py-2"
-                      text="Continue"
-                    />
+                      text="Confirm deposit" />
                   </Transaction>
                 )}
               </>

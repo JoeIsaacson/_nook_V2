@@ -37,6 +37,8 @@ export default function DepositInput() {
     return Math.min(((amount / total) * 100), 100).toFixed(0);
   };
 
+  console.log('USDCContracts', USDCContracts(inputAmount));
+
   const handleOnStatus = useCallback((status: LifecycleStatus) => {
     console.log('LifecycleStatus', status);
   }, []);
@@ -56,6 +58,7 @@ export default function DepositInput() {
     functionName: 'allowance',
     args: [address as `0x${string}`, moonWellDepositAddress], // owner, spender
     chainId: BASE_MAINNET_CHAIN_ID,
+    // watch: true,
   })
 
   const allowanceFormatted = allowance ? Number(allowance) / 1000000 : 0;

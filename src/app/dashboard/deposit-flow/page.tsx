@@ -12,6 +12,8 @@ import {
 
 import { LifecycleStatus } from '@coinbase/onchainkit/transaction';
 
+import { FundButton, getOnrampBuyUrl } from '@coinbase/onchainkit/fund';
+
 import { USDCContracts, moonWellContracts } from './contracts';
 
 export default function DepositInput() {
@@ -19,6 +21,7 @@ export default function DepositInput() {
   const { address } = useAccount();
   const BASE_MAINNET_CHAIN_ID = 8453;
   const moonWellDepositAddress = '0xEdc817A28E8B93B03976FBd4a3dDBc9f7D176c22'; // Moonwell USDC Market on Base
+  const projectId = process.env.NEXT_PUBLIC_CDP_PROJECT_ID;
 
   // get user USDC balance on Base
   const { data: balance } = useBalance({
@@ -63,6 +66,18 @@ export default function DepositInput() {
 
   console.log('hasAllowance', hasAllowance);
   console.log('its', allowanceFormatted);
+
+  console.log('projectId', projectId);
+
+  const onrampBuyUrl = projectId ? getOnrampBuyUrl({
+    projectId,
+    addresses: { [address as string]: ['base'] },
+    assets: ['USDC'],
+    presetFiatAmount: 20,
+    fiatCurrency: 'USD'
+  }) as any : undefined;
+
+  console.log('onrampBuyUrl', onrampBuyUrl);
 
   return (
     <>
@@ -117,34 +132,47 @@ export default function DepositInput() {
 
         <footer className="fixed-bottom py-3">
           <div className="container text-center">
-            {Number(inputAmount) > 0 && Number(USDC_BALANCE) > 0 && (
+            {Number(inputAmount) > 0 && (
               <>
-                {/* Confirm access to USDC */}
-                {!hasAllowance && (
-                  <Transaction
-                    chainId={BASE_MAINNET_CHAIN_ID}
-                    calls={USDCContracts(inputAmount) as any}
-                    onStatus={handleOnStatus}
-                  >
-                    <TransactionButton
-                      className="btn btn-lg btn-primary w-100 py-2"
-                      text="Continue"
-                    />
-                  </Transaction>
+                {/* Show Onramp if insufficient balance */}
+                {Number(inputAmount) > Number(USDC_BALANCE) && (
+                  <FundButton 
+                    fundingUrl={onrampBuyUrl}
+                    className="100"
+                    text="Continue"
+                  />
                 )}
 
-                {/* Deposit to Moonwell */}
-                {hasAllowance && (
-                  <Transaction
-                    chainId={BASE_MAINNET_CHAIN_ID}
-                    calls={moonWellContracts(inputAmount) as any}
-                    onStatus={handleOnStatus}
-                  >
-                    <TransactionButton
-                      className="btn btn-lg btn-secondary w-100 py-2"
-                      text="Continue"
-                    />
-                  </Transaction>
+                {/* Original deposit flow for sufficient balance */}
+                {Number(inputAmount) <= Number(USDC_BALANCE) && (
+                  <>
+                    {!hasAllowance && (
+                    //  check to see if USDC contract is met
+                     <Transaction
+                        chainId={BASE_MAINNET_CHAIN_ID}
+                        calls={USDCContracts(inputAmount) as any}
+                        onStatus={handleOnStatus}
+                      >
+                        <TransactionButton
+                          className="btn btn-lg btn-primary w-100 py-2"
+                          text="Continue"
+                        />
+                      </Transaction>
+                    )}
+                    {/* // Confirm moonwell mint */}
+                    {hasAllowance && (
+                      <Transaction
+                        chainId={BASE_MAINNET_CHAIN_ID}
+                        calls={moonWellContracts(inputAmount) as any}
+                        onStatus={handleOnStatus}
+                      >
+                        <TransactionButton
+                          className="btn btn-lg btn-secondary w-100 py-2"
+                          text="Continue"
+                        />
+                      </Transaction>
+                    )}
+                  </>
                 )}
               </>
             )}

@@ -32,7 +32,7 @@ export default function DepositInput() {
 
   const USDC_BALANCE = Number(balance?.formatted).toFixed(2);
   const [inputAmount, setInputAmount] = useState("0");
-  const expectedYearlyReturn = (Math.min(Number(inputAmount), Number(USDC_BALANCE)) * 0.12).toFixed(2);
+  const expectedYearlyReturn = (Math.min(Number(inputAmount) * 0.12)).toFixed(2);
 
   const calculatePercentage = () => {
     const amount = Number(inputAmount);
@@ -94,7 +94,7 @@ export default function DepositInput() {
               <span className="navbar-text small fw-medium">Deposit</span>
               <span className={`navbar-text USDC-balance-text small ${Number(inputAmount) > Number(USDC_BALANCE) ? 'text-secondary' : ''}`}>
                 {USDC_BALANCE && Number(USDC_BALANCE) > 0 && (
-                  <p className="mb-0">${USDC_BALANCE} available</p>
+                  <p className="mb-0">${USDC_BALANCE} available {Number(inputAmount) > 0 && (<span>· {calculatePercentage()}%</span>)}</p>
                 )}
               </span>
             </div>
@@ -124,7 +124,7 @@ export default function DepositInput() {
 
           {Number(inputAmount) > 0 && (
             <h6 className={`deposit-flow-expected-return mb-0 small text-center ${Number(inputAmount) > 0 ? 'fade-in' : ''}`}>
-              {calculatePercentage()}% · <span className="">${expectedYearlyReturn} expected /yr</span>
+               <span className="">${expectedYearlyReturn} expected /yr</span>
             </h6>
           )}
 

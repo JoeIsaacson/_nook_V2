@@ -121,9 +121,10 @@ export default function Details() {
           <div className="container">
             <button className="btn btn-transparent w-100 mt-2">Learn more</button>
           </div>
+
         </div>
 
-        <div className="container mt-5 pb-4">
+        <div className="container mt-4 pb-4">
           <h6 className="mb-4 small">Deposits and payouts</h6>
           <h2 className="">Transferring money out</h2>
           <p className="small fw-normal">You can move your funds whenever you wish and are never locked</p>

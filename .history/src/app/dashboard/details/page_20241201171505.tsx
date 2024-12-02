@@ -19,7 +19,6 @@ export default function Details() {
     
     if (dashboardData) {
       const parsedData: DashboardData = JSON.parse(dashboardData);
-      console.log(parsedData.totalRewardsObject);
       //
       setDetails(parsedData);
     }
@@ -99,7 +98,7 @@ export default function Details() {
         <div className="container mt-2 px-0">
           {/* notifications list */}
           <div className="list-group list-group-flush">
-            {details?.totalRewardsObject?.map((reward, index) => (
+            {totalRewardsObject?.map((reward, index) => (
 
               <li key={index} className="list-group-item px-4 py-3">
                 <div className="row">
@@ -107,23 +106,26 @@ export default function Details() {
                     <div className="list-item-square"></div>
                   </div>
                   <div className="col">
-                    <p className="mb-0 fw-normal">{reward.name}</p>
+                    <p className="mb-0 fw-normal">Moonwell</p>
                   </div>
                   <div className="col-auto">
                     <p className="mb-0 fw-normal">${reward.valueInUSDC.toFixed(2)}</p>
                   </div>
                 </div>
               </li>
-            ))} 
+            ))}
 
           </div>
 
           <div className="container">
-            <button className="btn btn-transparent w-100 mt-2">Learn more</button>
+          <button className="btn btn-transparent w-100 mt-2">Learn more</button>
           </div>
+
         </div>
 
-        <div className="container mt-5 pb-4">
+
+
+        <div className="container mt-4 pb-4">
           <h6 className="mb-4 small">Deposits and payouts</h6>
           <h2 className="">Transferring money out</h2>
           <p className="small fw-normal">You can move your funds whenever you wish and are never locked</p>

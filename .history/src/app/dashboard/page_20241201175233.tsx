@@ -70,9 +70,7 @@ export default function Dashboard() {
 
               const amount = Number(token.amount) || 0;
               const price = Number(token.price) || 0;
-              const tokenName = token.name;
-
-              console.log(tokenName);
+              const tokenName = token.asset;
 
               return {
                 name: tokenName,

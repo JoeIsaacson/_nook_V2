@@ -73,7 +73,7 @@ export default function DepositInput() {
     projectId,
     addresses: { [address as string]: ['base'] },
     assets: ['USDC'],
-    presetFiatAmount: 20,
+    presetFiatAmount: Number(inputAmount),
     fiatCurrency: 'USD'
   }) as any : undefined;
 
@@ -92,7 +92,7 @@ export default function DepositInput() {
             </button>
             <div className="position-absolute start-50 translate-middle-x text-center">
               <span className="navbar-text small fw-medium">Deposit</span>
-              <span className={`navbar-text USDC-balance-text small ${Number(inputAmount) > Number(USDC_BALANCE) ? 'text-danger' : ''}`}>
+              <span className={`navbar-text USDC-balance-text small ${Number(inputAmount) > Number(USDC_BALANCE) ? 'text-secondary' : ''}`}>
                 {USDC_BALANCE && Number(USDC_BALANCE) > 0 && (
                   <p className="mb-0">${USDC_BALANCE} available</p>
                 )}
@@ -159,6 +159,7 @@ export default function DepositInput() {
                         />
                       </Transaction>
                     )}
+                    
                     {/* // Confirm moonwell mint */}
                     {hasAllowance && (
                       <Transaction

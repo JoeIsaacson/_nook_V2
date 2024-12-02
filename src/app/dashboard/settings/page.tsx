@@ -1,12 +1,15 @@
 'use client'
 
-import { useDisconnect } from 'wagmi'
+import { useDisconnect, useAccount } from 'wagmi'
 import { useRouter } from 'next/navigation'
 
 function Settings() {
   const router = useRouter()
   const { disconnect } = useDisconnect()
+  const { address } = useAccount()
 
+  console.log('address', address);
+  
   return (
     <>
       {/* Navbar */}
@@ -25,7 +28,16 @@ function Settings() {
       <div className="container mt-2">
         <h2 className="mt-2 mb-3">Settings</h2>
         <h6 className="small mb-4">App version 0.00.4</h6>
-
+         {/* Log out button */}
+         <button 
+          className="btn btn-transparent me-3"
+          onClick={() => {
+            navigator.clipboard.writeText(address as string);
+          }}
+        >
+          Copy wallet address
+        </button>
+        {/* Log out button */}
         <button 
           className="btn btn-transparent"
           onClick={() => {

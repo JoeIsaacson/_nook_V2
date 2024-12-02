@@ -16,7 +16,7 @@ export default function Details() {
   useEffect(() => {
     // Get the APY from localStorage
     const dashboardData = localStorage.getItem('dashboardData');
-    
+
     if (dashboardData) {
       const parsedData: DashboardData = JSON.parse(dashboardData);
       console.log(parsedData.totalRewardsObject);
@@ -86,14 +86,13 @@ export default function Details() {
           <h2 className="">Your breakdown of earnings</h2>
           <p className="mb-0 small">You have earned ${details?.formattedLendingRewards} in yield for an average of {details?.formattedAPY}% return on your deposit</p>
           {/* progress bar */}
-          <div className="progress-stacked mt-4">
-            <div className="progress" role="progressbar" aria-valuenow={15} aria-valuemin={0} aria-valuemax={100} style={{ width: '80%' }}>
-              <div className="progress-bar"></div>
+            <div className="progress-stacked mt-4">
+            {details?.totalRewardsObject?.map((reward, index) => (
+              <div key={index} className="progress" role="progressbar" aria-valuenow={reward.valueInUSDC} aria-valuemin={0} aria-valuemax={100} style={{ width: `${reward.valueInUSDC / Number(details?.formattedLendingRewards) * 100}%` }}>
+                <div className={`progress-bar bg-${reward.name}`}></div>
+              </div>
+            ))}
             </div>
-            <div className="progress" role="progressbar" aria-valuenow={30} aria-valuemin={0} aria-valuemax={100} style={{ width: '20%' }}>
-              <div className="progress-bar bg-secondary"></div>
-            </div>
-          </div>
         </div>
 
         <div className="container mt-2 px-0">
@@ -114,7 +113,7 @@ export default function Details() {
                   </div>
                 </div>
               </li>
-            ))} 
+            ))}
 
           </div>
 

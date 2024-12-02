@@ -32,6 +32,21 @@ body {
   background-color: #000000;
 }
 
+.list-group-item:first-child .list-item-square,
+.progress-bar.bg-USDC {
+  background-color: #0052FF;
+}
+
+.list-group-item:nth-child(2) .list-item-square,
+.progress-bar.bg-WELL {
+  background-color: #4F46E5;
+}
+
+.list-group-item:nth-child(3) .list-item-square {
+  background-color: #374461;
+}
+
+
 .list-item-circle {
   height: 12px;
   width: 12px;

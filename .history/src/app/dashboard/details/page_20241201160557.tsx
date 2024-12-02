@@ -6,17 +6,11 @@ import { useEffect, useState } from 'react'
 interface DashboardData {
   formattedLendingRewards: string;
   formattedAPY: string;
-  totalRewardsObject: any[];
 }
 
 export default function Details() {
   const router = useRouter();
   const [details, setDetails] = useState<DashboardData | null>(null);
-
-  console.log('details', details);
-  console.log('totalRewardsObject', details?.totalRewardsObject);
-  console.log('formattedLendingRewards', details?.formattedLendingRewards);
-  console.log('formattedAPY', details?.formattedAPY);
 
 
   useEffect(() => {
@@ -26,7 +20,9 @@ export default function Details() {
       const parsedData: DashboardData = JSON.parse(dashboardData);
       setDetails(parsedData);
     }
-  }, []);
+  },
+
+    []);
 
   return (
     <>
@@ -42,9 +38,11 @@ export default function Details() {
           </div>
         </nav>
 
-        <div className="container mt-2">
-          <h6 className="small">You are earning {details?.formattedAPY}% APY</h6>
-          <h2 className="mt-2 mb-3">What happens next</h2>
+        <div className="container">
+          <div className="mt-4">
+            <h6 className="small">You are earning {details?.formattedAPY}% APY</h6>
+            <h2 className="mt-2 mb-3">What happens next</h2>
+          </div>
         </div>
 
         {/* graphic*/}

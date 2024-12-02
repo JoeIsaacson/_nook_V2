@@ -23,11 +23,13 @@ function Settings() {
 
       {/* Main Content */}
       <div className="container mt-2">
-        <h2 className="mt-2 mb-3">Settings</h2>
-        <h6 className="small mb-4">App version 0.00.4</h6>
+        <div className="my-4">
+          <h2 className="mt-2 mb-3">Settings</h2>
+          <h6 className="small">App version 0.00.4</h6>
+        </div>
 
         <button 
-          className="btn btn-transparent"
+          className="btn btn-transparent w-100"
           onClick={() => {
             disconnect();
             router.push('/welcome');
@@ -35,6 +37,19 @@ function Settings() {
         >
           Log out
         </button>
+
+        {/* Settings List */}
+        <ul className="settings-list-stacked list-group list-group-flush row">
+          <li className="list-group-item py-3"
+            onClick={() => {
+              disconnect();
+              router.push('/welcome');
+            }}
+          >
+            <i className="fas fa-user-xmark me-2"></i>
+            Log out
+          </li>
+        </ul>
       </div>
     </>
   )

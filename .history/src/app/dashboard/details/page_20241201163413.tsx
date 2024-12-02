@@ -42,9 +42,11 @@ export default function Details() {
           </div>
         </nav>
 
-        <div className="container mt-2">
-          <h6 className="small">You are earning {details?.formattedAPY}% APY</h6>
-          <h2 className="mt-2 mb-3">What happens next</h2>
+        <div className="container">
+          <div className="mt-4">
+            <h6 className="small">You are earning {details?.formattedAPY}% APY</h6>
+            <h2 className="mt-2 mb-3">What happens next</h2>
+          </div>
         </div>
 
         {/* graphic*/}

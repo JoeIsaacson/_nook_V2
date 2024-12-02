@@ -24,7 +24,7 @@ function Settings() {
       {/* Main Content */}
       <div className="container mt-2">
         <h2 className="mt-2 mb-3">Settings</h2>
-        <h6 className="small mb-4">App version 0.00.4</h6>
+        <h6 className="small">App version 0.00.4</h6>
 
         <button 
           className="btn btn-transparent"

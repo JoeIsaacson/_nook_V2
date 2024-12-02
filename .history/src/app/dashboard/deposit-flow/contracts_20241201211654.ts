@@ -60,7 +60,7 @@ const moonWellDepositAbi = [
 
 export const moonWellContracts = (inputAmount: string) => {
   return [{
-    address: moonWellDepositAddress,
+    to: moonWellDepositAddress,
     abi: moonWellDepositAbi,
     functionName: 'mint',
     args: [

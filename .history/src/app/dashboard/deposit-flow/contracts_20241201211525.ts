@@ -33,7 +33,7 @@ const usdcContractAbi = [
 
 export const USDCContracts = (inputAmount: string) => {
   return [{
-    address: usdcContractAddress,
+    to: usdcContractAddress,
     abi: usdcContractAbi,
     functionName: 'approve',
     args: [
@@ -60,7 +60,7 @@ const moonWellDepositAbi = [
 
 export const moonWellContracts = (inputAmount: string) => {
   return [{
-    address: moonWellDepositAddress,
+    to: moonWellDepositAddress,
     abi: moonWellDepositAbi,
     functionName: 'mint',
     args: [

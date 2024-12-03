@@ -152,6 +152,11 @@ export default function DepositInput() {
                         chainId={BASE_MAINNET_CHAIN_ID}
                         calls={USDCContracts(inputAmount) as any}
                         onStatus={handleOnStatus}
+                        capabilities={{
+                          paymasterService: {
+                            url: process.env.NEXT_PUBLIC_PAYMASTER_AND_BUNDLER_ENDPOINT!,
+                          },
+                        }}
                       >
                         <TransactionButton
                           className="btn btn-lg btn-primary w-100 py-2"

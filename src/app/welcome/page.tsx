@@ -51,6 +51,8 @@ export default function Welcome() {
             className="ellipse-1 coin-1" />
           <div className="splash-header pt-5">
             <h1 className="display-1">Welcome to Nook</h1>
+            <h1 className="display-1">You can earn 11.5% APY</h1>
+            <h1 className="display-1">Get started</h1>
           </div>
         </div>
 

@@ -80,7 +80,7 @@ export default function Welcome() {
             {headers.map((text, index) => (
               <h1
                 key={index}
-                className={`display-1 header-slide ${
+                className={`display-2 header-slide ${
                   index === currentIndex ? 'visible' : ''
                 }`}
               >

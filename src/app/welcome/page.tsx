@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useConnect, useAccount } from 'wagmi'
-import { useEffect, ReactNode } from 'react';
+import { useEffect, ReactNode, useState } from 'react';
 
 import {
   ConnectWallet,
@@ -14,6 +14,22 @@ export default function Welcome() {
   const { connectors, connect, status, error } = useConnect();
 
   const { isConnected, address } = useAccount();
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  const headers = [
+    "Welcome to Nook",
+    "You can earn 11.5%",
+    "Get started with $5"
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % headers.length);
+    }, 3000); // Change slide every 3 seconds
+
+    return () => clearInterval(timer);
+  }, []);
 
   console.log(status, isConnected);
   console.log(connectors);
@@ -49,10 +65,28 @@ export default function Welcome() {
             src="/img/ellipse_1.svg"
             alt="ellipse"
             className="ellipse-1 coin-1" />
-          <div className="splash-header pt-5">
-            <h1 className="display-1">Welcome to Nook</h1>
-            <h1 className="display-1">You can earn 11.5% APY</h1>
-            <h1 className="display-1">Get started</h1>
+
+          {/* Progress Bar */}
+          <div className="progress-container d-flex gap-2">
+            {headers.map((_, index) => (
+              <div 
+                key={index}
+                className={`progress-bar ${index === currentIndex ? 'active' : ''}`}
+              />
+            ))}
+          </div>
+
+          <div className="splash-header">
+            {headers.map((text, index) => (
+              <h1
+                key={index}
+                className={`display-1 header-slide ${
+                  index === currentIndex ? 'visible' : ''
+                }`}
+              >
+                {text}
+              </h1>
+            ))}
           </div>
         </div>
 

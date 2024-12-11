@@ -24,11 +24,18 @@ export default function Welcome() {
   ];
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % headers.length);
-    }, 3000); // Change slide every 3 seconds
+    // Initial delay before starting the interval
+    const startDelay = setTimeout(() => {
+      const timer = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % headers.length);
+      }, 4000); // Change slide every X seconds
 
-    return () => clearInterval(timer);
+      // Clean up interval when component unmounts
+      return () => clearInterval(timer);
+    }, 2500); // delay before starting
+
+    // Clean up timeout if component unmounts during delay
+    return () => clearTimeout(startDelay);
   }, []);
 
   console.log(status, isConnected);
@@ -67,7 +74,7 @@ export default function Welcome() {
             className="ellipse-1 coin-1" />
 
           {/* Progress Bar */}
-          <div className="progress-container d-flex gap-2">
+          <div className="progress-container d-flex">
             {headers.map((_, index) => (
               <div 
                 key={index}

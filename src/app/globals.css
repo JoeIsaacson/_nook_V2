@@ -364,17 +364,16 @@ input[type="number"]::before {
 
 .progress-container {
   position: absolute;
-  bottom: 230px;
+  bottom: 218px;
   width: 30%;
 }
 
-.progress-bar {
-  height: 6px;
+.splash-page .progress-bar {
+  height: 4px;
   width: 25%;
   max-width: 100px;
   background: #000000;
   opacity: 0.3;
-  border-radius: 8px;
   transition: all 0.3s ease;
 }
   
@@ -399,7 +398,7 @@ input[type="number"]::before {
 .progress-container {
   opacity: 0;
   animation: fadeIn 2.5s ease-in forwards;
-  animation-delay: 2s; /* Adds a 2 second delay before animation starts */
+  animation-delay: 2.5s; /* Adds a 2 second delay before animation starts */
 }
 
 @keyframes fadeIn {
@@ -411,8 +410,7 @@ input[type="number"]::before {
   }
 }
 
-
-.progress-bar.active {
+.splash-page .progress-bar.active {
   background: black;
   opacity: 1;
 }

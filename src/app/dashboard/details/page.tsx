@@ -39,20 +39,11 @@ export default function Details() {
           </div>
         </nav>
 
-        <div className="container mt-2">
-          <h6 className="small">You are earning {details?.formattedAPY}% APY</h6>
-          <h2 className="mt-2 mb-3">What happens next</h2>
-        </div>
-
-        {/* graphic*/}
-
-        <div className="details-graphic blur-overlay d-block d-sm-none">
+        {/* <div className="details-graphic blur-overlay d-block d-sm-none">
           <img src="/img/GRAPH.png" alt="graphic" />
         </div>
 
-        {/* payout schedule */}
         <div className="container mt-2 px-0">
-          {/* notifications list */}
           <ul className="settings-list-stacked list-group list-group-flush">
             <li className="list-group-item px-4 py-3">
               <div className="row">
@@ -79,11 +70,11 @@ export default function Details() {
             </li>
 
           </ul>
-        </div>
+        </div> */}
 
         <div className="container mt-4">
-          <h6 className="mb-4 small">Earnings</h6>
-          <h2 className="">Your breakdown of earnings</h2>
+        <h6 className="small">You are earning {details?.formattedAPY}% APY</h6>
+        <h2 className="">Your breakdown of earnings</h2>
           <p className="mb-0 small">You have earned ${details?.formattedLendingRewards} in yield for an average of {details?.formattedAPY}% return on your deposit</p>
           {/* progress bar */}
             <div className="progress-stacked mt-4">
@@ -114,15 +105,10 @@ export default function Details() {
                 </div>
               </li>
             ))}
-
-          </div>
-
-          <div className="container">
-            <button className="btn btn-transparent w-100 mt-2">Learn more</button>
           </div>
         </div>
 
-        <div className="container mt-5 pb-4">
+        <div className="container mt-4 pb-4">
           <h6 className="mb-4 small">Deposits and payouts</h6>
           <h2 className="">Transferring money out</h2>
           <p className="small fw-normal">You can move your funds whenever you wish and are never locked</p>

@@ -245,6 +245,7 @@ body {
 }
 
 .deposit-flow-expected-return {
+  min-height: 28px;
   animation: fadeInOut 0.3s ease-in-out;
   opacity: 1;
 }
@@ -418,4 +419,11 @@ input[type="number"]::before {
 .header-slide.visible {
   opacity: 1;
   pointer-events: auto;
+}
+
+.num-pad-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 0 auto;
 }
